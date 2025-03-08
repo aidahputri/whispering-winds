@@ -13,10 +13,17 @@ var dialog_data = [
 	{"character": "", "text": "But hope is not yet lost… Someone has been chosen.", "bg": "res://assets/background/start2.png"},
 	{"character": "", "text": "In a long-forgotten shrine, a boy awakens. He does not remember how he got here. Only the sound of the wind whispers to him, calling his name..."},
 	{"character": "", "text": "Aeria."},
+	{"character": "", "text": "His eyes flutter open, adjusting to the dim light of the shrine. A soft breeze brushes against his skin, carrying a distant voice—gentle, yet beckoning."},
+	{"character": "", "text": "He rises to her feet, his steps unsteady at first. The whispering wind calls again. With cautious curiosity, he follows the unseen presence."},
+	{"character": "???", "text": "You… are the Last Guardian.", "bg": "res://assets/background/start3.png"},
+	{"character": "Aeria", "text": "Who.. are you?"},
+	{"character": "Anemoi", "text": "I'm Anemoi, The Wind Spirit. This world is on the brink of collapse, and only you can awaken the slumbering spirits."},
+	{"character": "Anemoi", "text": "Seek the lost power. Listen to the voices of the wind and water. Only then can you restore balance and seal the Spiritus Rift… before it is too late."},
 ]
 var current_index = 0
-var typing_speed = 0.1
+var typing_speed = 0.07
 var is_typing = false
+var skip_typing = false
 
 func _ready():
 	show_dialog()
@@ -29,7 +36,7 @@ func show_dialog():
 
 		if current_dialog["character"] != "":
 			label_character.text = current_dialog["character"]
-			label_character.show()
+			char_box.show()
 		else:
 			char_box.hide()
 
@@ -48,16 +55,19 @@ func show_dialog():
 
 func _on_next_button_pressed():
 	if is_typing:
-		label_dialog.text = dialog_data[current_index]["text"]
-		is_typing = false
+		skip_typing = true
 	else:
 		current_index += 1
 		show_dialog()
 
 func type_text(text: String):
 	is_typing = true
+	skip_typing = false
 	label_dialog.text = ""
 	for i in range(text.length()):
+		if skip_typing:
+			label_dialog.text = text
+			break
 		label_dialog.text += text[i]
 		await get_tree().create_timer(typing_speed).timeout
 	is_typing = false
