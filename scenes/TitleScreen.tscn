@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://yqmk0vpvnyxr"]
+
+[ext_resource type="Texture2D" uid="uid://cr2uou762tsij" path="res://assets/background/title.png" id="1_hd0yi"]
+[ext_resource type="PackedScene" uid="uid://bcdgjmmqdfs0r" path="res://scenes/ui/StartButton.tscn" id="2_5cc6a"]
+
+[node name="TitleScreen" type="Node2D"]
+
+[node name="TextureRect" type="TextureRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -15.0
+offset_top = -7.0
+offset_right = 1577.0
+offset_bottom = 890.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("1_hd0yi")
+stretch_mode = 6
+
+[node name="StartButton" parent="." instance=ExtResource("2_5cc6a")]
+offset_left = 449.0
+offset_top = 459.0
+offset_right = 690.0
+offset_bottom = 548.0
