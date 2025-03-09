@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://bcdgjmmqdfs0r"]
 
 [ext_resource type="Texture2D" uid="uid://cgp3rtluojk1k" path="res://assets/ui/Fantasy Minimal Pixel Art GUI by eta-commercial-free/UI/Button_52x14.png" id="1_4m2w2"]
-[ext_resource type="Script" path="res://scenes/script/StartButton.gd" id="1_wb0we"]
+[ext_resource type="Script" path="res://scenes/scripts/StartButton.gd" id="1_wb0we"]
 [ext_resource type="FontFile" uid="uid://c2wdkmgc5gs8g" path="res://assets/font/CooperBits.ttf" id="2_5paqy"]
 [ext_resource type="Texture2D" uid="uid://dqabk00a1h78o" path="res://assets/ui/Fantasy Minimal Pixel Art GUI by eta-commercial-free/UI/HighlightButton_60x23.png" id="3_b2lo2"]
 

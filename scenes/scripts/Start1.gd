@@ -14,7 +14,7 @@ var dialog_data = [
 	{"character": "", "text": "In a long-forgotten shrine, a boy awakens. He does not remember how he got here. Only the sound of the wind whispers to him, calling his name..."},
 	{"character": "", "text": "Aeria."},
 	{"character": "", "text": "His eyes flutter open, adjusting to the dim light of the shrine. A soft breeze brushes against his skin, carrying a distant voice—gentle, yet beckoning."},
-	{"character": "", "text": "He rises to her feet, his steps unsteady at first. The whispering wind calls again. With cautious curiosity, he follows the unseen presence."},
+	{"character": "", "text": "He rises to his feet, his steps unsteady at first. The whispering wind calls again. With cautious curiosity, he follows the unseen presence."},
 	{"character": "???", "text": "You… are the Last Guardian.", "bg": "res://assets/background/start3.png"},
 	{"character": "Aeria", "text": "Who.. are you?"},
 	{"character": "Anemoi", "text": "I'm Anemoi, The Wind Spirit. This world is on the brink of collapse, and only you can awaken the slumbering spirits."},
