@@ -58,7 +58,10 @@ func _on_next_button_pressed():
 		skip_typing = true
 	else:
 		current_index += 1
-		show_dialog()
+		if current_index < dialog_data.size():
+			show_dialog()
+		else:
+			go_to_next_scene()
 
 func type_text(text: String):
 	is_typing = true
@@ -71,3 +74,11 @@ func type_text(text: String):
 		label_dialog.text += text[i]
 		await get_tree().create_timer(typing_speed).timeout
 	is_typing = false
+
+func go_to_next_scene():
+	anim_player.play("fade_out")
+	await anim_player.animation_finished
+	call_deferred("change_scene")
+	
+func change_scene():
+	get_tree().change_scene_to_file("res://scenes/cutscenes/LevelTitle.tscn")

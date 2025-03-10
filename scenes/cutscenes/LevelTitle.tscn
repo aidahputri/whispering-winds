@@ -1,0 +1,86 @@
+[gd_scene load_steps=7 format=3 uid="uid://drth56fea5qx4"]
+
+[ext_resource type="Script" path="res://scenes/scripts/LevelTitle.gd" id="1_at0a8"]
+[ext_resource type="FontFile" uid="uid://2snsq37rh6lp" path="res://assets/font/ModernDOS8x16.ttf" id="1_hs8w7"]
+
+[sub_resource type="Animation" id="Animation_ukjbn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/Background:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_qofon"]
+resource_name = "fade_out"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/Background:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.333333, 0.466667, 0.633333, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0.776471), Color(0, 0, 0, 0.615686), Color(0, 0, 0, 0.333333), Color(0, 0, 0, 0.176471), Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7nv7s"]
+_data = {
+"RESET": SubResource("Animation_ukjbn"),
+"fade_out": SubResource("Animation_qofon")
+}
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_r2o7t"]
+
+[node name="LevelTitle" type="Node2D"]
+script = ExtResource("1_at0a8")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_7nv7s")
+}
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Background" type="TextureRect" parent="CanvasLayer"]
+modulate = Color(0, 0, 0, 1)
+self_modulate = Color(0, 0, 0, 1)
+anchors_preset = -1
+anchor_right = 1.518
+anchor_bottom = 1.531
+offset_left = -15.0
+offset_top = -15.0
+offset_right = 1764.26
+offset_bottom = 1006.91
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+texture = SubResource("CanvasTexture_r2o7t")
+stretch_mode = 6
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+offset_left = 220.0
+offset_top = 245.0
+offset_right = 948.0
+offset_bottom = 407.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("1_hs8w7")
+theme_override_font_sizes/font_size = 52
+text = "Part 1
+
+Serenade of Breeze and Tides"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="FadeTimer" type="Timer" parent="CanvasLayer"]
+process_callback = 0
