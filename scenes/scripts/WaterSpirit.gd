@@ -58,11 +58,11 @@ func _physics_process(delta):
 	if Input.is_action_pressed("fire") and is_attacking:
 		fire_hold_time += delta
 
-		# Jika fire ditahan ≥ 1.2 detik, jalankan special_atk
+		# Jika fire ditahan ≥ 3.0 detik, jalankan special_atk
 		if fire_hold_time >= 3.0 and _animation_player.animation == "skill_atk":
 			_play_attack("special_atk")
 
-		# Jika fire ditahan ≥ 0.6 detik (dan belum mencapai 1.2 detik), jalankan skill_atk
+		# Jika fire ditahan ≥ 0.6 detik (dan belum mencapai 3.0 detik), jalankan skill_atk
 		elif fire_hold_time >= 0.6 and _animation_player.animation == "normal_atk":
 			_play_attack("skill_atk")
 
@@ -108,7 +108,12 @@ func _play_attack(anim_name: String):
 	_animation_player.play(anim_name)
 	await _animation_player.animation_finished
 
-	if not Input.is_action_pressed("fire"):
+	if Input.is_action_pressed("fire"):
+		# Ulangi dari normal_atk setelah special_atk
+		if anim_name == "special_atk":
+			fire_hold_time = 0.0
+			_play_attack("normal_atk")
+	else:
 		is_attacking = false
 		fire_hold_time = 0.0
 		_animation_player.play("idle")
