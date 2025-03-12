@@ -1,6 +1,7 @@
-[gd_scene load_steps=158 format=3 uid="uid://b167yhdjq7m37"]
+[gd_scene load_steps=165 format=3 uid="uid://b167yhdjq7m37"]
 
 [ext_resource type="Texture2D" uid="uid://w877v2fn51g1" path="res://assets/characters/water-spririt/01_idle/idle_1.png" id="1_h17jt"]
+[ext_resource type="Script" path="res://scenes/scripts/WaterSpirit.gd" id="1_i3jia"]
 [ext_resource type="Texture2D" uid="uid://dta2l4gxqre6x" path="res://assets/characters/water-spririt/air_atk/air_atk_1.png" id="1_lxeit"]
 [ext_resource type="Texture2D" uid="uid://cwufby3pffv0e" path="res://assets/characters/water-spririt/air_atk/air_atk_2.png" id="2_1okok"]
 [ext_resource type="Texture2D" uid="uid://b0gugytlwwdae" path="res://assets/characters/water-spririt/01_idle/idle_2.png" id="2_h678j"]
@@ -155,6 +156,12 @@
 [ext_resource type="Texture2D" uid="uid://b15vm5ihrkxob" path="res://assets/characters/water-spririt/13_take_hit/take_hit_5.png" id="119_5eo6s"]
 [ext_resource type="Texture2D" uid="uid://chf0eb2jttsjt" path="res://assets/characters/water-spririt/13_take_hit/take_hit_6.png" id="120_o67hb"]
 [ext_resource type="Texture2D" uid="uid://ccwddvbiegny7" path="res://assets/characters/water-spririt/13_take_hit/take_hit_7.png" id="121_7sobk"]
+[ext_resource type="Texture2D" uid="uid://dfaa1jkpl3klv" path="res://assets/characters/water-spririt/06_tumble/tumble_1.png" id="146_0hwvt"]
+[ext_resource type="Texture2D" uid="uid://cuph3qi3k2sou" path="res://assets/characters/water-spririt/06_tumble/tumble_2.png" id="147_27fr2"]
+[ext_resource type="Texture2D" uid="uid://dt6cbgp45s78y" path="res://assets/characters/water-spririt/06_tumble/tumble_3.png" id="148_arhad"]
+[ext_resource type="Texture2D" uid="uid://pc4si4q7gduc" path="res://assets/characters/water-spririt/06_tumble/tumble_4.png" id="149_iko88"]
+[ext_resource type="Texture2D" uid="uid://e3qdj5disung" path="res://assets/characters/water-spririt/06_tumble/tumble_5.png" id="150_5vtpk"]
+[ext_resource type="Texture2D" uid="uid://lc7ej2ulushd" path="res://assets/characters/water-spririt/06_tumble/tumble_6.png" id="151_38jrj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2pscc"]
 size = Vector2(27, 40)
@@ -188,35 +195,6 @@ animations = [{
 }],
 "loop": true,
 "name": &"air_atk",
-"speed": 8.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("9_vxq1g")
-}, {
-"duration": 1.0,
-"texture": ExtResource("10_uo343")
-}, {
-"duration": 1.0,
-"texture": ExtResource("11_qr27v")
-}, {
-"duration": 1.0,
-"texture": ExtResource("12_5ta8l")
-}, {
-"duration": 1.0,
-"texture": ExtResource("13_ch1b8")
-}, {
-"duration": 1.0,
-"texture": ExtResource("14_18xhe")
-}, {
-"duration": 1.0,
-"texture": ExtResource("15_djkt1")
-}, {
-"duration": 1.0,
-"texture": ExtResource("16_hsidg")
-}],
-"loop": true,
-"name": &"dash",
 "speed": 8.0
 }, {
 "frames": [{
@@ -440,6 +418,58 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("146_0hwvt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("147_27fr2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("148_arhad")
+}, {
+"duration": 1.0,
+"texture": ExtResource("149_iko88")
+}, {
+"duration": 1.0,
+"texture": ExtResource("150_5vtpk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("151_38jrj")
+}],
+"loop": false,
+"name": &"roll",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_vxq1g")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_uo343")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_qr27v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_5ta8l")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_ch1b8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_18xhe")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_djkt1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_hsidg")
+}],
+"loop": true,
+"name": &"run",
+"speed": 16.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": ExtResource("23_yyp34")
 }, {
 "duration": 1.0,
@@ -621,7 +651,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("102_6h0x3")
 }],
-"loop": true,
+"loop": false,
 "name": &"special_atk",
 "speed": 16.0
 }, {
@@ -688,6 +718,8 @@ animations = [{
 }]
 
 [node name="WaterSpirit" type="CharacterBody2D"]
+position = Vector2(0, -13)
+script = ExtResource("1_i3jia")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0.5, -11)
@@ -696,7 +728,5 @@ shape = SubResource("RectangleShape2D_2pscc")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -53)
 sprite_frames = SubResource("SpriteFrames_af8ba")
-animation = &"air_atk"
+animation = &"defend"
 autoplay = "idle"
-frame = 3
-frame_progress = 0.53662
