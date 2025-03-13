@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://scenes/scripts/Player.gd" id="3_sonct"]
 
 [sub_resource type="RectangleShape2D" id="1"]
-size = Vector2(52.924, 76.884)
+size = Vector2(52.924, 64.442)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fe11w"]
 atlas = ExtResource("2_ewhx5")
@@ -160,9 +160,18 @@ animations = [{
 script = ExtResource("3_sonct")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 6.221)
 shape = SubResource("1")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_lkmhk")
 animation = &"cast"
 autoplay = "idle"
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(18, 139)
+zoom = Vector2(1.5, 1.5)
+limit_left = -137
+limit_top = -113
+limit_right = 1303
+limit_bottom = 9458

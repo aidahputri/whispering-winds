@@ -8,13 +8,13 @@ extends CharacterBody2D
 const UP = Vector2(0,-1)
 
 func _get_input():
-	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
+	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = JUMP_SPEED
 
   # Get the input direction and handle the movement/deceleration.
   # As good practice, you should replace UI actions with custom gameplay actions.
-	var direction_x := Input.get_axis("ui_left", "ui_right")
-	var direction_y := Input.get_axis("ui_up", "ui_down")  # Tambahkan gerakan vertikal
+	var direction_x := Input.get_axis("left", "right")
+	var direction_y := Input.get_axis("up", "down")  # Tambahkan gerakan vertikal
 	var animation = "idle"
 	
 	# Animasi right n left

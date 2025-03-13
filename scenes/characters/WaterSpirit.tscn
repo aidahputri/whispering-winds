@@ -730,3 +730,7 @@ position = Vector2(0, -53)
 sprite_frames = SubResource("SpriteFrames_af8ba")
 animation = &"defend"
 autoplay = "idle"
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(318, -54)
+limit_smoothed = true
