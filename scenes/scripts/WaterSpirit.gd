@@ -109,7 +109,6 @@ func _play_attack(anim_name: String):
 	await _animation_player.animation_finished
 
 	if Input.is_action_pressed("fire"):
-		# Ulangi dari normal_atk setelah special_atk
 		if anim_name == "special_atk":
 			fire_hold_time = 0.0
 			_play_attack("normal_atk")

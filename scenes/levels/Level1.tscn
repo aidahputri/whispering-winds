@@ -1,7 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://dd2bskrwbr6kw"]
+[gd_scene load_steps=5 format=3 uid="uid://dd2bskrwbr6kw"]
 
 [ext_resource type="PackedScene" uid="uid://qx27r0ibibkr" path="res://scenes/levels/Level1Map.tscn" id="1_pr836"]
 [ext_resource type="PackedScene" uid="uid://bc2fujtl13g10" path="res://scenes/characters/Player.tscn" id="2_a7h88"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lvun8"]
+size = Vector2(531, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yvma1"]
 size = Vector2(1181.5, 7)
@@ -15,9 +18,38 @@ scale = Vector2(1.5, 1.5)
 
 [node name="Player" parent="." instance=ExtResource("2_a7h88")]
 position = Vector2(542, 48)
+collision_mask = 1
 
-[node name="Area2D" type="StaticBody2D" parent="."]
+[node name="DeathArea" type="Area2D" parent="."]
+position = Vector2(105, 1664)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(590, -111.5)
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="DeathArea"]
+polygon = PackedVector2Array(7, 25, -195, 25, -243, 0, -242, 402, -196, 401, -201, 381, -173, 355, -151, 353, -151, 326, -130, 308, -11, 305, 2, 273, 19, 258, 37, 259, 45, 229, 62, 213, 134, 209, 146, 116, 757, 107, 778, 155, 814, 173, 825, 207, 866, 216, 871, 255, 924, 282, 921, 349, 974.544, 341.42, 1023.68, 398.013, 1014, 442, 1053, 458, 1067, 497, 1094, 487, 1097, 503, 1115, 544, 1154, 563, 1163, 592, 1190, 592, 1211, 588, 1214, 567, 1204, -151, 1142, -109, 1030, -114, 878, 29)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DeathArea"]
+visible = false
+position = Vector2(430.5, 70)
+shape = SubResource("RectangleShape2D_lvun8")
+
+[node name="GroundArea" type="Area2D" parent="."]
+position = Vector2(259, 2181)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="GroundArea"]
+polygon = PackedVector2Array(-343, -118, -344, -135, -331, -150, -322, -156, -297, -157, -296, -181, -290, -191, -280, -201, -268, -206, -253, -202, -239, -199, -214, -202, -187, -199, -170, -202, -158, -211, -152, -231, -142, -244, -128, -253, -115, -254, -108, -261, -106, -278, -96, -293, -81, -301, -61, -303, -42, -301, -24, -300, -10, -300, -10, -313, -9, -320, -9, -340, -9, -355, -4, -392, 11, -397, 585, -394, 607, -382, 607, -375, 607, -365, 609, -354, 615, -345, 627, -349, 635, -347, 646, -338, 649, -327, 659, -319, 659, -307, 658, -302, 663, -299, 674, -298, 684, -299, 690, -293, 697, -288, 704, -281, 707, -271, 707, -261, 707, -255, 711, -252, 720, -252, 728, -250, 734, -248, 738, -245, 742, -242, 747, -238, 751, -232, 754, -224, 754, -216, 755, -210, 755, -202, 755, -191, 754, -185, 754, -171, 754, -163, 755, -158, 759, -153, 773, -151, 787, -150, 798, -153, 819, -156, 832, -153, 841, -146, 845, -141, 849, -135, 851, -131, 851, -121, 851, -96, 851, -87, 851, -74, 851, -65, 853, -61, 859, -58, 870, -59, 882, -56, 888, -49, 893, -44, 896, -38, 899, -34, 900, -24, 899, -11, 905, -12, 921, -11, 929, -8, 941, 1, 946, 9, 948, 22, 949, 34, 959, 36, 971, 37, 976, 41, 984, 50, 990, 54, 994, 65, 994, 75, 998, 80, 1004, 85, 1018, 90, 1026, 89, 1034, 87, 1045, 85, 1055, 103, 1050, 817, 992, 809, 954, 859, 615, 862, 582, 824, 584, 741, 484, 643, 482, 482, 439, 444, 432, 399, 384, 342, 271, 344, 226, 386, 176, 391, 171, 451, 132, 486, 81, 490, 81, 546, 64, 559, 35, 583, -349, 584, -397, 540, -398, -106, -375, -103, -357, -109)
+
+[node name="GroundArea2" type="Area2D" parent="."]
+position = Vector2(-137, -72)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="GroundArea2"]
+polygon = PackedVector2Array(1, 78, 1428, 80, 1447, 1493, 1398, 1542, 1242, 1542, 1106, 1683, 44, 1683, -2, 1631)
+
+[node name="Barrier1" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Barrier1"]
+position = Vector2(584, 0)
 shape = SubResource("RectangleShape2D_yvma1")
+
+[connection signal="body_entered" from="DeathArea" to="Player" method="_on_death_area_body_entered"]
+[connection signal="body_exited" from="DeathArea" to="Player" method="_on_death_area_body_exited"]
+[connection signal="body_entered" from="GroundArea" to="Player" method="_on_ground_area_body_entered"]
+[connection signal="body_entered" from="GroundArea2" to="Player" method="_on_ground_area_2_body_entered"]

@@ -1,23 +1,29 @@
 extends CharacterBody2D
 
-@export var SPEED := 200
-@export var JUMP_SPEED := -400
-@export var GRAVITY := 1200
+@export var SPEED = 200
+@export var JUMP_SPEED = 500
+@export var JUMP_GRAVITY = 1500
+@export var JUMP_DISTANCE = 100
+
 @onready var animplayer = $AnimatedSprite2D
 
-const UP = Vector2(0,-1)
+var z_position = 0.0
+var z_velocity = 0.0
+var is_jumping = false
+var landed_safely = false
+var jump_direction = Vector2.ZERO
 
 func _get_input():
-	if Input.is_action_just_pressed("jump") and is_on_floor():
-		velocity.y = JUMP_SPEED
-
-  # Get the input direction and handle the movement/deceleration.
-  # As good practice, you should replace UI actions with custom gameplay actions.
-	var direction_x := Input.get_axis("left", "right")
-	var direction_y := Input.get_axis("up", "down")  # Tambahkan gerakan vertikal
+	var direction_x = Input.get_axis("left", "right")
+	var direction_y = Input.get_axis("up", "down")
 	var animation = "idle"
-	
-	# Animasi right n left
+
+	if Input.is_action_just_pressed("jump") and not is_jumping:
+		is_jumping = true
+		z_velocity = -JUMP_SPEED
+		jump_direction = Vector2(direction_x, direction_y).normalized() * JUMP_DISTANCE
+		animation = "walk_down" 
+
 	if direction_x:
 		velocity.x = direction_x * SPEED
 		if direction_x > 0:
@@ -26,22 +32,56 @@ func _get_input():
 			animation = "walk_left"
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
-	
-	# Animasi up n down
+
 	if direction_y:
 		velocity.y = direction_y * SPEED
 		if direction_y < 0:
 			animation = "walk_up"
 		else:
-			animation = "walk_down"	
+			animation = "walk_down"
 	else:
 		velocity.y = move_toward(velocity.y, 0, SPEED)
-		
-	animplayer.play(animation)
-	move_and_slide()
 
+	animplayer.play(animation)
 
 func _physics_process(delta: float) -> void:
-	velocity.y += delta*GRAVITY
+	if is_jumping:
+		z_velocity += JUMP_GRAVITY * delta
+		z_position += z_velocity * delta
+		position += jump_direction * delta
+
+		if z_position >= 0:
+			z_position = 0
+			is_jumping = false
+			
+			if not landed_safely:
+				print("Jatuh ke jurang! Reload level.")
+				refresh_scene()
+
 	_get_input()
 	move_and_slide()
+
+	animplayer.scale = Vector2(1, 1) - Vector2(0.4, 0.4) * (z_position / JUMP_SPEED)
+	animplayer.position.y = -z_position * 0.5
+
+func _on_death_area_body_entered(body: Node2D):
+	landed_safely = false
+	if body.name == "Player" and not is_jumping:
+		print("halo")
+		call_deferred("refresh_scene")
+
+func _on_death_area_body_exited(body: Node2D):
+	landed_safely = true
+
+func refresh_scene():
+	get_tree().reload_current_scene()
+
+func _on_ground_area_body_entered(body: Node2D):
+	if body.name == "Player":
+		landed_safely = true
+		print("Mendarat di Ground Area 1")
+
+func _on_ground_area_2_body_entered(body: Node2D):
+	if body.name == "Player":
+		landed_safely = true
+		print("Mendarat di Ground Area 2")
