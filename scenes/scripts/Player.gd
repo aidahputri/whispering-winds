@@ -10,7 +10,7 @@ extends CharacterBody2D
 var z_position = 0.0
 var z_velocity = 0.0
 var is_jumping = false
-var landed_safely = false
+var landed_safely = true
 var jump_direction = Vector2.ZERO
 
 func _get_input():
@@ -59,19 +59,21 @@ func _physics_process(delta: float) -> void:
 				refresh_scene()
 
 	_get_input()
-	move_and_slide()
+	if is_instance_valid(self) and is_inside_tree():
+		move_and_slide()
 
 	animplayer.scale = Vector2(1, 1) - Vector2(0.4, 0.4) * (z_position / JUMP_SPEED)
 	animplayer.position.y = -z_position * 0.5
 
 func _on_death_area_body_entered(body: Node2D):
-	landed_safely = false
-	if body.name == "Player" and not is_jumping:
-		print("halo")
-		call_deferred("refresh_scene")
+	if body.name == "Player":
+		landed_safely = false
+		if not is_jumping:
+			call_deferred("refresh_scene")
 
 func _on_death_area_body_exited(body: Node2D):
-	landed_safely = true
+	if body.name == "Player":
+		landed_safely = true
 
 func refresh_scene():
 	get_tree().reload_current_scene()
@@ -79,9 +81,4 @@ func refresh_scene():
 func _on_ground_area_body_entered(body: Node2D):
 	if body.name == "Player":
 		landed_safely = true
-		print("Mendarat di Ground Area 1")
-
-func _on_ground_area_2_body_entered(body: Node2D):
-	if body.name == "Player":
-		landed_safely = true
-		print("Mendarat di Ground Area 2")
+		print("Mendarat di Ground Area")

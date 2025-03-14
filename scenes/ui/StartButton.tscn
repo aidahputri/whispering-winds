@@ -8,34 +8,36 @@
 [node name="StartButton" type="Button"]
 self_modulate = Color(1, 1, 1, 0)
 anchors_preset = -1
-anchor_left = 0.326
-anchor_top = 0.508
-anchor_right = 0.326
-anchor_bottom = 0.508
-offset_left = 45.448
-offset_top = -64.184
-offset_right = 286.448
-offset_bottom = 24.816
+anchor_left = 0.365
+anchor_top = 0.409
+anchor_right = 0.365
+anchor_bottom = 0.409
+offset_left = 0.519989
+offset_top = -0.0319824
+offset_right = 241.52
+offset_bottom = 88.968
 script = ExtResource("1_wb0we")
 
-[node name="Background" type="NinePatchRect" parent="."]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = -2.835
-anchor_top = -7.783
-anchor_right = -2.835
-anchor_bottom = -7.783
-offset_left = 697.235
-offset_top = 692.687
-offset_right = 908.235
-offset_bottom = 783.687
+[node name="Border" type="NinePatchRect" parent="."]
+visible = false
+layout_mode = 0
+offset_left = -11.0
+offset_top = -12.0
+offset_right = 256.0
+offset_bottom = 101.0
+texture = ExtResource("3_b2lo2")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+layout_mode = 0
+offset_right = 246.0
+offset_bottom = 89.0
 texture = ExtResource("1_4m2w2")
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 0
-offset_left = 48.0
+offset_left = 51.0
 offset_top = 26.0
-offset_right = 191.0
+offset_right = 194.0
 offset_bottom = 69.0
 theme_override_colors/font_color = Color(0.497935, 0.310291, 0.1175, 1)
 theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
@@ -45,14 +47,6 @@ text = "PLAY"
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
-
-[node name="Border" type="NinePatchRect" parent="."]
-visible = false
-layout_mode = 0
-offset_top = -13.0
-offset_right = 240.0
-offset_bottom = 102.0
-texture = ExtResource("3_b2lo2")
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
