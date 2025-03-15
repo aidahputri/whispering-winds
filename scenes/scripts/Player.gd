@@ -9,6 +9,9 @@ extends CharacterBody2D
 @onready var aerolite = $Aerolite
 @onready var aerocryst = $Aerocryst
 
+var last_checkpoint_position: Vector2 = Vector2.ZERO
+var has_checkpoint = false
+
 var z_position = 0.0
 var z_velocity = 0.0
 var is_jumping = false
@@ -57,8 +60,9 @@ func _physics_process(delta: float) -> void:
 			is_jumping = false
 			
 			if not landed_safely:
-				print("Jatuh ke jurang! Reload level.")
-				refresh_scene()
+				#print("Jatuh ke jurang! Reload level.")
+				#refresh_scene()
+				respawn()
 
 	_get_input()
 	if is_instance_valid(self) and is_inside_tree():
@@ -66,12 +70,26 @@ func _physics_process(delta: float) -> void:
 
 	animplayer.scale = Vector2(1, 1) - Vector2(0.4, 0.4) * (z_position / JUMP_SPEED)
 	animplayer.position.y = -z_position * 0.5
+	
+func claim_checkpoint(position: Vector2):
+	print("Memproses checkpoint. Diterima: ", position)
+	last_checkpoint_position = position
+	has_checkpoint = true
+	print("Checkpoint diklaim di: ", last_checkpoint_position)
+
+func respawn():
+	if has_checkpoint:
+		print("Respawn di checkpoint terakhir!")
+		global_position = last_checkpoint_position
+	else:
+		print("Tidak ada checkpoint, mengulang level!")
+		call_deferred("refresh_scene")
 
 func _on_death_area_body_entered(body: Node2D):
 	if body.name == "Player":
 		landed_safely = false
 		if not is_jumping:
-			call_deferred("refresh_scene")
+			respawn()
 
 func _on_death_area_body_exited(body: Node2D):
 	if body.name == "Player":
