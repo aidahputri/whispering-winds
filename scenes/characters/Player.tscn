@@ -302,3 +302,7 @@ limit_left = -137
 limit_top = -113
 limit_right = 1303
 limit_bottom = 9458
+
+[node name="SlideTimer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true

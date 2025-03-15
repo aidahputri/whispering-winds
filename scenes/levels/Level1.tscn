@@ -1,14 +1,18 @@
-[gd_scene load_steps=8 format=3 uid="uid://dd2bskrwbr6kw"]
+[gd_scene load_steps=10 format=3 uid="uid://dd2bskrwbr6kw"]
 
 [ext_resource type="PackedScene" uid="uid://qx27r0ibibkr" path="res://scenes/levels/Level1Map.tscn" id="1_pr836"]
 [ext_resource type="PackedScene" uid="uid://bc2fujtl13g10" path="res://scenes/characters/Player.tscn" id="2_a7h88"]
 [ext_resource type="Script" path="res://scenes/scripts/WindCurrentManager.gd" id="3_gnh8a"]
 [ext_resource type="PackedScene" uid="uid://blvfuck1q0t66" path="res://scenes/ui/Aerolite.tscn" id="4_bk1mr"]
 [ext_resource type="PackedScene" uid="uid://cw6bmkqq3ebad" path="res://scenes/characters/WindOrb.tscn" id="5_x2yx6"]
+[ext_resource type="PackedScene" uid="uid://tqe0mywskkmf" path="res://scenes/characters/WaterOrb.tscn" id="6_48007"]
 [ext_resource type="Script" path="res://scenes/scripts/Checkpoint.gd" id="6_yd877"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5qc3u"]
-size = Vector2(64, 55)
+size = Vector2(87, 60.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i56cx"]
+size = Vector2(596, 35)
 
 [node name="Level1" type="Node2D"]
 metadata/_edit_horizontal_guides_ = [9485.0]
@@ -209,6 +213,9 @@ position = Vector2(1045, 3372)
 position = Vector2(646, 4397)
 scale = Vector2(4, 4)
 
+[node name="WaterOrb" parent="." instance=ExtResource("6_48007")]
+position = Vector2(296, 7756)
+
 [node name="Checkpoint1" type="Area2D" parent="."]
 position = Vector2(607, 2065)
 script = ExtResource("6_yd877")
@@ -222,7 +229,7 @@ position = Vector2(656, 4570)
 script = ExtResource("6_yd877")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Checkpoint2"]
-position = Vector2(-49, 17)
+position = Vector2(-50.5, 14.25)
 shape = SubResource("RectangleShape2D_5qc3u")
 
 [node name="Checkpoint3" type="Area2D" parent="."]
@@ -232,6 +239,14 @@ script = ExtResource("6_yd877")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Checkpoint3"]
 position = Vector2(-59, 33)
 shape = SubResource("RectangleShape2D_5qc3u")
+
+[node name="SlideArea" type="Area2D" parent="."]
+visible = false
+position = Vector2(146, 7969)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SlideArea"]
+position = Vector2(181, 7.5)
+shape = SubResource("RectangleShape2D_i56cx")
 
 [connection signal="body_entered" from="DeathArea" to="Player" method="_on_death_area_body_entered"]
 [connection signal="body_exited" from="DeathArea" to="Player" method="_on_death_area_body_exited"]
@@ -274,6 +289,7 @@ shape = SubResource("RectangleShape2D_5qc3u")
 [connection signal="aerolite_collected" from="Aerolite14" to="WindCurrentManager" method="on_aerolite_collected"]
 [connection signal="body_entered" from="WindOrb" to="Player" method="_on_wind_orb_body_entered"]
 [connection signal="body_exited" from="WindOrb" to="WindOrb" method="_on_body_exited"]
+[connection signal="body_entered" from="WaterOrb" to="WaterOrb" method="_on_body_entered"]
 [connection signal="body_entered" from="Checkpoint1" to="Checkpoint1" method="_on_body_entered"]
 [connection signal="body_exited" from="Checkpoint1" to="Checkpoint1" method="_on_body_exited"]
 [connection signal="body_entered" from="Checkpoint2" to="Checkpoint2" method="_on_body_entered"]

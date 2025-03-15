@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
 @export var SPEED = 200
+@export var SLIDE_SPEED = 400
 @export var JUMP_SPEED = 500
 @export var JUMP_GRAVITY = 1500
 @export var JUMP_DISTANCE = 20
@@ -8,6 +9,7 @@ extends CharacterBody2D
 @onready var animplayer = $AnimatedSprite2D
 @onready var aerolite = $Aerolite
 @onready var aerocryst = $Aerocryst
+@onready var slide_timer = $SlideTimer
 
 var last_checkpoint_position: Vector2 = Vector2.ZERO
 var has_checkpoint = false
@@ -18,6 +20,14 @@ var is_jumping = false
 var landed_safely = true
 var jump_direction = Vector2.ZERO
 
+var is_sliding = false
+var water_slide_duration = 20.0
+var slide_direction = Vector2(0, 1)
+var can_change_direction = false 
+
+#func _ready():
+	#slide_timer.timeout.connect(_on_slide_time_up)
+	
 func _get_input():
 	var direction_x = Input.get_axis("left", "right")
 	var direction_y = Input.get_axis("up", "down")
@@ -59,12 +69,31 @@ func _physics_process(delta: float) -> void:
 			z_position = 0
 			is_jumping = false
 			
-			if not landed_safely:
-				#print("Jatuh ke jurang! Reload level.")
-				#refresh_scene()
+			if not landed_safely and not is_sliding:
 				respawn()
 
-	_get_input()
+	if is_sliding:
+		#var new_input = Vector2(Input.get_axis("left", "right"), Input.get_axis("up", "down"))
+		#if new_input != Vector2.ZERO:
+			#slide_direction = new_input.normalized()
+
+		velocity = slide_direction * SLIDE_SPEED
+
+		var collision = move_and_collide(velocity * delta)
+		if collision:
+			var normal = collision.get_normal()
+			print("Menabrak! Arah baru: ", slide_direction)
+			can_change_direction = true
+			
+		if can_change_direction:
+			var new_input = Vector2(Input.get_axis("left", "right"), Input.get_axis("up", "down"))
+			if new_input != Vector2.ZERO:
+				slide_direction = new_input.normalized()
+				can_change_direction = false
+				print("Arah berubah menjadi: ", slide_direction)
+	else:
+		_get_input()
+		
 	if is_instance_valid(self) and is_inside_tree():
 		move_and_slide()
 
@@ -86,7 +115,7 @@ func respawn():
 		call_deferred("refresh_scene")
 
 func _on_death_area_body_entered(body: Node2D):
-	if body.name == "Player":
+	if body.name == "Player" and not is_sliding:
 		landed_safely = false
 		if not is_jumping:
 			respawn()
@@ -116,3 +145,21 @@ func _on_wind_orb_body_entered(body: Node2D) -> void:
 	if body.name == "Player":
 		aerocryst.visible = true
 		JUMP_DISTANCE = 300
+
+func enable_water_slide():
+	print("Water Slide Aktif!")
+	is_sliding = true
+	can_change_direction = false
+	slide_timer.start()
+	
+func start_slide(direction: Vector2):
+	if not is_sliding:
+		enable_water_slide()
+	
+	slide_direction = direction.normalized() if direction != Vector2.ZERO else Vector2(0, 1)
+	print("Mulai slide dengan arah: ", slide_direction)
+
+#func _on_slide_time_up():
+	#print("Waktu Slide Habis! Mati!")
+	#is_sliding = false
+	#respawn()
