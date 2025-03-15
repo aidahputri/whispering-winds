@@ -1,7 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://dd2bskrwbr6kw"]
+[gd_scene load_steps=7 format=3 uid="uid://dd2bskrwbr6kw"]
 
 [ext_resource type="PackedScene" uid="uid://qx27r0ibibkr" path="res://scenes/levels/Level1Map.tscn" id="1_pr836"]
 [ext_resource type="PackedScene" uid="uid://bc2fujtl13g10" path="res://scenes/characters/Player.tscn" id="2_a7h88"]
+[ext_resource type="Script" path="res://scenes/scripts/WindCurrentManager.gd" id="3_gnh8a"]
+[ext_resource type="PackedScene" uid="uid://blvfuck1q0t66" path="res://scenes/ui/Aerolite.tscn" id="4_bk1mr"]
+[ext_resource type="PackedScene" uid="uid://cw6bmkqq3ebad" path="res://scenes/characters/WindOrb.tscn" id="5_x2yx6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5qc3u"]
+size = Vector2(48, 41.5)
 
 [node name="Level1" type="Node2D"]
 metadata/_edit_horizontal_guides_ = [9485.0]
@@ -33,11 +39,11 @@ position = Vector2(210, 3328)
 polygon = PackedVector2Array(1106, 4227, 915, 4418, 915, 4576, 852, 4608, 734, 4608, 728, 4732, 623, 4773, 331, 4757, 283, 4795, -126, 4814, -180, 4745, -190, 4681, -228, 4652, -285, 4662, -348, 4729, -352, 6157, 563, 6157, 577, 6121, 602, 6121, 600, 5907, 627, 5878, 796, 5880, 830, 5919, 825, 6121, 857, 6137, 858, 6157, 1078, 6157, 1094, 6157)
 
 [node name="GroundArea" type="Area2D" parent="."]
-visible = false
 position = Vector2(259, 2181)
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="GroundArea"]
-polygon = PackedVector2Array(-343, -118, -344, -135, -331, -150, -322, -156, -297, -157, -296, -181, -290, -191, -280, -201, -268, -206, -253, -202, -239, -199, -214, -202, -187, -199, -170, -202, -158, -211, -152, -231, -142, -244, -128, -253, -115, -254, -108, -261, -106, -278, -96, -293, -81, -301, -61, -303, -42, -301, -24, -300, -10, -300, -10, -313, -9, -320, -9, -340, -9, -355, -4, -392, 11, -397, 585, -394, 607, -382, 607, -375, 607, -365, 609, -354, 615, -345, 627, -349, 635, -347, 646, -338, 649, -327, 659, -319, 659, -307, 658, -302, 663, -299, 674, -298, 684, -299, 690, -293, 697, -288, 704, -281, 707, -271, 707, -261, 707, -255, 711, -252, 720, -252, 728, -250, 734, -248, 738, -245, 742, -242, 747, -238, 751, -232, 754, -224, 754, -216, 755, -210, 755, -202, 755, -191, 754, -185, 754, -171, 754, -163, 755, -158, 759, -153, 773, -151, 787, -150, 798, -153, 819, -156, 832, -153, 841, -146, 845, -141, 849, -135, 851, -131, 851, -121, 851, -96, 851, -87, 851, -74, 851, -65, 853, -61, 859, -58, 870, -59, 882, -56, 888, -49, 893, -44, 896, -38, 899, -34, 900, -24, 899, -11, 905, -12, 921, -11, 929, -8, 941, 1, 946, 9, 948, 22, 949, 34, 959, 36, 971, 37, 976, 41, 984, 50, 990, 54, 994, 65, 994, 75, 998, 80, 1004, 85, 1018, 90, 1026, 89, 1034, 87, 1045, 85, 1055, 103, 1050, 817, 992, 809, 954, 859, 615, 862, 582, 824, 584, 741, 484, 643, 482, 482, 439, 444, 432, 399, 384, 342, 271, 344, 226, 386, 176, 391, 171, 451, 132, 486, 81, 490, 81, 546, 64, 559, 35, 583, -349, 584, -397, 540, -398, -106, -375, -103, -357, -109)
+visible = false
+polygon = PackedVector2Array(-343, -118, -344, -135, -331, -150, -322, -156, -297, -157, -296, -181, -290, -191, -280, -201, -268, -206, -253, -202, -239, -199, -214, -202, -187, -199, -170, -202, -158, -211, -152, -231, -142, -244, -128, -253, -115, -254, -108, -261, -106, -278, -96, -293, -81, -301, -61, -303, -42, -301, -24, -300, -10, -300, -10, -313, -9, -320, -9, -340, -9, -355, -11, -372, -4, -392, 11, -397, 586, -399, 608, -385, 607, -375, 607, -365, 609, -354, 615, -345, 627, -349, 635, -347, 646, -338, 649, -327, 659, -319, 659, -307, 658, -302, 663, -299, 674, -298, 684, -299, 690, -293, 697, -288, 704, -281, 707, -271, 707, -261, 707, -255, 711, -252, 720, -252, 728, -250, 734, -248, 738, -245, 742, -242, 747, -238, 751, -232, 754, -224, 754, -216, 755, -210, 755, -202, 755, -191, 754, -185, 754, -171, 754, -163, 755, -158, 759, -153, 773, -151, 787, -150, 798, -153, 819, -156, 832, -153, 841, -146, 845, -141, 849, -135, 851, -131, 851, -121, 851, -96, 851, -87, 851, -74, 851, -65, 853, -61, 859, -58, 870, -59, 882, -56, 888, -49, 893, -44, 896, -38, 899, -34, 900, -24, 899, -11, 905, -12, 921, -11, 929, -8, 941, 1, 946, 9, 948, 22, 949, 34, 959, 36, 971, 37, 976, 41, 984, 50, 990, 54, 994, 65, 994, 75, 998, 80, 1004, 85, 1018, 90, 1026, 89, 1034, 87, 1045, 85, 1055, 103, 1050, 817, 992, 809, 954, 859, 615, 862, 582, 824, 584, 741, 484, 643, 482, 482, 439, 444, 432, 399, 384, 342, 271, 344, 226, 386, 176, 391, 171, 451, 132, 486, 81, 490, 81, 546, 64, 559, 35, 583, -349, 584, -397, 540, -398, -106, -375, -103, -357, -109)
 
 [node name="GroundArea2" type="Area2D" parent="."]
 visible = false
@@ -150,6 +156,78 @@ polygon = PackedVector2Array(-31, -25, -11, -46, 133, -47, 153, -26, 153, 187, 1
 position = Vector2(584, 0)
 polygon = PackedVector2Array(-576, -3, 688, -14, 696, 9485, -593, 9485, -585, 8, -574, 7, -554, 9459, 665, 9459, 662, 5, -574, 6)
 
+[node name="WindCurrentManager" type="Node2D" parent="."]
+script = ExtResource("3_gnh8a")
+
+[node name="Timer" type="Timer" parent="WindCurrentManager"]
+one_shot = true
+
+[node name="Aerolite" parent="." instance=ExtResource("4_bk1mr")]
+position = Vector2(380, 1343)
+
+[node name="Aerolite2" parent="." instance=ExtResource("4_bk1mr")]
+position = Vector2(843, 1172)
+
+[node name="Aerolite3" parent="." instance=ExtResource("4_bk1mr")]
+position = Vector2(745, 1537)
+
+[node name="Aerolite4" parent="." instance=ExtResource("4_bk1mr")]
+position = Vector2(105, 2372)
+
+[node name="Aerolite5" parent="." instance=ExtResource("4_bk1mr")]
+position = Vector2(210, 2608)
+
+[node name="Aerolite6" parent="." instance=ExtResource("4_bk1mr")]
+position = Vector2(584, 2231)
+
+[node name="Aerolite7" parent="." instance=ExtResource("4_bk1mr")]
+position = Vector2(1074, 2544)
+
+[node name="Aerolite8" parent="." instance=ExtResource("4_bk1mr")]
+position = Vector2(870, 2744)
+
+[node name="Aerolite9" parent="." instance=ExtResource("4_bk1mr")]
+position = Vector2(210, 2982)
+
+[node name="Aerolite10" parent="." instance=ExtResource("4_bk1mr")]
+position = Vector2(350, 3100)
+
+[node name="Aerolite11" parent="." instance=ExtResource("4_bk1mr")]
+position = Vector2(105, 3117)
+
+[node name="Aerolite12" parent="." instance=ExtResource("4_bk1mr")]
+position = Vector2(907, 3284)
+
+[node name="Aerolite13" parent="." instance=ExtResource("4_bk1mr")]
+position = Vector2(1175, 3283)
+
+[node name="Aerolite14" parent="." instance=ExtResource("4_bk1mr")]
+position = Vector2(1045, 3372)
+
+[node name="WindOrb" parent="." instance=ExtResource("5_x2yx6")]
+position = Vector2(646, 4397)
+scale = Vector2(4, 4)
+
+[node name="Checkpoint1" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Checkpoint1"]
+position = Vector2(559, 2095)
+shape = SubResource("RectangleShape2D_5qc3u")
+
+[node name="Checkpoint2" type="Area2D" parent="."]
+position = Vector2(596, 4585)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Checkpoint2"]
+position = Vector2(11, 5.5)
+shape = SubResource("RectangleShape2D_5qc3u")
+
+[node name="Checkpoint3" type="Area2D" parent="."]
+position = Vector2(1192, 9170)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Checkpoint3"]
+position = Vector2(-393, -1938.75)
+shape = SubResource("RectangleShape2D_5qc3u")
+
 [connection signal="body_entered" from="DeathArea" to="Player" method="_on_death_area_body_entered"]
 [connection signal="body_exited" from="DeathArea" to="Player" method="_on_death_area_body_exited"]
 [connection signal="body_entered" from="DeathArea2" to="Player" method="_on_death_area_body_entered"]
@@ -172,3 +250,22 @@ polygon = PackedVector2Array(-576, -3, 688, -14, 696, 9485, -593, 9485, -585, 8,
 [connection signal="body_entered" from="GroundArea14" to="Player" method="_on_ground_area_body_entered"]
 [connection signal="body_entered" from="GroundArea15" to="Player" method="_on_ground_area_body_entered"]
 [connection signal="body_entered" from="GroundArea16" to="Player" method="_on_ground_area_body_entered"]
+[connection signal="wind_activated" from="WindCurrentManager" to="Player" method="_on_wind_activated"]
+[connection signal="wind_deactivated" from="WindCurrentManager" to="Player" method="_on_wind_deactivated"]
+[connection signal="timeout" from="WindCurrentManager/Timer" to="WindCurrentManager" method="_on_timer_timeout"]
+[connection signal="aerolite_collected" from="Aerolite" to="WindCurrentManager" method="on_aerolite_collected"]
+[connection signal="aerolite_collected" from="Aerolite2" to="WindCurrentManager" method="on_aerolite_collected"]
+[connection signal="aerolite_collected" from="Aerolite3" to="WindCurrentManager" method="on_aerolite_collected"]
+[connection signal="aerolite_collected" from="Aerolite4" to="WindCurrentManager" method="on_aerolite_collected"]
+[connection signal="aerolite_collected" from="Aerolite5" to="WindCurrentManager" method="on_aerolite_collected"]
+[connection signal="aerolite_collected" from="Aerolite6" to="WindCurrentManager" method="on_aerolite_collected"]
+[connection signal="aerolite_collected" from="Aerolite7" to="WindCurrentManager" method="on_aerolite_collected"]
+[connection signal="aerolite_collected" from="Aerolite8" to="WindCurrentManager" method="on_aerolite_collected"]
+[connection signal="aerolite_collected" from="Aerolite9" to="WindCurrentManager" method="on_aerolite_collected"]
+[connection signal="aerolite_collected" from="Aerolite10" to="WindCurrentManager" method="on_aerolite_collected"]
+[connection signal="aerolite_collected" from="Aerolite11" to="WindCurrentManager" method="on_aerolite_collected"]
+[connection signal="aerolite_collected" from="Aerolite12" to="WindCurrentManager" method="on_aerolite_collected"]
+[connection signal="aerolite_collected" from="Aerolite13" to="WindCurrentManager" method="on_aerolite_collected"]
+[connection signal="aerolite_collected" from="Aerolite14" to="WindCurrentManager" method="on_aerolite_collected"]
+[connection signal="body_entered" from="WindOrb" to="Player" method="_on_wind_orb_body_entered"]
+[connection signal="body_exited" from="WindOrb" to="WindOrb" method="_on_body_exited"]

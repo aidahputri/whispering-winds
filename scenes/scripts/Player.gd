@@ -3,9 +3,11 @@ extends CharacterBody2D
 @export var SPEED = 200
 @export var JUMP_SPEED = 500
 @export var JUMP_GRAVITY = 1500
-@export var JUMP_DISTANCE = 100
+@export var JUMP_DISTANCE = 20
 
 @onready var animplayer = $AnimatedSprite2D
+@onready var aerolite = $Aerolite
+@onready var aerocryst = $Aerocryst
 
 var z_position = 0.0
 var z_velocity = 0.0
@@ -82,3 +84,17 @@ func _on_ground_area_body_entered(body: Node2D):
 	if body.name == "Player":
 		landed_safely = true
 		print("Mendarat di Ground Area")
+
+func _on_wind_activated() -> void:
+	print("jump speed inreased!")
+	JUMP_DISTANCE = 200
+	aerolite.visible = true
+
+func _on_wind_deactivated() -> void:
+	JUMP_DISTANCE = 20
+	aerolite.visible = false
+
+func _on_wind_orb_body_entered(body: Node2D) -> void:
+	if body.name == "Player":
+		aerocryst.visible = true
+		JUMP_DISTANCE = 300

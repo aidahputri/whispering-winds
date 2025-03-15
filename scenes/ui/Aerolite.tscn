@@ -1,0 +1,71 @@
+[gd_scene load_steps=11 format=3 uid="uid://blvfuck1q0t66"]
+
+[ext_resource type="Script" path="res://scenes/scripts/Aerolite.gd" id="1_e777k"]
+[ext_resource type="Texture2D" uid="uid://bnel1cihoun1i" path="res://assets/particles/Crystal.png" id="1_xuk20"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_566cl"]
+size = Vector2(36, 69)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s6t1u"]
+atlas = ExtResource("1_xuk20")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w0lhm"]
+atlas = ExtResource("1_xuk20")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ytrre"]
+atlas = ExtResource("1_xuk20")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8o6jl"]
+atlas = ExtResource("1_xuk20")
+region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0lthu"]
+atlas = ExtResource("1_xuk20")
+region = Rect2(512, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s7s0s"]
+atlas = ExtResource("1_xuk20")
+region = Rect2(640, 0, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wp6oo"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s6t1u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w0lhm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ytrre")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8o6jl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0lthu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s7s0s")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 6.0
+}]
+
+[node name="Aerolite" type="Area2D"]
+script = ExtResource("1_e777k")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(0, -1.5)
+shape = SubResource("RectangleShape2D_566cl")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_wp6oo")
+animation = &"idle"
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
