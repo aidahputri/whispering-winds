@@ -73,10 +73,6 @@ func _physics_process(delta: float) -> void:
 				respawn()
 
 	if is_sliding:
-		#var new_input = Vector2(Input.get_axis("left", "right"), Input.get_axis("up", "down"))
-		#if new_input != Vector2.ZERO:
-			#slide_direction = new_input.normalized()
-
 		velocity = slide_direction * SLIDE_SPEED
 
 		var collision = move_and_collide(velocity * delta)
@@ -130,6 +126,7 @@ func refresh_scene():
 func _on_ground_area_body_entered(body: Node2D):
 	if body.name == "Player":
 		landed_safely = true
+		is_sliding = false
 		print("Mendarat di Ground Area")
 
 func _on_wind_activated() -> void:
@@ -158,8 +155,8 @@ func start_slide(direction: Vector2):
 	
 	slide_direction = direction.normalized() if direction != Vector2.ZERO else Vector2(0, 1)
 	print("Mulai slide dengan arah: ", slide_direction)
-
-#func _on_slide_time_up():
-	#print("Waktu Slide Habis! Mati!")
-	#is_sliding = false
-	#respawn()
+	
+func stop_slide():
+	print("Slide dihentikan karena menyentuh ground!")
+	is_sliding = false
+	velocity = Vector2.ZERO
