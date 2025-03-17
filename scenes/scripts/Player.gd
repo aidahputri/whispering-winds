@@ -24,9 +24,6 @@ var is_sliding = false
 var water_slide_duration = 20.0
 var slide_direction = Vector2(0, 1)
 var can_change_direction = false 
-
-#func _ready():
-	#slide_timer.timeout.connect(_on_slide_time_up)
 	
 func _get_input():
 	var direction_x = Input.get_axis("left", "right")
@@ -130,16 +127,18 @@ func _on_ground_area_body_entered(body: Node2D):
 		print("Mendarat di Ground Area")
 
 func _on_wind_activated() -> void:
-	print("jump speed inreased!")
-	JUMP_DISTANCE = 200
-	aerolite.visible = true
+	if not aerocryst.visible:
+		print("jump speed inreased!")
+		JUMP_DISTANCE = 200
+		aerolite.visible = true
 
 func _on_wind_deactivated() -> void:
-	JUMP_DISTANCE = 20
-	aerolite.visible = false
+	if not aerocryst.visible:
+		JUMP_DISTANCE = 20
+		aerolite.visible = false
 
 func _on_wind_orb_body_entered(body: Node2D) -> void:
-	if body.name == "Player":
+	if body.name == "Player" and not aerocryst.visible:
 		aerocryst.visible = true
 		JUMP_DISTANCE = 300
 
@@ -154,9 +153,14 @@ func start_slide(direction: Vector2):
 		enable_water_slide()
 	
 	slide_direction = direction.normalized() if direction != Vector2.ZERO else Vector2(0, 1)
-	print("Mulai slide dengan arah: ", slide_direction)
 	
 func stop_slide():
 	print("Slide dihentikan karena menyentuh ground!")
 	is_sliding = false
 	velocity = Vector2.ZERO
+
+func _on_water_barrier_body_entered(body: Node2D) -> void:
+	if body.name == "Player":
+		landed_safely = false
+		if not is_jumping:
+			respawn()

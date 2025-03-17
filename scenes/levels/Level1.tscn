@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dd2bskrwbr6kw"]
+[gd_scene load_steps=12 format=3 uid="uid://dd2bskrwbr6kw"]
 
 [ext_resource type="PackedScene" uid="uid://qx27r0ibibkr" path="res://scenes/levels/Level1Map.tscn" id="1_pr836"]
 [ext_resource type="PackedScene" uid="uid://bc2fujtl13g10" path="res://scenes/characters/Player.tscn" id="2_a7h88"]
@@ -7,9 +7,11 @@
 [ext_resource type="PackedScene" uid="uid://cw6bmkqq3ebad" path="res://scenes/characters/WindOrb.tscn" id="5_x2yx6"]
 [ext_resource type="PackedScene" uid="uid://tqe0mywskkmf" path="res://scenes/characters/WaterOrb.tscn" id="6_48007"]
 [ext_resource type="Script" path="res://scenes/scripts/Checkpoint.gd" id="6_yd877"]
+[ext_resource type="PackedScene" uid="uid://q44cb2fgwvo5" path="res://scenes/ui/Portal.tscn" id="8_1u4mv"]
+[ext_resource type="Script" path="res://scenes/scripts/Portal.gd" id="9_7aubs"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5qc3u"]
-size = Vector2(87, 60.5)
+size = Vector2(91.5, 119)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i56cx"]
 size = Vector2(596, 35)
@@ -42,6 +44,20 @@ position = Vector2(210, 3328)
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="DeathArea3"]
 polygon = PackedVector2Array(1106, 4227, 915, 4418, 915, 4576, 852, 4608, 734, 4608, 728, 4732, 623, 4773, 331, 4757, 283, 4795, -126, 4814, -180, 4745, -190, 4681, -228, 4652, -285, 4662, -348, 4729, -352, 6157, 563, 6157, 577, 6121, 602, 6121, 600, 5907, 627, 5878, 796, 5880, 830, 5919, 825, 6121, 857, 6137, 858, 6157, 1078, 6157, 1094, 6157)
+
+[node name="WaterBarrier1" type="Area2D" parent="."]
+position = Vector2(-27, 7977)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="WaterBarrier1"]
+position = Vector2(-125, 48)
+polygon = PackedVector2Array(-8, -51, 26, -52, 19, 1491, 929, 1490, 931, 1517, -14, 1519)
+
+[node name="WaterBarrier2" type="Area2D" parent="."]
+position = Vector2(1220, 7655)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="WaterBarrier2"]
+position = Vector2(103, 0)
+polygon = PackedVector2Array(6, -162, 33, -189, 46, 1879, -241, 1881, -241, 1861, 15, 1859)
 
 [node name="GroundArea" type="Area2D" parent="."]
 position = Vector2(259, 2181)
@@ -157,9 +173,8 @@ polygon = PackedVector2Array(-31, -25, -11, -46, 133, -47, 153, -26, 153, 187, 1
 
 [node name="Barrier1" type="StaticBody2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionPolygon2D" parent="Barrier1"]
-position = Vector2(584, 0)
-polygon = PackedVector2Array(-576, -3, 688, -14, 696, 9485, -593, 9485, -585, 8, -574, 7, -554, 9459, 665, 9459, 662, 5, -574, 6)
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Barrier1"]
+polygon = PackedVector2Array(-6, -7, 1214, -22, 1275, 7534, 1249, 7546, 1184, 11, 12, 11, 24, 7921, -6, 7902)
 
 [node name="WindCurrentManager" type="Node2D" parent="."]
 script = ExtResource("3_gnh8a")
@@ -221,7 +236,7 @@ position = Vector2(607, 2065)
 script = ExtResource("6_yd877")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Checkpoint1"]
-position = Vector2(-47, 25)
+position = Vector2(-47, 42.875)
 shape = SubResource("RectangleShape2D_5qc3u")
 
 [node name="Checkpoint2" type="Area2D" parent="."]
@@ -229,7 +244,7 @@ position = Vector2(656, 4570)
 script = ExtResource("6_yd877")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Checkpoint2"]
-position = Vector2(-50.5, 14.25)
+position = Vector2(-50.5, 29)
 shape = SubResource("RectangleShape2D_5qc3u")
 
 [node name="Checkpoint3" type="Area2D" parent="."]
@@ -237,7 +252,7 @@ position = Vector2(858, 7195)
 script = ExtResource("6_yd877")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Checkpoint3"]
-position = Vector2(-59, 33)
+position = Vector2(-56.75, 38.5)
 shape = SubResource("RectangleShape2D_5qc3u")
 
 [node name="SlideArea" type="Area2D" parent="."]
@@ -248,12 +263,19 @@ position = Vector2(146, 7969)
 position = Vector2(181, 7.5)
 shape = SubResource("RectangleShape2D_i56cx")
 
+[node name="Portal" parent="." instance=ExtResource("8_1u4mv")]
+position = Vector2(918, 9429)
+scale = Vector2(1.5, 1.5)
+script = ExtResource("9_7aubs")
+
 [connection signal="body_entered" from="DeathArea" to="Player" method="_on_death_area_body_entered"]
 [connection signal="body_exited" from="DeathArea" to="Player" method="_on_death_area_body_exited"]
 [connection signal="body_entered" from="DeathArea2" to="Player" method="_on_death_area_body_entered"]
 [connection signal="body_exited" from="DeathArea2" to="Player" method="_on_death_area_body_exited"]
 [connection signal="body_entered" from="DeathArea3" to="Player" method="_on_death_area_body_entered"]
 [connection signal="body_exited" from="DeathArea3" to="Player" method="_on_death_area_body_exited"]
+[connection signal="body_entered" from="WaterBarrier1" to="Player" method="_on_water_barrier_body_entered"]
+[connection signal="body_entered" from="WaterBarrier2" to="Player" method="_on_water_barrier_body_entered"]
 [connection signal="body_entered" from="GroundArea" to="Player" method="_on_ground_area_body_entered"]
 [connection signal="body_entered" from="GroundArea2" to="Player" method="_on_ground_area_body_entered"]
 [connection signal="body_entered" from="GroundArea3" to="Player" method="_on_ground_area_body_entered"]
@@ -296,3 +318,4 @@ shape = SubResource("RectangleShape2D_i56cx")
 [connection signal="body_exited" from="Checkpoint2" to="Checkpoint2" method="_on_body_exited"]
 [connection signal="body_entered" from="Checkpoint3" to="Checkpoint3" method="_on_body_entered"]
 [connection signal="body_exited" from="Checkpoint3" to="Checkpoint3" method="_on_body_exited"]
+[connection signal="body_entered" from="Portal" to="Portal" method="_on_body_entered"]
