@@ -57,6 +57,11 @@ func _get_input():
 	animplayer.play(animation)
 
 func _physics_process(delta: float) -> void:
+	if Global.is_dialog_active:
+		velocity = Vector2.ZERO
+		animplayer.play("idle")
+		return
+		
 	if is_jumping:
 		z_velocity += JUMP_GRAVITY * delta
 		z_position += z_velocity * delta
@@ -84,6 +89,7 @@ func _physics_process(delta: float) -> void:
 				slide_direction = new_input.normalized()
 				can_change_direction = false
 				print("Arah berubah menjadi: ", slide_direction)
+				
 	else:
 		_get_input()
 		

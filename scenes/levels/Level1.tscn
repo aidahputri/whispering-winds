@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dd2bskrwbr6kw"]
+[gd_scene load_steps=19 format=3 uid="uid://dd2bskrwbr6kw"]
 
 [ext_resource type="PackedScene" uid="uid://qx27r0ibibkr" path="res://scenes/levels/Level1Map.tscn" id="1_pr836"]
 [ext_resource type="PackedScene" uid="uid://bc2fujtl13g10" path="res://scenes/characters/Player.tscn" id="2_a7h88"]
@@ -9,12 +9,21 @@
 [ext_resource type="Script" path="res://scenes/scripts/Checkpoint.gd" id="6_yd877"]
 [ext_resource type="PackedScene" uid="uid://q44cb2fgwvo5" path="res://scenes/ui/Portal.tscn" id="8_1u4mv"]
 [ext_resource type="Script" path="res://scenes/scripts/Portal.gd" id="9_7aubs"]
+[ext_resource type="Texture2D" uid="uid://cxjpjrs6u0w5m" path="res://assets/ui/Edinnu_UI_asset_pack/Edinnu_UI_asset_pack/Dialogue_plates/Plate (25).png" id="10_rn5he"]
+[ext_resource type="Texture2D" uid="uid://f0c8f087d4u7" path="res://assets/ui/Fantasy Minimal Pixel Art GUI by eta-commercial-free/UI/RightArrowButton_7x10.png" id="11_0fs1l"]
+[ext_resource type="Script" path="res://scenes/scripts/Level1Dialog.gd" id="11_5m3fn"]
+[ext_resource type="Texture2D" uid="uid://ipnwnngm1f0h" path="res://assets/ui/Fantasy Minimal Pixel Art GUI by eta-commercial-free/UI/BlackBigCircleBoxWithBorder_27x27.png" id="12_khnf6"]
+[ext_resource type="Texture2D" uid="uid://dgkriodcsswqj" path="res://assets/ui/Edinnu_UI_asset_pack/Edinnu_UI_asset_pack/Dialogue_plates/Plate (13).png" id="13_70anp"]
+[ext_resource type="FontFile" uid="uid://2snsq37rh6lp" path="res://assets/font/ModernDOS8x16.ttf" id="14_bwxom"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5qc3u"]
 size = Vector2(91.5, 119)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i56cx"]
 size = Vector2(596, 35)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xoql7"]
+size = Vector2(1196.5, 35)
 
 [node name="Level1" type="Node2D"]
 metadata/_edit_horizontal_guides_ = [9485.0]
@@ -268,6 +277,81 @@ position = Vector2(918, 9429)
 scale = Vector2(1.5, 1.5)
 script = ExtResource("9_7aubs")
 
+[node name="AreaTrigger1" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AreaTrigger1"]
+position = Vector2(584, 130)
+shape = SubResource("RectangleShape2D_xoql7")
+
+[node name="DialogBox" type="NinePatchRect" parent="."]
+visible = false
+visibility_layer = 2
+offset_left = 199.0
+offset_top = 398.0
+offset_right = 922.0
+offset_bottom = 517.0
+texture = ExtResource("10_rn5he")
+script = ExtResource("11_5m3fn")
+
+[node name="NextButton" type="Button" parent="DialogBox"]
+self_modulate = Color(1, 1, 1, 0.0705882)
+layout_mode = 0
+offset_left = 678.0
+offset_top = 75.0
+offset_right = 692.0
+offset_bottom = 93.0
+
+[node name="NinePatchRect" type="NinePatchRect" parent="DialogBox/NextButton"]
+visibility_layer = 2
+z_index = 1
+layout_mode = 0
+offset_left = 1.0
+offset_right = 13.0
+offset_bottom = 18.0
+texture = ExtResource("11_0fs1l")
+
+[node name="NinePatchRect2" type="NinePatchRect" parent="DialogBox/NextButton"]
+layout_mode = 0
+offset_left = -14.0
+offset_top = -11.0
+offset_right = 26.0
+offset_bottom = 29.0
+texture = ExtResource("12_khnf6")
+
+[node name="CharacterBox" type="NinePatchRect" parent="DialogBox"]
+layout_mode = 0
+offset_left = 6.0
+offset_top = -64.0
+offset_right = 145.0
+offset_bottom = -7.0
+texture = ExtResource("13_70anp")
+
+[node name="LabelCharacter" type="Label" parent="DialogBox/CharacterBox"]
+layout_mode = 0
+offset_left = 17.0
+offset_top = 21.0
+offset_right = 122.0
+offset_bottom = 44.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("14_bwxom")
+theme_override_font_sizes/font_size = 22
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LabelDialog" type="Label" parent="DialogBox"]
+layout_mode = 0
+offset_left = 52.0
+offset_top = 22.0
+offset_right = 645.0
+offset_bottom = 95.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("14_bwxom")
+theme_override_font_sizes/font_size = 21
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
 [connection signal="body_entered" from="DeathArea" to="Player" method="_on_death_area_body_entered"]
 [connection signal="body_exited" from="DeathArea" to="Player" method="_on_death_area_body_exited"]
 [connection signal="body_entered" from="DeathArea2" to="Player" method="_on_death_area_body_entered"]
@@ -319,3 +403,5 @@ script = ExtResource("9_7aubs")
 [connection signal="body_entered" from="Checkpoint3" to="Checkpoint3" method="_on_body_entered"]
 [connection signal="body_exited" from="Checkpoint3" to="Checkpoint3" method="_on_body_exited"]
 [connection signal="body_entered" from="Portal" to="Portal" method="_on_body_entered"]
+[connection signal="body_entered" from="AreaTrigger1" to="DialogBox" method="_on_area_trigger_1_body_entered"]
+[connection signal="pressed" from="DialogBox/NextButton" to="DialogBox" method="_on_next_button_pressed"]
