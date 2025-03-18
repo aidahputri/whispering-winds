@@ -14,11 +14,20 @@ var dialog_data = {
 		#{"character": "", "text": ""},
 	],
 	"trigger2": [
-		{"character": "Aeria", "text": "These crystals… they feel like fragments of the wind’s power. Maybe they can help me cross these impossible gaps."},
+		{"character": "Aeria", "text": "These crystals… they feel like fragments of the wind’s power. Maybe they somehow can help me."},
 		{"character": "", "text": "A chill breeze stirs the air as the Wind Spirit’s voice echoes softly."},
 		{"character": "Anemoi", "text": "The wind’s power lies scattered. Seek the Three Aerolites hidden within this broken land."},
 		{"character": "Anemoi", "text": "When gathered, they will grant you the power to leap farther—but be swift, child of Zephira, for their strength fades within 5 seconds."},
 	],
+	"trigger3": [
+		{"character": "Anemoi", "text": "This marker will guide you back. Should you fall, the wind shall return you here—so you may walk the path again."},
+		{"character": "Aeria", "text": "Woah, at least I won’t have to start over if something goes wrong…"},
+	],
+	"trigger4": [
+		{"character": "Anemoi", "text": "Step into the Wind Vortex, child of Zephira. Accept its mark, and the wind shall answer your call—no longer bound by scattered fragments."},
+		{"character": "Aeria", "text": "So… with this power, I won’t need to gather Aerolites anymore?"},
+		{"character": "Anemoi", "text": "Yes, but the wind’s blessing is fleeting. Use it wisely."},
+	]
 }
 
 var current_dialog = []
@@ -84,3 +93,13 @@ func _on_area_trigger_2_body_entered(body: Node2D) -> void:
 	if body.name == "Player":
 		print("Masuk ke area dialog 2")
 		start_dialog("trigger2")
+
+func _on_area_trigger_3_body_entered(body: Node2D) -> void:
+	if body.name == "Player": 
+		print("Masuk ke area dialog 3")
+		start_dialog("trigger3")
+
+func _on_area_trigger_4_body_entered(body: Node2D) -> void:
+	if body.name == "Player": 
+		print("Masuk ke area dialog 4")
+		start_dialog("trigger4")

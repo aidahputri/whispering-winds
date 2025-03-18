@@ -103,17 +103,17 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4ob18"]
-size = Vector2(113, 61)
+size = Vector2(209, 81)
 
 [node name="WindOrb" type="Area2D"]
 script = ExtResource("1_f5jqp")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_0gp60")
 animation = &"idle"
 autoplay = "idle"
 frame_progress = 0.273811
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(2.5, -9.5)
 shape = SubResource("RectangleShape2D_4ob18")

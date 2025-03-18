@@ -17,13 +17,13 @@
 [ext_resource type="FontFile" uid="uid://2snsq37rh6lp" path="res://assets/font/ModernDOS8x16.ttf" id="14_bwxom"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5qc3u"]
-size = Vector2(91.5, 119)
+size = Vector2(221, 114.375)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i56cx"]
 size = Vector2(596, 35)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xoql7"]
-size = Vector2(1232.25, 35)
+size = Vector2(1232.13, 25.25)
 
 [node name="Level1" type="Node2D"]
 metadata/_edit_horizontal_guides_ = [9485.0]
@@ -234,8 +234,8 @@ position = Vector2(1175, 3283)
 position = Vector2(1045, 3372)
 
 [node name="WindOrb" parent="." instance=ExtResource("5_x2yx6")]
-position = Vector2(646, 4397)
-scale = Vector2(4, 4)
+position = Vector2(632, 4413)
+scale = Vector2(2, 2)
 
 [node name="WaterOrb" parent="." instance=ExtResource("6_48007")]
 position = Vector2(296, 7756)
@@ -245,7 +245,7 @@ position = Vector2(607, 2065)
 script = ExtResource("6_yd877")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Checkpoint1"]
-position = Vector2(-47, 42.875)
+position = Vector2(-50.5, 45.1875)
 shape = SubResource("RectangleShape2D_5qc3u")
 
 [node name="Checkpoint2" type="Area2D" parent="."]
@@ -288,6 +288,20 @@ position = Vector2(0, 334)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AreaTrigger2"]
 position = Vector2(607, 798)
+shape = SubResource("RectangleShape2D_xoql7")
+
+[node name="AreaTrigger3" type="Area2D" parent="."]
+position = Vector2(0, 1236)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AreaTrigger3"]
+position = Vector2(602, 815.625)
+shape = SubResource("RectangleShape2D_xoql7")
+
+[node name="AreaTrigger4" type="Area2D" parent="."]
+position = Vector2(0, 3501)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AreaTrigger4"]
+position = Vector2(613.938, 796.75)
 shape = SubResource("RectangleShape2D_xoql7")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
@@ -422,4 +436,6 @@ autowrap_mode = 2
 [connection signal="body_entered" from="Portal" to="Portal" method="_on_body_entered"]
 [connection signal="body_entered" from="AreaTrigger1" to="CanvasLayer/DialogBox" method="_on_area_trigger_1_body_entered"]
 [connection signal="body_entered" from="AreaTrigger2" to="CanvasLayer/DialogBox" method="_on_area_trigger_2_body_entered"]
+[connection signal="body_entered" from="AreaTrigger3" to="CanvasLayer/DialogBox" method="_on_area_trigger_3_body_entered"]
+[connection signal="body_entered" from="AreaTrigger4" to="CanvasLayer/DialogBox" method="_on_area_trigger_4_body_entered"]
 [connection signal="pressed" from="CanvasLayer/DialogBox/NextButton" to="CanvasLayer/DialogBox" method="_on_next_button_pressed"]
