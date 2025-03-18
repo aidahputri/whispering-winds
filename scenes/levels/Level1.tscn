@@ -23,7 +23,7 @@ size = Vector2(91.5, 119)
 size = Vector2(596, 35)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xoql7"]
-size = Vector2(1196.5, 35)
+size = Vector2(1232.25, 35)
 
 [node name="Level1" type="Node2D"]
 metadata/_edit_horizontal_guides_ = [9485.0]
@@ -280,20 +280,29 @@ script = ExtResource("9_7aubs")
 [node name="AreaTrigger1" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AreaTrigger1"]
-position = Vector2(584, 130)
+position = Vector2(601.875, 130)
 shape = SubResource("RectangleShape2D_xoql7")
 
-[node name="DialogBox" type="NinePatchRect" parent="."]
+[node name="AreaTrigger2" type="Area2D" parent="."]
+position = Vector2(0, 334)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AreaTrigger2"]
+position = Vector2(607, 798)
+shape = SubResource("RectangleShape2D_xoql7")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="DialogBox" type="NinePatchRect" parent="CanvasLayer"]
 visible = false
 visibility_layer = 2
-offset_left = 199.0
-offset_top = 398.0
-offset_right = 922.0
-offset_bottom = 517.0
+offset_left = 205.0
+offset_top = 493.0
+offset_right = 937.0
+offset_bottom = 623.0
 texture = ExtResource("10_rn5he")
 script = ExtResource("11_5m3fn")
 
-[node name="NextButton" type="Button" parent="DialogBox"]
+[node name="NextButton" type="Button" parent="CanvasLayer/DialogBox"]
 self_modulate = Color(1, 1, 1, 0.0705882)
 layout_mode = 0
 offset_left = 678.0
@@ -301,7 +310,7 @@ offset_top = 75.0
 offset_right = 692.0
 offset_bottom = 93.0
 
-[node name="NinePatchRect" type="NinePatchRect" parent="DialogBox/NextButton"]
+[node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer/DialogBox/NextButton"]
 visibility_layer = 2
 z_index = 1
 layout_mode = 0
@@ -310,15 +319,20 @@ offset_right = 13.0
 offset_bottom = 18.0
 texture = ExtResource("11_0fs1l")
 
-[node name="NinePatchRect2" type="NinePatchRect" parent="DialogBox/NextButton"]
-layout_mode = 0
-offset_left = -14.0
-offset_top = -11.0
-offset_right = 26.0
-offset_bottom = 29.0
+[node name="NinePatchRect2" type="NinePatchRect" parent="CanvasLayer/DialogBox/NextButton"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -1.286
+anchor_top = -0.611
+anchor_right = -1.071
+anchor_bottom = 0.5
+offset_left = 3.004
+offset_top = -0.00199986
+offset_right = 39.994
+offset_bottom = 20.0
 texture = ExtResource("12_khnf6")
 
-[node name="CharacterBox" type="NinePatchRect" parent="DialogBox"]
+[node name="CharacterBox" type="NinePatchRect" parent="CanvasLayer/DialogBox"]
 layout_mode = 0
 offset_left = 6.0
 offset_top = -64.0
@@ -326,7 +340,7 @@ offset_right = 145.0
 offset_bottom = -7.0
 texture = ExtResource("13_70anp")
 
-[node name="LabelCharacter" type="Label" parent="DialogBox/CharacterBox"]
+[node name="LabelCharacter" type="Label" parent="CanvasLayer/DialogBox/CharacterBox"]
 layout_mode = 0
 offset_left = 17.0
 offset_top = 21.0
@@ -339,12 +353,15 @@ theme_override_font_sizes/font_size = 22
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="LabelDialog" type="Label" parent="DialogBox"]
-layout_mode = 0
-offset_left = 52.0
-offset_top = 22.0
-offset_right = 645.0
-offset_bottom = 95.0
+[node name="LabelDialog" type="Label" parent="CanvasLayer/DialogBox"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.231
+anchor_bottom = 0.231
+offset_left = 49.0
+offset_top = -0.0300007
+offset_right = 642.0
+offset_bottom = 72.97
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("14_bwxom")
 theme_override_font_sizes/font_size = 21
@@ -403,5 +420,6 @@ autowrap_mode = 2
 [connection signal="body_entered" from="Checkpoint3" to="Checkpoint3" method="_on_body_entered"]
 [connection signal="body_exited" from="Checkpoint3" to="Checkpoint3" method="_on_body_exited"]
 [connection signal="body_entered" from="Portal" to="Portal" method="_on_body_entered"]
-[connection signal="body_entered" from="AreaTrigger1" to="DialogBox" method="_on_area_trigger_1_body_entered"]
-[connection signal="pressed" from="DialogBox/NextButton" to="DialogBox" method="_on_next_button_pressed"]
+[connection signal="body_entered" from="AreaTrigger1" to="CanvasLayer/DialogBox" method="_on_area_trigger_1_body_entered"]
+[connection signal="body_entered" from="AreaTrigger2" to="CanvasLayer/DialogBox" method="_on_area_trigger_2_body_entered"]
+[connection signal="pressed" from="CanvasLayer/DialogBox/NextButton" to="CanvasLayer/DialogBox" method="_on_next_button_pressed"]

@@ -13,9 +13,12 @@ var dialog_data = {
 		{"character": "Anemoi", "text": "Follow the path ahead. In the face of uncertainty, the wind shall reveal what you cannot see."},
 		#{"character": "", "text": ""},
 	],
-	#"trigger2": [
-		#{"character": "???", "text": "Suara ini... dari mana asalnya?"},
-	#],
+	"trigger2": [
+		{"character": "Aeria", "text": "These crystals… they feel like fragments of the wind’s power. Maybe they can help me cross these impossible gaps."},
+		{"character": "", "text": "A chill breeze stirs the air as the Wind Spirit’s voice echoes softly."},
+		{"character": "Anemoi", "text": "The wind’s power lies scattered. Seek the Three Aerolites hidden within this broken land."},
+		{"character": "Anemoi", "text": "When gathered, they will grant you the power to leap farther—but be swift, child of Zephira, for their strength fades within 5 seconds."},
+	],
 }
 
 var current_dialog = []
@@ -25,6 +28,9 @@ var is_typing = false
 var skip_typing = false
 
 func start_dialog(trigger_name):
+	print("Memulai dialog untuk:", trigger_name)  # Debug log
+	print("Status dialog sebelumnya:", Global.dialog_seen.get(trigger_name, false)) 
+	
 	if dialog_data.has(trigger_name) and not Global.dialog_seen.get(trigger_name, false):
 		current_dialog = dialog_data[trigger_name]
 		current_index = 0
@@ -73,3 +79,8 @@ func _on_area_trigger_1_body_entered(body: Node2D) -> void:
 	if body.name == "Player": 
 		print("Masuk ke area dialog 1")
 		start_dialog("trigger1")
+
+func _on_area_trigger_2_body_entered(body: Node2D) -> void:
+	if body.name == "Player":
+		print("Masuk ke area dialog 2")
+		start_dialog("trigger2")
