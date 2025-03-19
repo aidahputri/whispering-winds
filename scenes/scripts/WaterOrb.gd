@@ -1,26 +1,30 @@
 extends Area2D
 
 @onready var water = $Water
-var player_in_area = null
+@onready var slide_bubble = $SlideArea
+var player_in_area_water = null
+var player_in_area_slide = null
 
-func _on_body_entered(body):
+func _on_body_entered(body: Node2D) -> void:
 	if body.name == "Player":
 		print("Tekan 'F' untuk mengaktifkan mekanisme")
-		player_in_area = body
+		player_in_area_water = body
+	
+func _on_slide_area_2_body_entered(body: Node2D):
+	if body.name == "Player":
+		print("Tekan 'J' untuk mengaktifkan mekanisme")
+		player_in_area_slide = body
 
-#func _on_body_exited(body):
-	#if body == player_in_area:
-		#player_in_area = null
-		#visible = false
-
-func _process(delta):
-	if player_in_area and Input.is_action_just_pressed("interact"):
+func _process(_delta):
+	if player_in_area_water and Input.is_action_just_pressed("interact"):
 		water.visible = true
+		slide_bubble.visible = true
+		Global.set_water_orb_status(true)
 		
-	if player_in_area and Input.is_action_just_pressed("fire") and player_in_area.has_method("start_slide"):
+	if player_in_area_slide and Global.is_waterorb_active and Input.is_action_just_pressed("fire") and player_in_area_slide.has_method("start_slide"):
 		var slide_direction = Vector2(Input.get_axis("left", "right"), Input.get_axis("up", "down"))
 			
 		if slide_direction == Vector2.ZERO:
 			slide_direction = Vector2(0, 1)
 			
-		player_in_area.start_slide(slide_direction)
+		player_in_area_slide.start_slide(slide_direction)

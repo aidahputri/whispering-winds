@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://dd2bskrwbr6kw"]
+[gd_scene load_steps=20 format=3 uid="uid://dd2bskrwbr6kw"]
 
 [ext_resource type="PackedScene" uid="uid://qx27r0ibibkr" path="res://scenes/levels/Level1Map.tscn" id="1_pr836"]
 [ext_resource type="PackedScene" uid="uid://bc2fujtl13g10" path="res://scenes/characters/Player.tscn" id="2_a7h88"]
@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://blvfuck1q0t66" path="res://scenes/ui/Aerolite.tscn" id="4_bk1mr"]
 [ext_resource type="PackedScene" uid="uid://cw6bmkqq3ebad" path="res://scenes/characters/WindOrb.tscn" id="5_x2yx6"]
 [ext_resource type="PackedScene" uid="uid://tqe0mywskkmf" path="res://scenes/characters/WaterOrb.tscn" id="6_48007"]
-[ext_resource type="Script" path="res://scenes/scripts/Checkpoint.gd" id="6_yd877"]
+[ext_resource type="PackedScene" uid="uid://24e5im3wsegk" path="res://scenes/ui/Checkpoint.tscn" id="7_420bu"]
 [ext_resource type="PackedScene" uid="uid://q44cb2fgwvo5" path="res://scenes/ui/Portal.tscn" id="8_1u4mv"]
 [ext_resource type="Script" path="res://scenes/scripts/Portal.gd" id="9_7aubs"]
 [ext_resource type="Texture2D" uid="uid://cxjpjrs6u0w5m" path="res://assets/ui/Edinnu_UI_asset_pack/Edinnu_UI_asset_pack/Dialogue_plates/Plate (25).png" id="10_rn5he"]
@@ -15,15 +15,16 @@
 [ext_resource type="Texture2D" uid="uid://ipnwnngm1f0h" path="res://assets/ui/Fantasy Minimal Pixel Art GUI by eta-commercial-free/UI/BlackBigCircleBoxWithBorder_27x27.png" id="12_khnf6"]
 [ext_resource type="Texture2D" uid="uid://dgkriodcsswqj" path="res://assets/ui/Edinnu_UI_asset_pack/Edinnu_UI_asset_pack/Dialogue_plates/Plate (13).png" id="13_70anp"]
 [ext_resource type="FontFile" uid="uid://2snsq37rh6lp" path="res://assets/font/ModernDOS8x16.ttf" id="14_bwxom"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_5qc3u"]
-size = Vector2(221, 114.375)
+[ext_resource type="PackedScene" uid="uid://baukgnyykvv2n" path="res://scenes/ui/GUILevel1.tscn" id="16_v367w"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i56cx"]
 size = Vector2(596, 35)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xoql7"]
-size = Vector2(1232.13, 25.25)
+size = Vector2(1247, 31.625)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mnjx0"]
+size = Vector2(1243, 113)
 
 [node name="Level1" type="Node2D"]
 metadata/_edit_horizontal_guides_ = [9485.0]
@@ -238,31 +239,16 @@ position = Vector2(632, 4413)
 scale = Vector2(2, 2)
 
 [node name="WaterOrb" parent="." instance=ExtResource("6_48007")]
-position = Vector2(296, 7756)
+position = Vector2(295, 7777)
 
-[node name="Checkpoint1" type="Area2D" parent="."]
-position = Vector2(607, 2065)
-script = ExtResource("6_yd877")
+[node name="Checkpoint1" parent="." instance=ExtResource("7_420bu")]
+position = Vector2(607, 2033)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Checkpoint1"]
-position = Vector2(-50.5, 45.1875)
-shape = SubResource("RectangleShape2D_5qc3u")
+[node name="Checkpoint2" parent="." instance=ExtResource("7_420bu")]
+position = Vector2(668, 4529)
 
-[node name="Checkpoint2" type="Area2D" parent="."]
-position = Vector2(656, 4570)
-script = ExtResource("6_yd877")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Checkpoint2"]
-position = Vector2(-50.5, 29)
-shape = SubResource("RectangleShape2D_5qc3u")
-
-[node name="Checkpoint3" type="Area2D" parent="."]
-position = Vector2(858, 7195)
-script = ExtResource("6_yd877")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Checkpoint3"]
-position = Vector2(-56.75, 38.5)
-shape = SubResource("RectangleShape2D_5qc3u")
+[node name="Checkpoint3" parent="." instance=ExtResource("7_420bu")]
+position = Vector2(847, 7167)
 
 [node name="SlideArea" type="Area2D" parent="."]
 visible = false
@@ -294,7 +280,7 @@ shape = SubResource("RectangleShape2D_xoql7")
 position = Vector2(0, 1236)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AreaTrigger3"]
-position = Vector2(602, 815.625)
+position = Vector2(602, 815.188)
 shape = SubResource("RectangleShape2D_xoql7")
 
 [node name="AreaTrigger4" type="Area2D" parent="."]
@@ -302,6 +288,20 @@ position = Vector2(0, 3501)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AreaTrigger4"]
 position = Vector2(613.938, 796.75)
+shape = SubResource("RectangleShape2D_xoql7")
+
+[node name="AreaTrigger5" type="Area2D" parent="."]
+position = Vector2(0, 6949)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AreaTrigger5"]
+position = Vector2(613.938, 796.75)
+shape = SubResource("RectangleShape2D_xoql7")
+
+[node name="AreaTrigger6" type="Area2D" parent="."]
+position = Vector2(41, 7068)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AreaTrigger6"]
+position = Vector2(579, 797)
 shape = SubResource("RectangleShape2D_xoql7")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
@@ -383,6 +383,17 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 
+[node name="SlideArea2" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SlideArea2"]
+position = Vector2(621.5, 7986.5)
+shape = SubResource("RectangleShape2D_mnjx0")
+
+[node name="CanvasLayerGUI" type="CanvasLayer" parent="."]
+
+[node name="GUILevel1" parent="CanvasLayerGUI" instance=ExtResource("16_v367w")]
+position = Vector2(27, 17)
+
 [connection signal="body_entered" from="DeathArea" to="Player" method="_on_death_area_body_entered"]
 [connection signal="body_exited" from="DeathArea" to="Player" method="_on_death_area_body_exited"]
 [connection signal="body_entered" from="DeathArea2" to="Player" method="_on_death_area_body_entered"]
@@ -427,15 +438,12 @@ autowrap_mode = 2
 [connection signal="body_entered" from="WindOrb" to="Player" method="_on_wind_orb_body_entered"]
 [connection signal="body_exited" from="WindOrb" to="WindOrb" method="_on_body_exited"]
 [connection signal="body_entered" from="WaterOrb" to="WaterOrb" method="_on_body_entered"]
-[connection signal="body_entered" from="Checkpoint1" to="Checkpoint1" method="_on_body_entered"]
-[connection signal="body_exited" from="Checkpoint1" to="Checkpoint1" method="_on_body_exited"]
-[connection signal="body_entered" from="Checkpoint2" to="Checkpoint2" method="_on_body_entered"]
-[connection signal="body_exited" from="Checkpoint2" to="Checkpoint2" method="_on_body_exited"]
-[connection signal="body_entered" from="Checkpoint3" to="Checkpoint3" method="_on_body_entered"]
-[connection signal="body_exited" from="Checkpoint3" to="Checkpoint3" method="_on_body_exited"]
 [connection signal="body_entered" from="Portal" to="Portal" method="_on_body_entered"]
 [connection signal="body_entered" from="AreaTrigger1" to="CanvasLayer/DialogBox" method="_on_area_trigger_1_body_entered"]
 [connection signal="body_entered" from="AreaTrigger2" to="CanvasLayer/DialogBox" method="_on_area_trigger_2_body_entered"]
 [connection signal="body_entered" from="AreaTrigger3" to="CanvasLayer/DialogBox" method="_on_area_trigger_3_body_entered"]
 [connection signal="body_entered" from="AreaTrigger4" to="CanvasLayer/DialogBox" method="_on_area_trigger_4_body_entered"]
+[connection signal="body_entered" from="AreaTrigger5" to="CanvasLayer/DialogBox" method="_on_area_trigger_5_body_entered"]
+[connection signal="body_entered" from="AreaTrigger6" to="CanvasLayer/DialogBox" method="_on_area_trigger_6_body_entered"]
 [connection signal="pressed" from="CanvasLayer/DialogBox/NextButton" to="CanvasLayer/DialogBox" method="_on_next_button_pressed"]
+[connection signal="body_entered" from="SlideArea2" to="WaterOrb" method="_on_slide_area_2_body_entered"]

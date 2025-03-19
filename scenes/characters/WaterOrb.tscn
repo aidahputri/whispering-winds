@@ -1,10 +1,12 @@
-[gd_scene load_steps=18 format=3 uid="uid://tqe0mywskkmf"]
+[gd_scene load_steps=20 format=3 uid="uid://tqe0mywskkmf"]
 
 [ext_resource type="Texture2D" uid="uid://bkqdsniv4yrqs" path="res://assets/particles/v2.Elemental_Skills_Animations/WaterSpells/water_spell_03_sheet.png" id="1_hre5j"]
 [ext_resource type="Script" path="res://scenes/scripts/WaterOrb.gd" id="1_wivve"]
+[ext_resource type="Texture2D" uid="uid://bgkpoboepfaig" path="res://assets/bubble2.png" id="3_gfti6"]
+[ext_resource type="FontFile" uid="uid://bwwjbytyasj6u" path="res://assets/font/ModernDOS8x8.ttf" id="4_bdcvm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2omk1"]
-size = Vector2(784, 226)
+size = Vector2(297, 107)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_trxht"]
 atlas = ExtResource("1_hre5j")
@@ -109,7 +111,7 @@ animations = [{
 script = ExtResource("1_wivve")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(119, 78)
+position = Vector2(2.5, 18.5)
 shape = SubResource("RectangleShape2D_2omk1")
 
 [node name="Water" type="AnimatedSprite2D" parent="."]
@@ -119,4 +121,41 @@ autoplay = "default"
 frame = 6
 frame_progress = 0.656365
 
-[connection signal="body_exited" from="." to="." method="_on_body_exited"]
+[node name="SlideArea" type="NinePatchRect" parent="."]
+visible = false
+offset_left = -253.0
+offset_top = 137.0
+offset_right = -75.0
+offset_bottom = 185.0
+texture = ExtResource("3_gfti6")
+
+[node name="Label" type="Label" parent="SlideArea"]
+layout_mode = 0
+offset_left = 13.0
+offset_top = 5.0
+offset_right = 165.0
+offset_bottom = 28.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_bdcvm")
+text = "Click J to Slide"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+offset_left = -188.0
+offset_top = -65.0
+offset_right = -10.0
+offset_bottom = -17.0
+texture = ExtResource("3_gfti6")
+
+[node name="Label" type="Label" parent="NinePatchRect"]
+layout_mode = 0
+offset_left = 13.0
+offset_top = 5.0
+offset_right = 165.0
+offset_bottom = 28.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_bdcvm")
+text = "Click F to Interact"
+horizontal_alignment = 1
+vertical_alignment = 1

@@ -1,0 +1,87 @@
+[gd_scene load_steps=10 format=3 uid="uid://baukgnyykvv2n"]
+
+[ext_resource type="Script" path="res://scenes/scripts/GUILevel1.gd" id="1_roft5"]
+[ext_resource type="Texture2D" uid="uid://duf3ef1vwcqj5" path="res://assets/ui/Edinnu_UI_asset_pack/Edinnu_UI_asset_pack/Dialogue_plates/Plate (56).png" id="2_gfuu1"]
+[ext_resource type="Texture2D" uid="uid://bgpqu686gcrcc" path="res://assets/characters/aeria-potrait.png" id="2_nj645"]
+[ext_resource type="FontFile" uid="uid://c2wdkmgc5gs8g" path="res://assets/font/CooperBits.ttf" id="3_w077k"]
+[ext_resource type="Texture2D" uid="uid://cq2aacpwrbhfu" path="res://assets/particles/crystal1.png" id="4_1vjmm"]
+[ext_resource type="FontFile" uid="uid://2snsq37rh6lp" path="res://assets/font/ModernDOS8x16.ttf" id="6_wkege"]
+[ext_resource type="Texture2D" uid="uid://ipnwnngm1f0h" path="res://assets/ui/Fantasy Minimal Pixel Art GUI by eta-commercial-free/UI/BlackBigCircleBoxWithBorder_27x27.png" id="7_n6dwt"]
+[ext_resource type="Texture2D" uid="uid://c2hqhth1gybvb" path="res://assets/particles/v2.Elemental_Skills_Animations/WaterSpells/water_spell_01.png" id="8_6dsup"]
+[ext_resource type="Texture2D" uid="uid://dsigh4qp4l0dw" path="res://assets/particles/v2.Elemental_Skills_Animations/Airbook/air_book.png" id="9_vc8ev"]
+
+[node name="GUILevel1" type="Node2D"]
+script = ExtResource("1_roft5")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+offset_right = 317.0
+offset_bottom = 167.0
+texture = ExtResource("2_gfuu1")
+
+[node name="Name" type="Sprite2D" parent="."]
+position = Vector2(95, 74)
+scale = Vector2(0.5, 0.584)
+texture = ExtResource("2_nj645")
+flip_h = true
+
+[node name="CharName" type="Label" parent="."]
+offset_left = 149.0
+offset_top = 40.0
+offset_right = 247.0
+offset_bottom = 72.0
+size_flags_horizontal = 4
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_w077k")
+theme_override_font_sizes/font_size = 32
+text = "Aeria"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Crystal1" type="Sprite2D" parent="."]
+position = Vector2(154, 92)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("4_1vjmm")
+
+[node name="AeroliteLabel" type="Label" parent="."]
+offset_left = 172.0
+offset_top = 82.0
+offset_right = 221.0
+offset_bottom = 106.0
+theme_override_fonts/font = ExtResource("6_wkege")
+theme_override_font_sizes/font_size = 24
+vertical_alignment = 1
+
+[node name="WindTimerLabel" type="Label" parent="."]
+offset_left = 214.0
+offset_top = 82.0
+offset_right = 254.0
+offset_bottom = 106.0
+theme_override_fonts/font = ExtResource("6_wkege")
+theme_override_font_sizes/font_size = 24
+vertical_alignment = 1
+
+[node name="AerocrystIcon" type="Node2D" parent="."]
+visible = false
+
+[node name="BlackBigCircleBoxWithBorder27x27" type="Sprite2D" parent="AerocrystIcon"]
+position = Vector2(159.3, 128.3)
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("7_n6dwt")
+
+[node name="Aerocryst" type="Sprite2D" parent="AerocrystIcon"]
+position = Vector2(159.3, 128.3)
+scale = Vector2(0.55, 0.55)
+texture = ExtResource("9_vc8ev")
+
+[node name="WaterIcon" type="Node2D" parent="."]
+visible = false
+
+[node name="BlackBigCircleBoxWithBorder27x28" type="Sprite2D" parent="WaterIcon"]
+position = Vector2(190.3, 128)
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("7_n6dwt")
+
+[node name="Aerocryst2" type="Sprite2D" parent="WaterIcon"]
+position = Vector2(190.3, 127)
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("8_6dsup")

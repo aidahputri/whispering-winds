@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3 uid="uid://bcdgjmmqdfs0r"]
 
-[ext_resource type="Texture2D" uid="uid://cgp3rtluojk1k" path="res://assets/ui/Fantasy Minimal Pixel Art GUI by eta-commercial-free/UI/Button_52x14.png" id="1_4m2w2"]
 [ext_resource type="Script" path="res://scenes/scripts/StartButton.gd" id="1_wb0we"]
 [ext_resource type="FontFile" uid="uid://c2wdkmgc5gs8g" path="res://assets/font/CooperBits.ttf" id="2_5paqy"]
-[ext_resource type="Texture2D" uid="uid://dqabk00a1h78o" path="res://assets/ui/Fantasy Minimal Pixel Art GUI by eta-commercial-free/UI/HighlightButton_60x23.png" id="3_b2lo2"]
+[ext_resource type="Texture2D" uid="uid://bbiluhlo65amq" path="res://assets/ui/Edinnu_UI_asset_pack/Edinnu_UI_asset_pack/Menu/Menu (10).png" id="3_4lrwx"]
+[ext_resource type="Texture2D" uid="uid://cepmwk6rfva2o" path="res://assets/ui/Edinnu_UI_asset_pack/Edinnu_UI_asset_pack/Arrows/Arrow (1).png" id="5_euqey"]
 
 [node name="StartButton" type="Button"]
 self_modulate = Color(1, 1, 1, 0)
@@ -18,28 +18,20 @@ offset_right = 241.52
 offset_bottom = 88.968
 script = ExtResource("1_wb0we")
 
-[node name="Border" type="NinePatchRect" parent="."]
-visible = false
-layout_mode = 0
-offset_left = -11.0
-offset_top = -12.0
-offset_right = 256.0
-offset_bottom = 101.0
-texture = ExtResource("3_b2lo2")
-
 [node name="NinePatchRect" type="NinePatchRect" parent="."]
 layout_mode = 0
+offset_top = -3.0
 offset_right = 246.0
-offset_bottom = 89.0
-texture = ExtResource("1_4m2w2")
+offset_bottom = 86.0
+texture = ExtResource("3_4lrwx")
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 0
-offset_left = 51.0
+offset_left = 64.0
 offset_top = 26.0
-offset_right = 194.0
+offset_right = 207.0
 offset_bottom = 69.0
-theme_override_colors/font_color = Color(0.497935, 0.310291, 0.1175, 1)
+theme_override_colors/font_color = Color(0.662745, 0.439216, 0.196078, 1)
 theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("2_5paqy")
 theme_override_font_sizes/font_size = 36
@@ -48,6 +40,9 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 
-[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
+[node name="Arrow(1)" type="Sprite2D" parent="."]
+position = Vector2(49, 42)
+scale = Vector2(2.75, 2.66667)
+texture = ExtResource("5_euqey")
+
 [connection signal="pressed" from="." to="." method="_on_pressed"]

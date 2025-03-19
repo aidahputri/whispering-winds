@@ -16,6 +16,8 @@ func on_aerolite_collected():
 	
 	collected_count += 1
 	print("Aerolite dikumpulkan: ", collected_count)
+	
+	Global.update_collected_count(collected_count)
 
 	if collected_count >= 3:
 		activate_wind_current()
@@ -25,14 +27,21 @@ func activate_wind_current():
 		return
 	print("Wind Current Aktif!")
 	wind_active = true
-	collected_count = 0
+	#collected_count = 0
+	#
+	#Global.update_collected_count(collected_count)
 	
 	wind_activated.emit()
+	
+	Global.start_wind_countdown(3)
 
 	timer.start(3)
 
 func _on_timer_timeout():
 	print("Wind Current Nonaktif!")
 	wind_active = false
+	
+	collected_count = 0
+	Global.update_collected_count(collected_count)
 	
 	wind_deactivated.emit()

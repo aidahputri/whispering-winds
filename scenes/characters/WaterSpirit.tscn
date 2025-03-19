@@ -728,8 +728,10 @@ shape = SubResource("RectangleShape2D_2pscc")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -53)
 sprite_frames = SubResource("SpriteFrames_af8ba")
-animation = &"defend"
+animation = &"death"
 autoplay = "idle"
+frame = 15
+frame_progress = 1.0
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(318, -54)

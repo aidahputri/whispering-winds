@@ -79,7 +79,6 @@ func _physics_process(delta: float) -> void:
 
 		var collision = move_and_collide(velocity * delta)
 		if collision:
-			var normal = collision.get_normal()
 			print("Menabrak! Arah baru: ", slide_direction)
 			can_change_direction = true
 			
@@ -146,6 +145,7 @@ func _on_wind_deactivated() -> void:
 func _on_wind_orb_body_entered(body: Node2D) -> void:
 	if body.name == "Player" and not aerocryst.visible:
 		aerocryst.visible = true
+		Global.set_wind_orb_status(true)
 		JUMP_DISTANCE = 300
 
 func enable_water_slide():

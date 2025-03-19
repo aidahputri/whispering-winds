@@ -19,8 +19,19 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-offset_left = 474.0
-offset_top = 508.0
-offset_right = 717.0
-offset_bottom = 597.0
-scale = Vector2(0.75, 0.75)
+offset_left = 451.0
+offset_top = 388.0
+offset_right = 694.0
+offset_bottom = 477.0
+
+[node name="ExitButton" parent="." instance=ExtResource("2_uhnbi")]
+z_index = 1
+anchors_preset = 0
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 450.0
+offset_top = 499.0
+offset_right = 693.0
+offset_bottom = 588.0

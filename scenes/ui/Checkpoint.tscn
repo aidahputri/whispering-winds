@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=3 uid="uid://24e5im3wsegk"]
+
+[ext_resource type="Script" path="res://scenes/scripts/Checkpoint.gd" id="1_3s1id"]
+[ext_resource type="Texture2D" uid="uid://bgkpoboepfaig" path="res://assets/bubble2.png" id="2_1rwb3"]
+[ext_resource type="FontFile" uid="uid://bwwjbytyasj6u" path="res://assets/font/ModernDOS8x8.ttf" id="3_0xw43"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5qc3u"]
+size = Vector2(312, 134)
+
+[node name="Checkpoint" type="Area2D"]
+position = Vector2(607, 2065)
+script = ExtResource("1_3s1id")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-48, 55)
+shape = SubResource("RectangleShape2D_5qc3u")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+offset_left = -204.0
+offset_top = -12.0
+offset_right = -48.0
+offset_bottom = 36.0
+texture = ExtResource("2_1rwb3")
+
+[node name="Label" type="Label" parent="NinePatchRect"]
+layout_mode = 0
+offset_left = 14.0
+offset_top = 4.0
+offset_right = 142.0
+offset_bottom = 27.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_0xw43")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
