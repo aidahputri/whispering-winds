@@ -17,6 +17,10 @@ signal water_orb_status_updated
 func update_collected_count(count: int):
 	collected_count = count
 	collected_count_updated.emit(collected_count, max_aerolite)
+	
+func reset_collected_count():
+	collected_count = 0
+	collected_count_updated.emit(collected_count, max_aerolite)
 
 func start_wind_countdown(duration: int):
 	wind_active = true
