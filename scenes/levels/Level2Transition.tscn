@@ -1,12 +1,35 @@
-[gd_scene load_steps=3 format=3 uid="uid://b0dc8ahvv3ydk"]
+[gd_scene load_steps=4 format=3 uid="uid://b0dc8ahvv3ydk"]
 
 [ext_resource type="PackedScene" uid="uid://bu6f3i8rv4gfp" path="res://scenes/levels/Level2TransitionMap.tscn" id="1_4f4lm"]
 [ext_resource type="PackedScene" uid="uid://bc2fujtl13g10" path="res://scenes/characters/Player.tscn" id="2_fjanp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_l2pfc"]
+size = Vector2(1314, 72)
 
 [node name="Level2Transition" type="Node2D"]
 
 [node name="Level2TransitionMap" parent="." instance=ExtResource("1_4f4lm")]
 scale = Vector2(1.3, 1.3)
 
+[node name="Barrier" type="StaticBody2D" parent="."]
+position = Vector2(203, 1274)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Barrier"]
+position = Vector2(-203, -1274)
+polygon = PackedVector2Array(-169, 1187, 758, 1184, 761, 1244, 839, 1206, 881, 1205, 957, 1166, 1020, 1166, 1022, 1373, 951, 1376, 870, 1416, 824, 1418, 746, 1460, -163, 1463)
+
+[node name="Barrier2" type="StaticBody2D" parent="."]
+position = Vector2(1276, 1274)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Barrier2"]
+position = Vector2(-1276, -1274)
+polygon = PackedVector2Array(1228, 1178, 1333, 1176, 1336, 1378, 1227, 1379)
+
+[node name="Barrier3" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Barrier3"]
+position = Vector2(647, 1686)
+shape = SubResource("RectangleShape2D_l2pfc")
+
 [node name="Player" parent="." instance=ExtResource("2_fjanp")]
-position = Vector2(727, 1548)
+position = Vector2(562, 1532)

@@ -11,3 +11,4 @@ func _on_pressed():
 
 func start_1_scene():
 	get_tree().change_scene_to_file(str("res://scenes/levels/Level2Transition.tscn"))
+	#get_tree().change_scene_to_file(str("res://scenes/levels/Level1.tscn"))

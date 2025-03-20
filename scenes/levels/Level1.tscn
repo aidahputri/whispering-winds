@@ -178,7 +178,7 @@ polygon = PackedVector2Array(-31, -25, -11, -46, 133, -47, 153, -26, 153, 187, 1
 [node name="Barrier1" type="StaticBody2D" parent="."]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Barrier1"]
-polygon = PackedVector2Array(-6, -7, 1214, -22, 1275, 7534, 1249, 7546, 1184, 11, 12, 11, 24, 7921, -6, 7902)
+polygon = PackedVector2Array(-6, -7, 1214, -22, 1275, 7534, 1249, 7546, 1184, 11, 12, 11, 24, 7921, -6, 7902, -6, 2100.69)
 
 [node name="WindCurrentManager" type="Node2D" parent="."]
 script = ExtResource("3_gnh8a")
