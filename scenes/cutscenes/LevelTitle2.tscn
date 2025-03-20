@@ -1,7 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://drth56fea5qx4"]
+[gd_scene load_steps=7 format=3 uid="uid://bha7o6y1hltkb"]
 
-[ext_resource type="Script" path="res://scenes/scripts/LevelTitle.gd" id="1_at0a8"]
-[ext_resource type="FontFile" uid="uid://2snsq37rh6lp" path="res://assets/font/ModernDOS8x16.ttf" id="1_hs8w7"]
+[ext_resource type="Script" path="res://scenes/scripts/LevelTitle.gd" id="1_lqq50"]
+[ext_resource type="FontFile" uid="uid://2snsq37rh6lp" path="res://assets/font/ModernDOS8x16.ttf" id="1_m6odx"]
 
 [sub_resource type="Animation" id="Animation_ukjbn"]
 length = 0.001
@@ -40,11 +40,11 @@ _data = {
 "fade_out": SubResource("Animation_qofon")
 }
 
-[sub_resource type="CanvasTexture" id="CanvasTexture_r2o7t"]
+[sub_resource type="CanvasTexture" id="CanvasTexture_5f8ww"]
 
-[node name="LevelTitle" type="Node2D"]
-script = ExtResource("1_at0a8")
-target_scene = "Level1"
+[node name="LevelTitle2" type="Node2D"]
+script = ExtResource("1_lqq50")
+target_scene = "Level2Transition"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -66,7 +66,7 @@ offset_bottom = 1006.91
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.5, 0.5)
-texture = SubResource("CanvasTexture_r2o7t")
+texture = SubResource("CanvasTexture_5f8ww")
 stretch_mode = 6
 metadata/_edit_use_anchors_ = true
 
@@ -76,11 +76,11 @@ offset_top = 245.0
 offset_right = 948.0
 offset_bottom = 407.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_fonts/font = ExtResource("1_hs8w7")
+theme_override_fonts/font = ExtResource("1_m6odx")
 theme_override_font_sizes/font_size = 52
-text = "Part 1
+text = "Part 2
 
-Serenade of Breeze and Tides"
+Echoes of the Fallen"
 horizontal_alignment = 1
 vertical_alignment = 1
 metadata/_edit_use_anchors_ = true

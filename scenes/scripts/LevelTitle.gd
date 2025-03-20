@@ -1,5 +1,7 @@
 extends Node2D
 
+@export var target_scene: String = ""
+
 @onready var background = $CanvasLayer/Background
 @onready var title_label = $CanvasLayer/Label
 @onready var fade_timer = $CanvasLayer/FadeTimer
@@ -39,4 +41,4 @@ func fade_out():
 	fading_out = true
 
 func change_scene():
-	get_tree().change_scene_to_file("res://scenes/levels/Level1.tscn")
+	get_tree().change_scene_to_file("res://scenes/levels/" + target_scene + ".tscn")

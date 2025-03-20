@@ -256,6 +256,7 @@ shape = SubResource("RectangleShape2D_i56cx")
 position = Vector2(918, 9429)
 scale = Vector2(1.5, 1.5)
 script = ExtResource("9_7aubs")
+target_scene = "cutscenes/LevelTitle2"
 
 [node name="AreaTrigger1" type="Area2D" parent="."]
 
