@@ -6,6 +6,7 @@ extends NinePatchRect
 @onready var next_button = $NextButton
 
 var dialog_data = {
+	# Level 1
 	"trigger1": [
 		{"character": "", "text": "Aeria steps into what was once a lush forest—now, only withered branches and cracked earth remain."},
 		{"character": "", "text": "The air is heavy and still, with faint gusts of wind swirling through the dead landscape."},
@@ -42,6 +43,22 @@ var dialog_data = {
 		{"character": "Kekai", "text": "When you stand near water, press J to glide along its surface. But beware—stray too far from the river’s flow, and the waters will pull you under"},
 		{"character": "Aeria", "text": "I need to stay within the current’s path… or I won’t make it across."},
 	],
+	
+	# Level 2 Transition
+	"trigger7": [
+		{"character": "", "text": "Aeria pushes forward through the barren wasteland. Crumbled stone pillars and shattered relics emerge from the cracked earth"},
+		{"character": "", "text": "In the distance, a faint glimmer draws his attention."},
+		{"character": "Aeria", "text": "Is that… an entrance? I need to get closer."},
+		{"character": "Anemoi", "text": "The path ahead is veiled in shadow. Seek the Dragon’s Gate hidden within these ruins—it will lead you deeper into Bonazarch’s domain."},
+		{"character": "Aeria", "text": "A dragon’s gate…? I’ll find it."},
+	],
+	"trigger8": [
+		{"character": "Aeria", "text": "So… this is the Dragon’s Gate. But how do I open it?"},
+		{"character": "Anemoi", "text": "The path is already open, child of Zephira. Step forward—enter the portal within the dragon’s mouth, and the ruins shall reveal their secrets."},
+		{"character": "Aeria", "text": "I just… walk in? That’s it?"},
+		{"character": "Anemoi", "text": "Yes—but be prepared. What lies beyond is not for the faint of heart. The shadows of Bonazarch’s minions guard these ruins fiercely."},
+		{"character": "Aeria", "text": "Great… Nothing’s ever simple, is it?"},
+	]
 }
 
 var current_dialog = []
@@ -124,3 +141,13 @@ func _on_area_trigger_6_body_entered(body: Node2D) -> void:
 	if body.name == "Player" and Global.is_waterorb_active: 
 		print("Masuk ke area dialog 6")
 		start_dialog("trigger6")
+		
+func _on_area_trigger_7_body_entered(body: Node2D) -> void:
+	if body.name == "Player": 
+		print("Masuk ke area dialog 7")
+		start_dialog("trigger7")
+
+func _on_area_trigger_8_body_entered(body: Node2D) -> void:
+	if body.name == "Player": 
+		print("Masuk ke area dialog 8")
+		start_dialog("trigger8")

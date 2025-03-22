@@ -1,15 +1,29 @@
-[gd_scene load_steps=4 format=3 uid="uid://b0dc8ahvv3ydk"]
+[gd_scene load_steps=13 format=3 uid="uid://b0dc8ahvv3ydk"]
 
 [ext_resource type="PackedScene" uid="uid://bu6f3i8rv4gfp" path="res://scenes/levels/Level2TransitionMap.tscn" id="1_4f4lm"]
 [ext_resource type="PackedScene" uid="uid://bc2fujtl13g10" path="res://scenes/characters/Player.tscn" id="2_fjanp"]
+[ext_resource type="PackedScene" uid="uid://q44cb2fgwvo5" path="res://scenes/ui/Portal.tscn" id="3_y0xss"]
+[ext_resource type="Texture2D" uid="uid://cxjpjrs6u0w5m" path="res://assets/ui/Edinnu_UI_asset_pack/Edinnu_UI_asset_pack/Dialogue_plates/Plate (25).png" id="4_jopo8"]
+[ext_resource type="Script" path="res://scenes/scripts/Portal.gd" id="4_mqe7g"]
+[ext_resource type="Script" path="res://scenes/scripts/Level1Dialog.gd" id="5_nmqgn"]
+[ext_resource type="Texture2D" uid="uid://f0c8f087d4u7" path="res://assets/ui/Fantasy Minimal Pixel Art GUI by eta-commercial-free/UI/RightArrowButton_7x10.png" id="6_wfxf6"]
+[ext_resource type="Texture2D" uid="uid://ipnwnngm1f0h" path="res://assets/ui/Fantasy Minimal Pixel Art GUI by eta-commercial-free/UI/BlackBigCircleBoxWithBorder_27x27.png" id="7_x7yc6"]
+[ext_resource type="Texture2D" uid="uid://dgkriodcsswqj" path="res://assets/ui/Edinnu_UI_asset_pack/Edinnu_UI_asset_pack/Dialogue_plates/Plate (13).png" id="8_ft733"]
+[ext_resource type="FontFile" uid="uid://2snsq37rh6lp" path="res://assets/font/ModernDOS8x16.ttf" id="9_vyl3b"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_l2pfc"]
-size = Vector2(1314, 72)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vrqh3"]
+size = Vector2(1276, 72)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b04aa"]
+size = Vector2(1301, 46)
 
 [node name="Level2Transition" type="Node2D"]
 
 [node name="Level2TransitionMap" parent="." instance=ExtResource("1_4f4lm")]
 scale = Vector2(1.3, 1.3)
+
+[node name="Player" parent="." instance=ExtResource("2_fjanp")]
+position = Vector2(722, 1506)
 
 [node name="Barrier" type="StaticBody2D" parent="."]
 position = Vector2(203, 1274)
@@ -27,9 +41,114 @@ polygon = PackedVector2Array(1228, 1178, 1333, 1176, 1336, 1378, 1227, 1379)
 
 [node name="Barrier3" type="StaticBody2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Barrier3"]
-position = Vector2(647, 1686)
-shape = SubResource("RectangleShape2D_l2pfc")
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Barrier3"]
+polygon = PackedVector2Array(-92, 1, -76, 2223, 1247, 2220, 1299, 1, 1265, 1, 1225, 2166, -29, 2159, -54, -2)
 
-[node name="Player" parent="." instance=ExtResource("2_fjanp")]
-position = Vector2(562, 1532)
+[node name="Barrier4" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Barrier4"]
+polygon = PackedVector2Array(-167, -1, 1332, -1, 1332, 375, 556, 379, 533, 437, 530, 518, 528, 558, 490, 618, 343, 624, 303, 552, 301, 462, 294, 398, 277, 373, 271, 373, -167, 373)
+
+[node name="Portal" parent="." instance=ExtResource("3_y0xss")]
+position = Vector2(408, 624)
+scale = Vector2(2, 2)
+script = ExtResource("4_mqe7g")
+target_scene = "levels/Level2"
+
+[node name="AreaTrigger1" type="Area2D" parent="."]
+position = Vector2(-31, 1571)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AreaTrigger1"]
+position = Vector2(628, -4)
+shape = SubResource("RectangleShape2D_vrqh3")
+
+[node name="AreaTrigger2" type="Area2D" parent="."]
+position = Vector2(0, 10)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AreaTrigger2"]
+position = Vector2(601.5, 727)
+shape = SubResource("RectangleShape2D_b04aa")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="DialogBox" type="NinePatchRect" parent="CanvasLayer"]
+visible = false
+visibility_layer = 2
+offset_left = 205.0
+offset_top = 493.0
+offset_right = 937.0
+offset_bottom = 623.0
+texture = ExtResource("4_jopo8")
+script = ExtResource("5_nmqgn")
+
+[node name="NextButton" type="Button" parent="CanvasLayer/DialogBox"]
+self_modulate = Color(1, 1, 1, 0.0705882)
+layout_mode = 0
+offset_left = 678.0
+offset_top = 75.0
+offset_right = 692.0
+offset_bottom = 93.0
+
+[node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer/DialogBox/NextButton"]
+visibility_layer = 2
+z_index = 1
+layout_mode = 0
+offset_left = 1.0
+offset_right = 13.0
+offset_bottom = 18.0
+texture = ExtResource("6_wfxf6")
+
+[node name="NinePatchRect2" type="NinePatchRect" parent="CanvasLayer/DialogBox/NextButton"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -1.286
+anchor_top = -0.611
+anchor_right = -1.071
+anchor_bottom = 0.5
+offset_left = 3.004
+offset_top = -0.00199986
+offset_right = 39.994
+offset_bottom = 20.0
+texture = ExtResource("7_x7yc6")
+
+[node name="CharacterBox" type="NinePatchRect" parent="CanvasLayer/DialogBox"]
+layout_mode = 0
+offset_left = 6.0
+offset_top = -64.0
+offset_right = 145.0
+offset_bottom = -7.0
+texture = ExtResource("8_ft733")
+
+[node name="LabelCharacter" type="Label" parent="CanvasLayer/DialogBox/CharacterBox"]
+layout_mode = 0
+offset_left = 17.0
+offset_top = 21.0
+offset_right = 122.0
+offset_bottom = 44.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("9_vyl3b")
+theme_override_font_sizes/font_size = 22
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LabelDialog" type="Label" parent="CanvasLayer/DialogBox"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.231
+anchor_bottom = 0.231
+offset_left = 49.0
+offset_top = -0.0300007
+offset_right = 642.0
+offset_bottom = 72.97
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("9_vyl3b")
+theme_override_font_sizes/font_size = 21
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[connection signal="body_entered" from="Portal" to="Portal" method="_on_body_entered"]
+[connection signal="body_entered" from="AreaTrigger1" to="CanvasLayer/DialogBox" method="_on_area_trigger_7_body_entered"]
+[connection signal="body_entered" from="AreaTrigger2" to="CanvasLayer/DialogBox" method="_on_area_trigger_8_body_entered"]
+[connection signal="pressed" from="CanvasLayer/DialogBox/NextButton" to="CanvasLayer/DialogBox" method="_on_next_button_pressed"]

@@ -35,7 +35,6 @@ scale = Vector2(1.5, 1.5)
 
 [node name="Player" parent="." instance=ExtResource("2_a7h88")]
 position = Vector2(542, 48)
-collision_mask = 1
 
 [node name="DeathArea" type="Area2D" parent="."]
 position = Vector2(105, 1664)
