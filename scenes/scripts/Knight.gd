@@ -109,6 +109,7 @@ func _play_attack(anim_name: String):
 func take_damage(amount: int):
 	hp -= amount
 	health_bar.update_health(hp)
+	Global.set_current_hp(Global.current_hp - amount)
 	if hp <= 0:
 		die()
 

@@ -18,10 +18,10 @@ func _ready():
 func _physics_process(delta: float) -> void:
 	if is_attacking and timer.is_stopped():
 		_animation_player.play("atk")
-		timer.start(0.75)
+		timer.start(0.67)
 		if is_damaging and target_body:
 			print("damage")
-			target_body.take_damage(5)
+			target_body.take_damage(2)
 			
 	if not is_attacking:
 		_animation_player.play("idle")

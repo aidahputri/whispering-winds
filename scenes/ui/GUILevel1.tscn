@@ -19,8 +19,8 @@ offset_bottom = 167.0
 texture = ExtResource("2_gfuu1")
 
 [node name="Name" type="Sprite2D" parent="."]
-position = Vector2(95, 74)
-scale = Vector2(0.5, 0.584)
+position = Vector2(91, 79)
+scale = Vector2(0.467014, 0.548778)
 texture = ExtResource("2_nj645")
 flip_h = true
 

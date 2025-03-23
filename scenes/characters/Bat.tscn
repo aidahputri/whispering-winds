@@ -275,7 +275,7 @@ size = Vector2(29, 11)
 size = Vector2(63, 37)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_miqrq"]
-size = Vector2(5.5, 37)
+size = Vector2(7.5, 37)
 
 [node name="Bat" type="CharacterBody2D"]
 script = ExtResource("1_t3bt2")
@@ -285,7 +285,7 @@ sprite_frames = SubResource("SpriteFrames_g1mh5")
 animation = &"atk"
 autoplay = "idle"
 
-[node name="Body" type="CollisionShape2D" parent="."]
+[node name="Body" type="CollisionShape2D" parent="." groups=["enemies"]]
 position = Vector2(0.5, 11.5)
 shape = SubResource("RectangleShape2D_3rpkp")
 
@@ -298,7 +298,7 @@ shape = SubResource("RectangleShape2D_o73kn")
 [node name="AttackArea" type="Area2D" parent="." groups=["enemies"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
-position = Vector2(-21.75, 8.5)
+position = Vector2(-20.75, 8.5)
 shape = SubResource("RectangleShape2D_miqrq")
 
 [node name="HealthBar" parent="." instance=ExtResource("6_kub6t")]

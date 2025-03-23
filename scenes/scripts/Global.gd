@@ -9,10 +9,19 @@ var max_aerolite := 3
 var wind_active := false
 var wind_timer := 0
 
+# Tambahan HP
+var max_hp := 100
+var current_hp := 100
+
 signal collected_count_updated(current: int, max: int)
 signal wind_countdown_updated(time_left: int)
 signal wind_orb_status_updated
 signal water_orb_status_updated
+signal hp_updated(current_hp: int, max_hp: int)
+
+func set_current_hp(value: int):
+	current_hp = value
+	hp_updated.emit(current_hp, max_hp)
 
 func update_collected_count(count: int):
 	collected_count = count

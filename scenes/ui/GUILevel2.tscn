@@ -1,0 +1,64 @@
+[gd_scene load_steps=8 format=3 uid="uid://cmpe51gwrxakn"]
+
+[ext_resource type="Script" path="res://scenes/ui/GUILevel2.gd" id="1_g10e0"]
+[ext_resource type="Texture2D" uid="uid://duf3ef1vwcqj5" path="res://assets/ui/Edinnu_UI_asset_pack/Edinnu_UI_asset_pack/Dialogue_plates/Plate (56).png" id="1_p130q"]
+[ext_resource type="Texture2D" uid="uid://bgpqu686gcrcc" path="res://assets/characters/aeria-potrait.png" id="2_udqn0"]
+[ext_resource type="FontFile" uid="uid://c2wdkmgc5gs8g" path="res://assets/font/CooperBits.ttf" id="3_jph5q"]
+[ext_resource type="Texture2D" uid="uid://cpugqhuhwsrsm" path="res://assets/ui/Edinnu_UI_asset_pack/Edinnu_UI_asset_pack/Star_icons/Star_icon (2).png" id="4_dim8c"]
+[ext_resource type="Texture2D" uid="uid://cvcqv32smj2vc" path="res://assets/ui/Fantasy Minimal Pixel Art GUI by eta-commercial-free/UI/HeartIcons_32x32.png" id="5_ayjyj"]
+[ext_resource type="FontFile" uid="uid://2snsq37rh6lp" path="res://assets/font/ModernDOS8x16.ttf" id="5_ugv22"]
+
+[node name="GuiLevel2" type="Node2D"]
+script = ExtResource("1_g10e0")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+offset_right = 317.0
+offset_bottom = 167.0
+texture = ExtResource("1_p130q")
+
+[node name="Name" type="Sprite2D" parent="."]
+position = Vector2(87, 81)
+scale = Vector2(0.456597, 0.535056)
+texture = ExtResource("2_udqn0")
+flip_h = true
+
+[node name="CharName" type="Label" parent="."]
+offset_left = 149.0
+offset_top = 37.0
+offset_right = 247.0
+offset_bottom = 69.0
+size_flags_horizontal = 4
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_jph5q")
+theme_override_font_sizes/font_size = 32
+text = "Aeria"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Crystal1" type="Sprite2D" parent="."]
+position = Vector2(162, 125)
+texture = ExtResource("4_dim8c")
+
+[node name="Heart" type="Sprite2D" parent="."]
+position = Vector2(162, 91)
+scale = Vector2(0.9, 0.9)
+texture = ExtResource("5_ayjyj")
+
+[node name="LightLabel" type="Label" parent="."]
+offset_left = 185.0
+offset_top = 114.0
+offset_right = 234.0
+offset_bottom = 138.0
+theme_override_fonts/font = ExtResource("5_ugv22")
+theme_override_font_sizes/font_size = 24
+text = "adas"
+vertical_alignment = 1
+
+[node name="HPLabel" type="Label" parent="."]
+offset_left = 186.0
+offset_top = 79.0
+offset_right = 226.0
+offset_bottom = 103.0
+theme_override_fonts/font = ExtResource("5_ugv22")
+theme_override_font_sizes/font_size = 24
+vertical_alignment = 1

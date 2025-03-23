@@ -106,7 +106,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_rnhrl")
 }],
-"loop": true,
+"loop": false,
 "name": &"atk",
 "speed": 10.0
 }, {
@@ -140,7 +140,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_6hjga")
 }],
-"loop": true,
+"loop": false,
 "name": &"hurt",
 "speed": 6.0
 }, {
@@ -180,13 +180,13 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_15wdn"]
-size = Vector2(29, 5)
+size = Vector2(23, 5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ttlyp"]
-size = Vector2(42, 24)
+size = Vector2(45, 24)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8jomm"]
-size = Vector2(8, 22)
+size = Vector2(34, 23)
 
 [node name="Slime" type="CharacterBody2D"]
 script = ExtResource("1_dv5v8")
@@ -196,23 +196,21 @@ position = Vector2(0, 1)
 sprite_frames = SubResource("SpriteFrames_yeojj")
 animation = &"atk"
 autoplay = "idle"
-frame = 2
-frame_progress = 0.905617
 
 [node name="Body" type="CollisionShape2D" parent="." groups=["enemies"]]
-position = Vector2(0.5, 10.5)
+position = Vector2(3.5, 10.5)
 shape = SubResource("RectangleShape2D_15wdn")
 
 [node name="AttackStart" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackStart"]
-position = Vector2(-3, 1)
+position = Vector2(-4.5, 1)
 shape = SubResource("RectangleShape2D_ttlyp")
 
-[node name="AttackArea" type="Area2D" parent="."]
+[node name="AttackArea" type="Area2D" parent="." groups=["enemies"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
-position = Vector2(-12, 1)
+position = Vector2(1, 0.5)
 shape = SubResource("RectangleShape2D_8jomm")
 
 [node name="HealthBar" parent="." instance=ExtResource("2_cwhbi")]
@@ -224,6 +222,7 @@ scale = Vector2(0.3, 0.3)
 max_health = 20
 
 [node name="Timer" type="Timer" parent="."]
+one_shot = true
 
 [connection signal="body_entered" from="AttackStart" to="." method="_on_attack_start_body_entered"]
 [connection signal="body_exited" from="AttackStart" to="." method="_on_attack_start_body_exited"]

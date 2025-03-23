@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=4 uid="uid://cy6qsmh0kp8ds"]
+[gd_scene load_steps=8 format=4 uid="uid://cy6qsmh0kp8ds"]
 
 [ext_resource type="Texture2D" uid="uid://bqy24f5eoaifq" path="res://assets/Terrain (16x16).png" id="1_83ujb"]
 [ext_resource type="PackedScene" uid="uid://bpo3fgnn3e3a1" path="res://scenes/characters/Knight.tscn" id="2_cj7qc"]
 [ext_resource type="PackedScene" uid="uid://d6ihrnhmwp7q" path="res://scenes/characters/Bat.tscn" id="3_dvtrw"]
 [ext_resource type="PackedScene" uid="uid://b2x81s4stpug" path="res://scenes/characters/Slime.tscn" id="4_2r4gv"]
+[ext_resource type="PackedScene" uid="uid://cmpe51gwrxakn" path="res://scenes/ui/GUILevel2.tscn" id="5_psayb"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6u6nx"]
 texture = ExtResource("1_83ujb")
@@ -186,3 +187,8 @@ position = Vector2(141.5, 219)
 
 [node name="Slime" parent="." instance=ExtResource("4_2r4gv")]
 position = Vector2(244.5, 233)
+
+[node name="CanvasLayerGUI" type="CanvasLayer" parent="."]
+
+[node name="GuiLevel2" parent="CanvasLayerGUI" instance=ExtResource("5_psayb")]
+position = Vector2(8, 4)
