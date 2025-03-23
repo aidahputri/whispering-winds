@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=3 uid="uid://df807rgbi3asw"]
+
+[ext_resource type="Texture2D" uid="uid://bbiluhlo65amq" path="res://assets/ui/Edinnu_UI_asset_pack/Edinnu_UI_asset_pack/Menu/Menu (10).png" id="1_rtswr"]
+[ext_resource type="FontFile" uid="uid://c2wdkmgc5gs8g" path="res://assets/font/CooperBits.ttf" id="2_7mmo0"]
+
+[node name="ExitButton" type="Button"]
+self_modulate = Color(1, 1, 1, 0)
+offset_right = 246.0
+offset_bottom = 86.0
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+offset_top = -3.0
+offset_right = 246.0
+offset_bottom = 86.0
+texture = ExtResource("1_rtswr")
+
+[node name="Label" type="Label" parent="."]
+offset_left = 13.0
+offset_top = 26.0
+offset_right = 233.0
+offset_bottom = 69.0
+theme_override_colors/font_color = Color(0.662745, 0.439216, 0.196078, 1)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("2_7mmo0")
+theme_override_font_sizes/font_size = 36
+text = "EXIT"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
