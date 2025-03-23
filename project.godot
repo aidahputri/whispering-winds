@@ -25,6 +25,10 @@ window/size/resizable=false
 window/stretch/mode="viewport"
 window/stretch/aspect="expand"
 
+[global_group]
+
+enemies=""
+
 [input]
 
 up={

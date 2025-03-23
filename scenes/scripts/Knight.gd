@@ -4,10 +4,10 @@ extends CharacterBody2D
 @export var walk_speed = 200
 @export var dash_speed = 400
 @export var jump_speed = -150
-@export var roll_speed = 300
-@export var roll_distance = 100 
 @export var can_double_jump = false
+@export var max_hp = 100
 
+var hp: int
 var was_in_air = false
 var is_landing = false
 var is_attacking = false
@@ -15,9 +15,21 @@ var fire_hold_time = 0.0
 var input_queue = []
 
 @onready var _animation_player = $AnimatedSprite2D
+@onready var health_bar = $HealthBar
+@onready var attack_area = $AttackArea
 
+func _ready():
+	hp = max_hp
+	health_bar.update_health(hp)
+	attack_area.monitoring = false 
+	
 func _physics_process(delta):
 	velocity.y += delta * gravity
+	
+	#if is_on_floor() and is_attacking:
+		#is_attacking = false
+		#attack_area.monitoring = false
+		#_animation_player.play("idle")
 
 	if is_attacking:
 		velocity.x = 0
@@ -31,6 +43,7 @@ func _physics_process(delta):
 			was_in_air = false
 			await get_tree().create_timer(0.1).timeout
 			is_landing = false
+			is_attacking = false
 
 		if Input.is_action_just_pressed("jump"):
 			velocity.y = jump_speed
@@ -48,29 +61,9 @@ func _physics_process(delta):
 			_animation_player.play("jump")
 
 	# Attack (Normal, Skill & Special)
-	if Input.is_action_just_pressed("fire") and not is_attacking and not is_landing and not was_in_air:
-		input_queue.append("fire")
-
-	if not is_attacking and input_queue.size() > 0:
-		var next_attack = input_queue.pop_front()
-		if next_attack == "fire":
-			_play_attack("normal_atk")
-
-	# Hold-release system
-	if is_attacking and Input.is_action_pressed("fire"):
-		fire_hold_time += delta
-
-		if fire_hold_time >= 1.0 and _animation_player.animation == "skill_atk":
-			_play_attack("special_atk")
-		elif fire_hold_time >= 0.3 and _animation_player.animation == "normal_atk":
-			_play_attack("skill_atk")
+	if Input.is_action_just_pressed("fire") and not is_attacking:
+		_play_attack("special_atk")
 		
-	if Input.is_action_just_released("fire"):
-		fire_hold_time = 0.0
-		input_queue.clear()
-		is_attacking = false
-		_animation_player.play("idle")
-
 	move_and_slide()
 
 func _handle_movement():
@@ -101,19 +94,29 @@ func _play_walk_or_run():
 func _play_attack(anim_name: String):
 	is_attacking = true
 	velocity.x = 0
+	attack_area.monitoring = true
 	_animation_player.play(anim_name)
+	
 	 # Attack canceling: Bisa di-cancel setelah 0.2 detik
 	await get_tree().create_timer(0.2).timeout
 
-	if Input.is_action_pressed("fire"):
-		if anim_name == "normal_atk":
-			_play_attack("skill_atk")
-		elif anim_name == "skill_atk":
-			_play_attack("special_atk")
-
 	await _animation_player.animation_finished
 
+	attack_area.monitoring = false
 	is_attacking = false
-	fire_hold_time = 0.0
-	input_queue.clear()
 	_animation_player.play("idle")
+	
+func take_damage(amount: int):
+	hp -= amount
+	health_bar.update_health(hp)
+	if hp <= 0:
+		die()
+
+func die():
+	_animation_player.play("die")
+	await _animation_player.animation_finished
+	queue_free()
+	
+func _on_attack_area_body_entered(body):
+	if is_attacking and body.name in ['Bat', 'Slime']:
+		body.take_damage(5)

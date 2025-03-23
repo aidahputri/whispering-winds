@@ -1,4 +1,4 @@
-[gd_scene load_steps=75 format=3 uid="uid://bpo3fgnn3e3a1"]
+[gd_scene load_steps=76 format=3 uid="uid://bpo3fgnn3e3a1"]
 
 [ext_resource type="Texture2D" uid="uid://w71e5tp0nodo" path="res://assets/characters/knight/without_outline/DEATH.png" id="1_3l3h3"]
 [ext_resource type="Texture2D" uid="uid://vy2f07tv3npo" path="res://assets/characters/knight/without_outline/IDLE.png" id="1_i0fei"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://cs1qrabfftt1r" path="res://assets/characters/knight/without_outline/JUMP.png" id="4_u3h6y"]
 [ext_resource type="Texture2D" uid="uid://dwc5cku7kqu1t" path="res://assets/characters/knight/without_outline/RUN.png" id="6_bv5pq"]
 [ext_resource type="Texture2D" uid="uid://dvqhbd5jmgmcm" path="res://assets/characters/knight/without_outline/WALK.png" id="8_deo82"]
+[ext_resource type="PackedScene" uid="uid://pu5lxm1tc0yd" path="res://scenes/ui/HealthBar.tscn" id="11_tw1vi"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_s1d8d"]
 atlas = ExtResource("1_3l3h3")
@@ -452,9 +453,9 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_1p13p")
 }],
-"loop": true,
+"loop": false,
 "name": &"special_atk",
-"speed": 12.0
+"speed": 15.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -497,10 +498,8 @@ script = ExtResource("1_pxsda")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_fn8hu")
-animation = &"normal_atk"
+animation = &"special_atk"
 autoplay = "idle"
-frame = 3
-frame_progress = 0.335772
 
 [node name="Body" type="CollisionShape2D" parent="."]
 position = Vector2(0.5, 11)
@@ -512,3 +511,12 @@ position = Vector2(17, 0)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
 position = Vector2(2, 11.5)
 shape = SubResource("RectangleShape2D_qxpyl")
+
+[node name="HealthBar" parent="." instance=ExtResource("11_tw1vi")]
+offset_left = -20.0
+offset_top = -19.0
+offset_right = -20.0
+offset_bottom = -19.0
+scale = Vector2(0.3, 0.3)
+
+[connection signal="body_entered" from="AttackArea" to="." method="_on_attack_area_body_entered"]

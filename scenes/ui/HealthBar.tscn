@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://pu5lxm1tc0yd"]
+
+[ext_resource type="FontFile" uid="uid://2snsq37rh6lp" path="res://assets/font/ModernDOS8x16.ttf" id="1_7kj31"]
+[ext_resource type="Script" path="res://scenes/scripts/HealthBar.gd" id="1_ipglj"]
+
+[node name="HealthBar" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_ipglj")
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+layout_mode = 0
+offset_right = 143.0
+offset_bottom = 27.0
+theme_override_fonts/font = ExtResource("1_7kj31")
+rounded = true
