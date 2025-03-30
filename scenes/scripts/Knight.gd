@@ -71,26 +71,27 @@ func _physics_process(delta):
 	move_and_slide()
 
 func _handle_movement():
-	var speed = dash_speed if Input.is_action_pressed("dash") else walk_speed
+	if hp > 0:
+		var speed = dash_speed if Input.is_action_pressed("dash") else walk_speed
 
-	if Input.is_action_pressed("left"):
-		velocity.x = -speed
-		_animation_player.flip_h = true
-		attack_area_left.visible = true
-		attack_area_right.visible = false
-		_play_walk_or_run()
+		if Input.is_action_pressed("left"):
+			velocity.x = -speed
+			_animation_player.flip_h = true
+			attack_area_left.visible = true
+			attack_area_right.visible = false
+			_play_walk_or_run()
 
-	elif Input.is_action_pressed("right"):
-		velocity.x = speed
-		_animation_player.flip_h = false
-		attack_area_left.visible = false
-		attack_area_right.visible = true
-		_play_walk_or_run()
+		elif Input.is_action_pressed("right"):
+			velocity.x = speed
+			_animation_player.flip_h = false
+			attack_area_left.visible = false
+			attack_area_right.visible = true
+			_play_walk_or_run()
 
-	else:
-		velocity.x = 0
-		if is_on_floor() and not was_in_air and not is_landing:
-			_animation_player.play("idle")
+		else:
+			velocity.x = 0
+			if is_on_floor() and not was_in_air and not is_landing:
+				_animation_player.play("idle")
 
 func _play_walk_or_run():
 	if is_on_floor():
@@ -100,34 +101,40 @@ func _play_walk_or_run():
 			_animation_player.play("walk")
 
 func _play_attack(anim_name: String):
-	is_attacking = true
-	velocity.x = 0
-	attack_area_left.monitoring = true
-	attack_area_right.monitoring = true
-	_animation_player.play(anim_name)
-	
-	 # Attack canceling: Bisa di-cancel setelah 0.2 detik
-	await get_tree().create_timer(0.2).timeout
+	if hp > 0:
+		is_attacking = true
+		velocity.x = 0
+		attack_area_left.monitoring = true
+		attack_area_right.monitoring = true
+		_animation_player.play(anim_name)
+		
+		 # Attack canceling: Bisa di-cancel setelah 0.2 detik
+		await get_tree().create_timer(0.2).timeout
 
-	await _animation_player.animation_finished
+		await _animation_player.animation_finished
 
-	attack_area_left.monitoring = false
-	attack_area_right.monitoring = false
-	is_attacking = false
-	_animation_player.play("idle")
+		attack_area_left.monitoring = false
+		attack_area_right.monitoring = false
+		is_attacking = false
+		_animation_player.play("idle")
 	
 func take_damage(amount: int):
-	hp -= amount
-	health_bar.update_health(hp)
-	Global.set_current_hp(Global.current_hp - amount)
-	if hp <= 0:
-		die()
+	if hp > 0:
+		hp -= amount
+		health_bar.update_health(hp)
+		Global.set_current_hp(max(0, Global.current_hp - amount))
+		if hp <= 0:
+			die()
 
 func die():
-	_animation_player.play("die")
+	_animation_player.play("death")
 	await _animation_player.animation_finished
 	queue_free()
 	
 func _on_attack_area_body_entered(body):
-	if is_attacking and body.name in ['Bat', 'Slime']:
+	#if is_attacking and body.name in ['Bat', 'Slime']:
+	#print(get_tree().get_nodes_in_group("slime"))
+	print(body)
+	if is_attacking and (body.name.contains("Bat") or body.is_in_group("slime")):
+		#print(body.name)
 		body.take_damage(5)

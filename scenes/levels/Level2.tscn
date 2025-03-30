@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://cy6qsmh0kp8ds"]
+[gd_scene load_steps=7 format=3 uid="uid://cy6qsmh0kp8ds"]
 
 [ext_resource type="PackedScene" uid="uid://c2fdv70g2ipfl" path="res://scenes/levels/Level2Map.tscn" id="1_543la"]
 [ext_resource type="PackedScene" uid="uid://bpo3fgnn3e3a1" path="res://scenes/characters/Knight.tscn" id="2_cj7qc"]
 [ext_resource type="PackedScene" uid="uid://d6ihrnhmwp7q" path="res://scenes/characters/Bat.tscn" id="3_dvtrw"]
 [ext_resource type="PackedScene" uid="uid://b2x81s4stpug" path="res://scenes/characters/Slime.tscn" id="4_2r4gv"]
 [ext_resource type="PackedScene" uid="uid://cmpe51gwrxakn" path="res://scenes/ui/GUILevel2.tscn" id="5_psayb"]
+[ext_resource type="PackedScene" uid="uid://bkgn2c1joulvm" path="res://scenes/ui/LightSeed.tscn" id="6_e0j8n"]
 
 [node name="Level2" type="Node2D"]
 position = Vector2(0, 48)
@@ -24,11 +25,23 @@ position = Vector2(915.5, 253.5)
 [node name="Bat2" parent="." instance=ExtResource("3_dvtrw")]
 position = Vector2(1476.5, 124.5)
 
+[node name="Bat3" parent="." instance=ExtResource("3_dvtrw")]
+position = Vector2(2580, 80)
+
 [node name="Slime" parent="." instance=ExtResource("4_2r4gv")]
-position = Vector2(147, 296)
+position = Vector2(157, 296)
+
+[node name="Slime3" parent="." instance=ExtResource("4_2r4gv")]
+position = Vector2(2032.5, 267)
+
+[node name="Slime4" parent="." instance=ExtResource("4_2r4gv")]
+position = Vector2(2401.5, 266)
+
+[node name="Slime5" parent="." instance=ExtResource("4_2r4gv")]
+position = Vector2(2206.5, 268)
 
 [node name="Slime2" parent="." instance=ExtResource("4_2r4gv")]
-position = Vector2(285, 297)
+position = Vector2(281.5, 295.5)
 
 [node name="CanvasLayerGUI" type="CanvasLayer" parent="."]
 scale = Vector2(0.8, 0.8)
@@ -36,3 +49,6 @@ transform = Transform2D(0.8, 0, 0, 0.8, 0, 0)
 
 [node name="GuiLevel2" parent="CanvasLayerGUI" instance=ExtResource("5_psayb")]
 position = Vector2(17.5, 11.25)
+
+[node name="LightSeed" parent="." instance=ExtResource("6_e0j8n")]
+position = Vector2(537.5, 237)

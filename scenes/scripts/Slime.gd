@@ -14,23 +14,23 @@ var target_body = null
 func _ready():
 	hp = max_hp
 	health_bar.update_health(hp)
+	add_to_group("slime")
 	
 func _physics_process(delta: float) -> void:
 	if is_attacking and timer.is_stopped():
 		_animation_player.play("atk")
 		timer.start(0.5)
-		print("helo")
+		#print("helo")
 		if is_damaging and target_body:
-			print(is_damaging)
-			print(target_body)
-			print("damage")
-			target_body.take_damage(2)
+			#print(is_damaging)
+			#print(target_body)
+			#print("damage")
+			target_body.take_damage(10)
 			
 	if not is_attacking:
 		_animation_player.play("idle")
 
 func take_damage(amount: int):
-	print("here")
 	if hp <= 0:
 		return
 	_animation_player.play("hurt")

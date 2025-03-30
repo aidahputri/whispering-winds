@@ -505,8 +505,10 @@ script = ExtResource("1_pxsda")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(-491, 247.5)
 sprite_frames = SubResource("SpriteFrames_fn8hu")
-animation = &"fall"
+animation = &"hurt"
 autoplay = "idle"
+frame = 3
+frame_progress = 1.0
 
 [node name="Body" type="CollisionShape2D" parent="."]
 position = Vector2(-490.5, 258.5)
