@@ -16,12 +16,14 @@ var input_queue = []
 
 @onready var _animation_player = $AnimatedSprite2D
 @onready var health_bar = $HealthBar
-@onready var attack_area = $AttackArea
+@onready var attack_area_right = $AttackAreaRight
+@onready var attack_area_left = $AttackAreaLeft
 
 func _ready():
 	hp = max_hp
 	health_bar.update_health(hp)
-	attack_area.monitoring = false 
+	attack_area_left.monitoring = false 
+	attack_area_right.monitoring = false 
 	
 func _physics_process(delta):
 	velocity.y += delta * gravity
@@ -54,6 +56,8 @@ func _physics_process(delta):
 	elif not is_on_floor():
 		if velocity.y < 0:
 			_animation_player.play("jump")
+		elif velocity.y > 0:
+			_animation_player.play("fall")
 
 		if can_double_jump and Input.is_action_just_pressed("jump"):
 			velocity.y = jump_speed
@@ -72,11 +76,15 @@ func _handle_movement():
 	if Input.is_action_pressed("left"):
 		velocity.x = -speed
 		_animation_player.flip_h = true
+		attack_area_left.visible = true
+		attack_area_right.visible = false
 		_play_walk_or_run()
 
 	elif Input.is_action_pressed("right"):
 		velocity.x = speed
 		_animation_player.flip_h = false
+		attack_area_left.visible = false
+		attack_area_right.visible = true
 		_play_walk_or_run()
 
 	else:
@@ -94,7 +102,8 @@ func _play_walk_or_run():
 func _play_attack(anim_name: String):
 	is_attacking = true
 	velocity.x = 0
-	attack_area.monitoring = true
+	attack_area_left.monitoring = true
+	attack_area_right.monitoring = true
 	_animation_player.play(anim_name)
 	
 	 # Attack canceling: Bisa di-cancel setelah 0.2 detik
@@ -102,7 +111,8 @@ func _play_attack(anim_name: String):
 
 	await _animation_player.animation_finished
 
-	attack_area.monitoring = false
+	attack_area_left.monitoring = false
+	attack_area_right.monitoring = false
 	is_attacking = false
 	_animation_player.play("idle")
 	

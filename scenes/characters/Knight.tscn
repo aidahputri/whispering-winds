@@ -60,6 +60,10 @@ region = Rect2(960, 0, 96, 69)
 atlas = ExtResource("1_3l3h3")
 region = Rect2(1056, 0, 96, 69)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_r82ht"]
+atlas = ExtResource("4_u3h6y")
+region = Rect2(384, 0, 96, 69)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_uok5d"]
 atlas = ExtResource("2_8jgjs")
 region = Rect2(0, 0, 96, 69)
@@ -111,10 +115,6 @@ region = Rect2(0, 0, 96, 69)
 [sub_resource type="AtlasTexture" id="AtlasTexture_nj4is"]
 atlas = ExtResource("4_u3h6y")
 region = Rect2(96, 0, 96, 69)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_idpl8"]
-atlas = ExtResource("4_u3h6y")
-region = Rect2(192, 0, 96, 69)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wwao2"]
 atlas = ExtResource("4_u3h6y")
@@ -301,6 +301,14 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_r82ht")
+}],
+"loop": false,
+"name": &"fall",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_uok5d")
 }, {
 "duration": 1.0,
@@ -350,17 +358,14 @@ animations = [{
 "texture": SubResource("AtlasTexture_nj4is")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_idpl8")
-}, {
-"duration": 1.0,
 "texture": SubResource("AtlasTexture_wwao2")
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_0jevq")
 }],
-"loop": true,
+"loop": false,
 "name": &"jump",
-"speed": 10.0
+"speed": 8.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -494,29 +499,43 @@ size = Vector2(19, 30)
 size = Vector2(8, 21)
 
 [node name="Knight" type="CharacterBody2D"]
+position = Vector2(290, -13)
 script = ExtResource("1_pxsda")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-491, 247.5)
 sprite_frames = SubResource("SpriteFrames_fn8hu")
-animation = &"special_atk"
+animation = &"fall"
 autoplay = "idle"
 
 [node name="Body" type="CollisionShape2D" parent="."]
-position = Vector2(0.5, 11)
+position = Vector2(-490.5, 258.5)
 shape = SubResource("RectangleShape2D_jctru")
 
-[node name="AttackArea" type="Area2D" parent="."]
-position = Vector2(17, 0)
+[node name="AttackAreaRight" type="Area2D" parent="."]
+position = Vector2(-474, 247.5)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackAreaRight"]
 position = Vector2(2, 11.5)
 shape = SubResource("RectangleShape2D_qxpyl")
 
+[node name="AttackAreaLeft" type="Area2D" parent="."]
+position = Vector2(-511, 248)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackAreaLeft"]
+position = Vector2(0, 11)
+shape = SubResource("RectangleShape2D_qxpyl")
+
 [node name="HealthBar" parent="." instance=ExtResource("11_tw1vi")]
-offset_left = -20.0
-offset_top = -19.0
-offset_right = -20.0
-offset_bottom = -19.0
+offset_left = -511.0
+offset_top = 228.5
+offset_right = -511.0
+offset_bottom = 228.5
 scale = Vector2(0.3, 0.3)
 
-[connection signal="body_entered" from="AttackArea" to="." method="_on_attack_area_body_entered"]
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(-288, 241)
+limit_top = -200
+
+[connection signal="body_entered" from="AttackAreaRight" to="." method="_on_attack_area_body_entered"]
+[connection signal="body_entered" from="AttackAreaLeft" to="." method="_on_attack_area_body_entered"]

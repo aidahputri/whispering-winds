@@ -186,7 +186,7 @@ size = Vector2(23, 5)
 size = Vector2(45, 24)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8jomm"]
-size = Vector2(34, 23)
+size = Vector2(42, 23)
 
 [node name="Slime" type="CharacterBody2D"]
 script = ExtResource("1_dv5v8")
@@ -210,7 +210,7 @@ shape = SubResource("RectangleShape2D_ttlyp")
 [node name="AttackArea" type="Area2D" parent="." groups=["enemies"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
-position = Vector2(1, 0.5)
+position = Vector2(5, 0.5)
 shape = SubResource("RectangleShape2D_8jomm")
 
 [node name="HealthBar" parent="." instance=ExtResource("2_cwhbi")]
