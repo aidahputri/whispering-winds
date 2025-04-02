@@ -493,7 +493,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jctru"]
-size = Vector2(19, 25)
+size = Vector2(19, 24)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qxpyl"]
 size = Vector2(8, 27.5)
@@ -511,7 +511,7 @@ frame = 3
 frame_progress = 1.0
 
 [node name="Body" type="CollisionShape2D" parent="."]
-position = Vector2(-490.5, 262.5)
+position = Vector2(-490.5, 262)
 shape = SubResource("RectangleShape2D_jctru")
 
 [node name="AttackAreaRight" type="Area2D" parent="."]

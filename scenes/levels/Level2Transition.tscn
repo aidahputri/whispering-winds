@@ -53,7 +53,7 @@ polygon = PackedVector2Array(-167, -1, 1332, -1, 1332, 375, 556, 379, 533, 437, 
 position = Vector2(408, 624)
 scale = Vector2(2, 2)
 script = ExtResource("4_mqe7g")
-target_scene = "levels/Level2"
+target_scene = "levels/InTheRuin"
 
 [node name="AreaTrigger1" type="Area2D" parent="."]
 position = Vector2(-31, 1571)

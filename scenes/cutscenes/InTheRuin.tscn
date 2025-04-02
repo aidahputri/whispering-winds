@@ -1,7 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://7oem5fx7ycsv"]
+[gd_scene load_steps=7 format=3 uid="uid://b6obp4mvt8aoa"]
 
-[ext_resource type="Script" path="res://scenes/scripts/Epilogue.gd" id="1_ry2fq"]
-[ext_resource type="FontFile" uid="uid://2snsq37rh6lp" path="res://assets/font/ModernDOS8x16.ttf" id="2_ujeyi"]
+[ext_resource type="Script" path="res://scenes/scripts/LevelTitle.gd" id="1_5rjh8"]
+[ext_resource type="FontFile" uid="uid://2snsq37rh6lp" path="res://assets/font/ModernDOS8x16.ttf" id="1_idhqd"]
 
 [sub_resource type="Animation" id="Animation_ukjbn"]
 length = 0.001
@@ -40,10 +40,11 @@ _data = {
 "fade_out": SubResource("Animation_qofon")
 }
 
-[sub_resource type="CanvasTexture" id="CanvasTexture_q713g"]
+[sub_resource type="CanvasTexture" id="CanvasTexture_jlqes"]
 
-[node name="Epilogue" type="Node2D"]
-script = ExtResource("1_ry2fq")
+[node name="InTheRuin" type="Node2D"]
+script = ExtResource("1_5rjh8")
+target_scene = "Level2"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -65,7 +66,7 @@ offset_bottom = 1006.91
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.5, 0.5)
-texture = SubResource("CanvasTexture_q713g")
+texture = SubResource("CanvasTexture_jlqes")
 stretch_mode = 6
 metadata/_edit_use_anchors_ = true
 
@@ -75,15 +76,12 @@ offset_top = 245.0
 offset_right = 948.0
 offset_bottom = 407.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_fonts/font = ExtResource("2_ujeyi")
-theme_override_font_sizes/font_size = 24
+theme_override_fonts/font = ExtResource("1_idhqd")
+theme_override_font_sizes/font_size = 52
+text = "In the Shadow of Ruin..."
 horizontal_alignment = 1
 vertical_alignment = 1
-autowrap_mode = 2
 metadata/_edit_use_anchors_ = true
 
 [node name="FadeTimer" type="Timer" parent="CanvasLayer"]
 process_callback = 0
-one_shot = true
-
-[connection signal="timeout" from="CanvasLayer/FadeTimer" to="." method="_on_fade_timer_timeout"]

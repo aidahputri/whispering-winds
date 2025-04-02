@@ -46,7 +46,7 @@ position = Vector2(-2, 78.5)
 scale = Vector2(0.9, 0.9)
 
 [node name="Knight" parent="." instance=ExtResource("2_cj7qc")]
-position = Vector2(527.5, -111)
+position = Vector2(527.5, -108.5)
 
 [node name="Bat" parent="." instance=ExtResource("3_dvtrw")]
 position = Vector2(915.5, 253.5)
@@ -209,7 +209,7 @@ position = Vector2(3072.5, 282)
 [node name="Barrier" type="StaticBody2D" parent="."]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Barrier"]
-polygon = PackedVector2Array(-149.5, 474, -146, -59, 3578.5, -49.5, 3580, 476, 3549.5, 476, 3554.5, -25.5, -119, -35, -125, 471.5)
+polygon = PackedVector2Array(-149.5, 474, -146, -59, 3239, -48, 3237.5, 472.5, 3196.5, 477, 3199.5, 359.5, 3202, -23.5, -119, -35, -125, 471.5)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
