@@ -11,6 +11,12 @@ extends CharacterBody2D
 @onready var aerocryst = $Aerocryst
 @onready var slide_timer = $SlideTimer
 
+@onready var sfx_move = $SFXWalk
+@onready var sfx_jump = $SFXJump
+@onready var sfx_interact = $SFXInteract
+@onready var sfx_die = $SFXDie
+@onready var sfx_slide = $SFXSlide
+
 var last_checkpoint_position: Vector2 = Vector2.ZERO
 var has_checkpoint = false
 
@@ -34,10 +40,15 @@ func _get_input():
 		is_jumping = true
 		z_velocity = -JUMP_SPEED
 		jump_direction = Vector2(direction_x, direction_y).normalized() * JUMP_DISTANCE
-		animation = "walk_down" 
+		animation = "walk_down"
+		sfx_jump.play()
 
 	if direction_x:
 		velocity.x = direction_x * SPEED
+		
+		if not sfx_move.playing:
+			sfx_move.play()
+			
 		if direction_x > 0:
 			animation = "walk_right"
 		else:
@@ -47,12 +58,19 @@ func _get_input():
 
 	if direction_y:
 		velocity.y = direction_y * SPEED
+		
+		if not sfx_move.playing:
+			sfx_move.play()
+			
 		if direction_y < 0:
 			animation = "walk_up"
 		else:
 			animation = "walk_down"
 	else:
 		velocity.y = move_toward(velocity.y, 0, SPEED)
+		
+	if Input.is_action_just_pressed("interact") or Input.is_action_just_pressed("fire"):
+		sfx_interact.play()
 
 	animplayer.play(animation)
 
@@ -102,13 +120,14 @@ func claim_checkpoint(position: Vector2):
 	print("Memproses checkpoint. Diterima: ", position)
 	last_checkpoint_position = position
 	has_checkpoint = true
-	print("Checkpoint diklaim di: ", last_checkpoint_position)
 
 func respawn():
 	if has_checkpoint:
+		sfx_die.play()
 		print("Respawn di checkpoint terakhir!")
 		global_position = last_checkpoint_position
 	else:
+		sfx_die.play()
 		print("Tidak ada checkpoint, mengulang level!")
 		call_deferred("refresh_scene")
 
@@ -150,6 +169,7 @@ func _on_wind_orb_body_entered(body: Node2D) -> void:
 
 func enable_water_slide():
 	print("Water Slide Aktif!")
+	sfx_slide.play()
 	is_sliding = true
 	can_change_direction = false
 	slide_timer.start()
@@ -162,6 +182,7 @@ func start_slide(direction: Vector2):
 	
 func stop_slide():
 	print("Slide dihentikan karena menyentuh ground!")
+	sfx_slide.stop()
 	is_sliding = false
 	velocity = Vector2.ZERO
 

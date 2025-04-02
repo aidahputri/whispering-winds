@@ -1,5 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://df807rgbi3asw"]
+[gd_scene load_steps=4 format=3 uid="uid://df807rgbi3asw"]
 
+[ext_resource type="Script" path="res://scenes/scripts/ExitButton.gd" id="1_656an"]
 [ext_resource type="Texture2D" uid="uid://bbiluhlo65amq" path="res://assets/ui/Edinnu_UI_asset_pack/Edinnu_UI_asset_pack/Menu/Menu (10).png" id="1_rtswr"]
 [ext_resource type="FontFile" uid="uid://c2wdkmgc5gs8g" path="res://assets/font/CooperBits.ttf" id="2_7mmo0"]
 
@@ -7,6 +8,7 @@
 self_modulate = Color(1, 1, 1, 0)
 offset_right = 246.0
 offset_bottom = 86.0
+script = ExtResource("1_656an")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="."]
 layout_mode = 0
@@ -29,3 +31,5 @@ text = "EXIT"
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
+
+[connection signal="pressed" from="." to="." method="_on_exit_pressed"]

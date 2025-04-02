@@ -1,7 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://blvfuck1q0t66"]
+[gd_scene load_steps=12 format=3 uid="uid://blvfuck1q0t66"]
 
 [ext_resource type="Script" path="res://scenes/scripts/Aerolite.gd" id="1_e777k"]
 [ext_resource type="Texture2D" uid="uid://bnel1cihoun1i" path="res://assets/particles/Crystal.png" id="1_xuk20"]
+[ext_resource type="AudioStream" uid="uid://bdeyaop6l0a0i" path="res://assets/audios/051_use_item_01.wav" id="3_k7o43"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_566cl"]
 size = Vector2(36, 69)
@@ -67,5 +68,8 @@ shape = SubResource("RectangleShape2D_566cl")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_wp6oo")
 animation = &"idle"
+
+[node name="SFXCollected" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_k7o43")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

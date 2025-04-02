@@ -1,9 +1,14 @@
-[gd_scene load_steps=38 format=3 uid="uid://bc2fujtl13g10"]
+[gd_scene load_steps=43 format=3 uid="uid://bc2fujtl13g10"]
 
 [ext_resource type="Texture2D" uid="uid://b20tk3ujlg2dp" path="res://assets/characters/aeria.png" id="2_ewhx5"]
 [ext_resource type="Texture2D" uid="uid://jnup6lu8gsmg" path="res://assets/particles/v2.Elemental_Skills_Animations/Airbook/air_book_sheet.png" id="2_fvogq"]
 [ext_resource type="Texture2D" uid="uid://bnel1cihoun1i" path="res://assets/particles/Crystal.png" id="2_ryqks"]
 [ext_resource type="Script" path="res://scenes/scripts/Player.gd" id="3_sonct"]
+[ext_resource type="AudioStream" uid="uid://b2ptqcsvtt7x4" path="res://assets/audios/03_Step_grass_03.wav" id="5_p0ilb"]
+[ext_resource type="AudioStream" uid="uid://btfu6knaeoy6e" path="res://assets/audios/30_Jump_03.wav" id="6_k3xc8"]
+[ext_resource type="AudioStream" uid="uid://bo7njnjjio1qy" path="res://assets/audios/013_Confirm_03.wav" id="7_4y842"]
+[ext_resource type="AudioStream" uid="uid://x8g4vryyj1ow" path="res://assets/audios/033_Denied_03.wav" id="8_mm4he"]
+[ext_resource type="AudioStream" uid="uid://s0io7rmv0tk1" path="res://assets/audios/14_Step_water_02.wav" id="9_mciy4"]
 
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(30, 19)
@@ -304,3 +309,20 @@ limit_bottom = 9458
 [node name="SlideTimer" type="Timer" parent="."]
 wait_time = 5.0
 one_shot = true
+
+[node name="SFXWalk" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_p0ilb")
+pitch_scale = 2.0
+
+[node name="SFXJump" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_k3xc8")
+
+[node name="SFXInteract" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_4y842")
+
+[node name="SFXDie" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_mm4he")
+
+[node name="SFXSlide" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("9_mciy4")
+volume_db = 2.971
