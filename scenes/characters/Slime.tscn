@@ -180,7 +180,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_15wdn"]
-size = Vector2(23, 5)
+size = Vector2(25, 11)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ttlyp"]
 size = Vector2(45, 24)
@@ -198,7 +198,7 @@ animation = &"atk"
 autoplay = "idle"
 
 [node name="Body" type="CollisionShape2D" parent="." groups=["enemies"]]
-position = Vector2(3.5, 10.5)
+position = Vector2(2, 7)
 shape = SubResource("RectangleShape2D_15wdn")
 
 [node name="AttackStart" type="Area2D" parent="."]

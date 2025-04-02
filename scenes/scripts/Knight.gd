@@ -7,17 +7,20 @@ extends CharacterBody2D
 @export var can_double_jump = false
 @export var max_hp = 100
 
-var hp: int
-var was_in_air = false
-var is_landing = false
-var is_attacking = false
-var fire_hold_time = 0.0
-var input_queue = []
-
 @onready var _animation_player = $AnimatedSprite2D
 @onready var health_bar = $HealthBar
 @onready var attack_area_right = $AttackAreaRight
 @onready var attack_area_left = $AttackAreaLeft
+
+var hp: int
+var was_in_air = false
+var is_landing = false
+var is_attacking = false
+var max_jumps = 3 
+var jump_count = 0
+var fire_hold_time = 0.0
+var input_queue = []
+
 
 func _ready():
 	hp = max_hp
@@ -26,12 +29,12 @@ func _ready():
 	attack_area_right.monitoring = false 
 	
 func _physics_process(delta):
+	if Global.is_dialog_active:
+		velocity = Vector2.ZERO
+		_animation_player.play("idle")
+		return
+		
 	velocity.y += delta * gravity
-	
-	#if is_on_floor() and is_attacking:
-		#is_attacking = false
-		#attack_area.monitoring = false
-		#_animation_player.play("idle")
 
 	if is_attacking:
 		velocity.x = 0
@@ -40,6 +43,8 @@ func _physics_process(delta):
 
 	# Lompat
 	if is_on_floor():
+		jump_count = 0
+		
 		if was_in_air:
 			is_landing = true
 			was_in_air = false
@@ -47,11 +52,11 @@ func _physics_process(delta):
 			is_landing = false
 			is_attacking = false
 
-		if Input.is_action_just_pressed("jump"):
-			velocity.y = jump_speed
-			can_double_jump = true
-			_animation_player.play("jump")
-			was_in_air = true
+	if Input.is_action_just_pressed("jump") and jump_count < max_jumps:
+		velocity.y = jump_speed
+		jump_count += 1
+		_animation_player.play("jump")
+		was_in_air = true
 
 	elif not is_on_floor():
 		if velocity.y < 0:
@@ -130,11 +135,18 @@ func die():
 	_animation_player.play("death")
 	await _animation_player.animation_finished
 	queue_free()
-	
+	Global.reset_variables()
+	call_deferred("reload_scene")
+
+func reload_scene():
+	get_tree().reload_current_scene()	
+
 func _on_attack_area_body_entered(body):
-	#if is_attacking and body.name in ['Bat', 'Slime']:
-	#print(get_tree().get_nodes_in_group("slime"))
 	print(body)
 	if is_attacking and (body.is_in_group("bat") or body.is_in_group("slime")):
-		#print(body.name)
 		body.take_damage(5)
+
+func _on_fall_area_body_entered(body: Node2D) -> void:
+	if body.name == "Knight":
+		Global.reset_variables()
+		call_deferred("reload_scene")

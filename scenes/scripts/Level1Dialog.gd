@@ -40,7 +40,7 @@ var dialog_data = {
 	"trigger6": [
 		{"character": "", "text": "As the Water Altar hums softly with renewed energy, Kekai’s voice echoes once more, steady but urgent."},
 		{"character": "Kekai", "text": "The current is now yours to command… With this power, you can slide across water and reach places beyond your path."},
-		{"character": "Kekai", "text": "When you stand near water, press J to glide along its surface. But beware—stray too far from the river’s flow, and the waters will pull you under"},
+		{"character": "Kekai", "text": "But beware—stray too far from the river’s flow, and the waters will pull you under"},
 		{"character": "Aeria", "text": "I need to stay within the current’s path… or I won’t make it across."},
 	],
 	
@@ -50,14 +50,35 @@ var dialog_data = {
 		{"character": "", "text": "In the distance, a faint glimmer draws his attention."},
 		{"character": "Aeria", "text": "Is that… an entrance? I need to get closer."},
 		{"character": "Anemoi", "text": "The path ahead is veiled in shadow. Seek the Dragon’s Gate hidden within these ruins—it will lead you deeper into Bonazarch’s domain."},
-		{"character": "Aeria", "text": "A dragon’s gate…? I’ll find it."},
+		{"character": "Aeria", "text": "Dragon Gate? What is that?"},
+		{"character": "Anemoi", "text": "A stone gate, carved in the shape of a dragon’s head."},
+		{"character": "Anemoi", "text": "It is an ancient portal—only by passing through it can you enter the heart of the ruins."},
+		{"character": "Aeria", "text": "Alright… I’ll find it."},
 	],
 	"trigger8": [
 		{"character": "Aeria", "text": "So… this is the Dragon’s Gate. But how do I open it?"},
 		{"character": "Anemoi", "text": "The path is already open, child of Zephira. Step forward—enter the portal within the dragon’s mouth, and the ruins shall reveal their secrets."},
 		{"character": "Aeria", "text": "I just… walk in? That’s it?"},
-		{"character": "Anemoi", "text": "Yes—but be prepared. What lies beyond is not for the faint of heart. The shadows of Bonazarch’s minions guard these ruins fiercely."},
+		{"character": "Anemoi", "text": "Yes—but be prepared. The path ahead is dangerous."},
 		{"character": "Aeria", "text": "Great… Nothing’s ever simple, is it?"},
+	],
+	"trigger9": [
+		{"character": "", "text": "Aeria steps through the dragon’s mouth. A wave of cold air rushes past him as the world shifts around him."},
+		{"character": "", "text": "When the light fades, he finds himself standing in the heart of the ruins—crumbling stone walls stretch endlessly, shrouded in a dim, eerie glow."},
+		{"character": "Aeria", "text": "What… What is this?"},
+		{"character": "", "text": "He glances down and freezes. The simple clothes he wore before are gone—replaced by a gleaming suit of knight’s armor, heavy and unfamiliar."},
+		{"character": "Aeria", "text": "Why am I wearing this armor? Where did it come from?"},
+		{"character": "Anemoi", "text": "That armor is a gift—a fragment of power from the ancient guardians. You will need its strength to survive these ruins."},
+		{"character": "Aeria", "text": "A gift? From who?"},
+		{"character": "Anemoi", "text": "The spirits who once protected this land. Though their bodies have faded, their will remains."},
+		{"character": "Aeria", "text": "So, I’m borrowing their strength?"},
+		{"character": "Anemoi", "text": "Yes, but be careful. The deeper you go, the stronger the darkness becomes. Do not let their gift go to waste."},
+		{"character": "Aeria", "text": "Alright… but why am I even here? What am I supposed to find?"},
+		{"character": "Anemoi", "text": "The light of this world is fading because of Bonazarch’s corruption. He has stolen the Seeds of Light—fragments of the world’s essence."},
+		{"character": "Aeria", "text": "Seeds of Light? What do they do?"},
+		{"character": "Anemoi", "text": "These seeds hold the power to restore balance. You must find all five hidden within these ruins and offer them to the Spiritus."},
+		{"character": "Anemoi", "text": "Only then can we begin to mend what Bonazarch has broken."},
+		{"character": "Aeria", "text": "Five seeds… Alright, I’ll find them. Let’s do this."}
 	]
 }
 
@@ -151,3 +172,8 @@ func _on_area_trigger_8_body_entered(body: Node2D) -> void:
 	if body.name == "Player": 
 		print("Masuk ke area dialog 8")
 		start_dialog("trigger8")
+
+func _on_area_trigger_9_body_entered(body: Node2D) -> void:
+	if body.name == "Knight": 
+		print("Masuk ke area dialog 9")
+		start_dialog("trigger9")

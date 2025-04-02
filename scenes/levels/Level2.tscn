@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://cy6qsmh0kp8ds"]
+[gd_scene load_steps=22 format=3 uid="uid://cy6qsmh0kp8ds"]
 
 [ext_resource type="PackedScene" uid="uid://c2fdv70g2ipfl" path="res://scenes/levels/Level2Map.tscn" id="1_543la"]
 [ext_resource type="PackedScene" uid="uid://bpo3fgnn3e3a1" path="res://scenes/characters/Knight.tscn" id="2_cj7qc"]
@@ -6,6 +6,35 @@
 [ext_resource type="PackedScene" uid="uid://b2x81s4stpug" path="res://scenes/characters/Slime.tscn" id="4_2r4gv"]
 [ext_resource type="PackedScene" uid="uid://cmpe51gwrxakn" path="res://scenes/ui/GUILevel2.tscn" id="5_psayb"]
 [ext_resource type="PackedScene" uid="uid://bkgn2c1joulvm" path="res://scenes/ui/LightSeed.tscn" id="6_e0j8n"]
+[ext_resource type="Script" path="res://scenes/scripts/Obstacle.gd" id="7_lb3rn"]
+[ext_resource type="PackedScene" uid="uid://c4rln28d47k1c" path="res://scenes/ui/Spiritus.tscn" id="8_jk3lo"]
+[ext_resource type="Texture2D" uid="uid://cxjpjrs6u0w5m" path="res://assets/ui/Edinnu_UI_asset_pack/Edinnu_UI_asset_pack/Dialogue_plates/Plate (25).png" id="9_ix1it"]
+[ext_resource type="Script" path="res://scenes/scripts/Level1Dialog.gd" id="10_6i0er"]
+[ext_resource type="Texture2D" uid="uid://f0c8f087d4u7" path="res://assets/ui/Fantasy Minimal Pixel Art GUI by eta-commercial-free/UI/RightArrowButton_7x10.png" id="11_i64lp"]
+[ext_resource type="Texture2D" uid="uid://ipnwnngm1f0h" path="res://assets/ui/Fantasy Minimal Pixel Art GUI by eta-commercial-free/UI/BlackBigCircleBoxWithBorder_27x27.png" id="12_7eog2"]
+[ext_resource type="Texture2D" uid="uid://dgkriodcsswqj" path="res://assets/ui/Edinnu_UI_asset_pack/Edinnu_UI_asset_pack/Dialogue_plates/Plate (13).png" id="13_dwr1q"]
+[ext_resource type="FontFile" uid="uid://2snsq37rh6lp" path="res://assets/font/ModernDOS8x16.ttf" id="14_u7cn5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_041nj"]
+size = Vector2(1744.5, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iswfa"]
+size = Vector2(37, 16.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0fnm8"]
+size = Vector2(41, 17)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dlhfv"]
+size = Vector2(11, 12)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i41bb"]
+size = Vector2(12.5, 185)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dc6p0"]
+size = Vector2(12.5, 213)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r3bp3"]
+size = Vector2(68.5, 20)
 
 [node name="Level2" type="Node2D"]
 position = Vector2(0, 48)
@@ -25,8 +54,8 @@ position = Vector2(915.5, 253.5)
 [node name="Bat2" parent="." instance=ExtResource("3_dvtrw")]
 position = Vector2(1496, 125)
 
-[node name="Slime" parent="." instance=ExtResource("4_2r4gv")]
-position = Vector2(157, 296)
+[node name="Slime6" parent="." instance=ExtResource("4_2r4gv")]
+position = Vector2(156.5, 295.5)
 
 [node name="Slime2" parent="." instance=ExtResource("4_2r4gv")]
 position = Vector2(281.5, 295.5)
@@ -44,8 +73,9 @@ position = Vector2(2344, 267.5)
 scale = Vector2(0.8, 0.8)
 transform = Transform2D(0.8, 0, 0, 0.8, 0, 0)
 
-[node name="GuiLevel2" parent="CanvasLayerGUI" instance=ExtResource("5_psayb")]
+[node name="GuiLevel2" parent="CanvasLayerGUI" node_paths=PackedStringArray("knight") instance=ExtResource("5_psayb")]
 position = Vector2(17.5, 11.25)
+knight = NodePath("../../Knight")
 
 [node name="LightSeed" parent="." instance=ExtResource("6_e0j8n")]
 position = Vector2(537.5, 237)
@@ -61,3 +91,225 @@ position = Vector2(2755.5, 46)
 
 [node name="LightSeed5" parent="." instance=ExtResource("6_e0j8n")]
 position = Vector2(2207.5, 223.5)
+
+[node name="FallArea" type="Area2D" parent="."]
+position = Vector2(4, 393)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FallArea"]
+position = Vector2(465.25, 3.5)
+shape = SubResource("RectangleShape2D_041nj")
+
+[node name="Obstacle" type="Area2D" parent="."]
+position = Vector2(1364.5, 142)
+script = ExtResource("7_lb3rn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacle"]
+position = Vector2(1, 1.75)
+shape = SubResource("RectangleShape2D_iswfa")
+
+[node name="Obstacle2" type="Area2D" parent="."]
+position = Vector2(1566.5, 144)
+script = ExtResource("7_lb3rn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacle2"]
+position = Vector2(8.5, -2)
+shape = SubResource("RectangleShape2D_0fnm8")
+
+[node name="Obstacle3" type="Area2D" parent="."]
+position = Vector2(1638.5, 144)
+script = ExtResource("7_lb3rn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacle3"]
+position = Vector2(7.5, -1.5)
+shape = SubResource("RectangleShape2D_0fnm8")
+
+[node name="Obstacle4" type="Area2D" parent="."]
+position = Vector2(1710.5, 143.5)
+script = ExtResource("7_lb3rn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacle4"]
+position = Vector2(8, -0.5)
+shape = SubResource("RectangleShape2D_0fnm8")
+
+[node name="Obstacle5" type="Area2D" parent="."]
+position = Vector2(1518, 203.5)
+script = ExtResource("7_lb3rn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacle5"]
+position = Vector2(-0.5, -4)
+shape = SubResource("RectangleShape2D_dlhfv")
+
+[node name="Obstacle6" type="Area2D" parent="."]
+position = Vector2(1604, 203.5)
+script = ExtResource("7_lb3rn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacle6"]
+position = Vector2(-1.5, -4)
+shape = SubResource("RectangleShape2D_dlhfv")
+
+[node name="Obstacle7" type="Area2D" parent="."]
+position = Vector2(1433, 277.5)
+script = ExtResource("7_lb3rn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacle7"]
+position = Vector2(1.5, -4.5)
+shape = SubResource("RectangleShape2D_dlhfv")
+
+[node name="Obstacle8" type="Area2D" parent="."]
+position = Vector2(1532.5, 304.5)
+script = ExtResource("7_lb3rn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacle8"]
+position = Vector2(-0.5, -4)
+shape = SubResource("RectangleShape2D_dlhfv")
+
+[node name="Obstacle9" type="Area2D" parent="."]
+position = Vector2(1604.5, 304)
+script = ExtResource("7_lb3rn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacle9"]
+position = Vector2(-0.5, -3.5)
+shape = SubResource("RectangleShape2D_dlhfv")
+
+[node name="Obstacle10" type="Area2D" parent="."]
+position = Vector2(1676, 304)
+script = ExtResource("7_lb3rn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacle10"]
+position = Vector2(0, -3.5)
+shape = SubResource("RectangleShape2D_dlhfv")
+
+[node name="Obstacle11" type="Area2D" parent="."]
+position = Vector2(1408.5, 342)
+script = ExtResource("7_lb3rn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacle11"]
+position = Vector2(1.25, 2.75)
+shape = SubResource("RectangleShape2D_iswfa")
+
+[node name="Obstacle12" type="Area2D" parent="."]
+position = Vector2(2615.5, 120)
+script = ExtResource("7_lb3rn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacle12"]
+position = Vector2(-3.75, 81)
+shape = SubResource("RectangleShape2D_i41bb")
+
+[node name="Obstacle13" type="Area2D" parent="."]
+position = Vector2(2655, 88)
+script = ExtResource("7_lb3rn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacle13"]
+position = Vector2(0.25, 98.5)
+shape = SubResource("RectangleShape2D_dc6p0")
+
+[node name="Spiritus" parent="." instance=ExtResource("8_jk3lo")]
+position = Vector2(3072.5, 282)
+
+[node name="Barrier" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Barrier"]
+polygon = PackedVector2Array(-149.5, 474, -146, -59, 3578.5, -49.5, 3580, 476, 3549.5, 476, 3554.5, -25.5, -119, -35, -125, 471.5)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="DialogBox" type="NinePatchRect" parent="CanvasLayer"]
+visible = false
+visibility_layer = 2
+offset_left = 205.0
+offset_top = 493.0
+offset_right = 937.0
+offset_bottom = 623.0
+texture = ExtResource("9_ix1it")
+script = ExtResource("10_6i0er")
+
+[node name="NextButton" type="Button" parent="CanvasLayer/DialogBox"]
+self_modulate = Color(1, 1, 1, 0.0705882)
+layout_mode = 0
+offset_left = 678.0
+offset_top = 75.0
+offset_right = 692.0
+offset_bottom = 93.0
+
+[node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer/DialogBox/NextButton"]
+visibility_layer = 2
+z_index = 1
+layout_mode = 0
+offset_left = 1.0
+offset_right = 13.0
+offset_bottom = 18.0
+texture = ExtResource("11_i64lp")
+
+[node name="NinePatchRect2" type="NinePatchRect" parent="CanvasLayer/DialogBox/NextButton"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -1.286
+anchor_top = -0.611
+anchor_right = -1.071
+anchor_bottom = 0.5
+offset_left = 3.004
+offset_top = -0.00199986
+offset_right = 39.994
+offset_bottom = 20.0
+texture = ExtResource("12_7eog2")
+
+[node name="CharacterBox" type="NinePatchRect" parent="CanvasLayer/DialogBox"]
+layout_mode = 0
+offset_left = 6.0
+offset_top = -64.0
+offset_right = 145.0
+offset_bottom = -7.0
+texture = ExtResource("13_dwr1q")
+
+[node name="LabelCharacter" type="Label" parent="CanvasLayer/DialogBox/CharacterBox"]
+layout_mode = 0
+offset_left = 17.0
+offset_top = 21.0
+offset_right = 122.0
+offset_bottom = 44.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("14_u7cn5")
+theme_override_font_sizes/font_size = 22
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LabelDialog" type="Label" parent="CanvasLayer/DialogBox"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.231
+anchor_bottom = 0.231
+offset_left = 49.0
+offset_top = -0.0300007
+offset_right = 642.0
+offset_bottom = 72.97
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("14_u7cn5")
+theme_override_font_sizes/font_size = 21
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="AreaTrigger9" type="Area2D" parent="."]
+position = Vector2(10.5, 155.5)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AreaTrigger9"]
+position = Vector2(24.25, 0)
+shape = SubResource("RectangleShape2D_r3bp3")
+
+[connection signal="body_entered" from="FallArea" to="Knight" method="_on_fall_area_body_entered"]
+[connection signal="body_entered" from="Obstacle" to="Obstacle" method="_on_body_entered"]
+[connection signal="body_entered" from="Obstacle2" to="Obstacle2" method="_on_body_entered"]
+[connection signal="body_entered" from="Obstacle3" to="Obstacle3" method="_on_body_entered"]
+[connection signal="body_entered" from="Obstacle4" to="Obstacle4" method="_on_body_entered"]
+[connection signal="body_entered" from="Obstacle5" to="Obstacle5" method="_on_body_entered"]
+[connection signal="body_entered" from="Obstacle6" to="Obstacle6" method="_on_body_entered"]
+[connection signal="body_entered" from="Obstacle7" to="Obstacle7" method="_on_body_entered"]
+[connection signal="body_entered" from="Obstacle8" to="Obstacle8" method="_on_body_entered"]
+[connection signal="body_entered" from="Obstacle9" to="Obstacle9" method="_on_body_entered"]
+[connection signal="body_entered" from="Obstacle10" to="Obstacle10" method="_on_body_entered"]
+[connection signal="body_entered" from="Obstacle11" to="Obstacle11" method="_on_body_entered"]
+[connection signal="body_entered" from="Obstacle12" to="Obstacle12" method="_on_body_entered"]
+[connection signal="body_entered" from="Obstacle13" to="Obstacle13" method="_on_body_entered"]
+[connection signal="pressed" from="CanvasLayer/DialogBox/NextButton" to="CanvasLayer/DialogBox" method="_on_next_button_pressed"]
+[connection signal="body_entered" from="AreaTrigger9" to="CanvasLayer/DialogBox" method="_on_area_trigger_9_body_entered"]

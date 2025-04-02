@@ -17,6 +17,9 @@ func _ready():
 	add_to_group("slime")
 	
 func _physics_process(delta: float) -> void:
+	if hp <= 0:
+		return
+
 	if is_attacking and timer.is_stopped():
 		_animation_player.play("atk")
 		timer.start(0.5)

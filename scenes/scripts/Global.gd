@@ -24,6 +24,10 @@ signal water_orb_status_updated
 signal hp_updated(current_hp: int, max_hp: int)
 signal light_seeds_updated(current: int, max: int)
 
+func reset_variables():
+	current_hp = max_hp
+	total_light_seeds = 0
+
 func add_light_seed():
 	if total_light_seeds < max_light_seeds:
 		total_light_seeds += 1
