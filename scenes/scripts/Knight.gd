@@ -135,6 +135,6 @@ func _on_attack_area_body_entered(body):
 	#if is_attacking and body.name in ['Bat', 'Slime']:
 	#print(get_tree().get_nodes_in_group("slime"))
 	print(body)
-	if is_attacking and (body.name.contains("Bat") or body.is_in_group("slime")):
+	if is_attacking and (body.is_in_group("bat") or body.is_in_group("slime")):
 		#print(body.name)
 		body.take_damage(5)

@@ -23,25 +23,22 @@ position = Vector2(527.5, -111)
 position = Vector2(915.5, 253.5)
 
 [node name="Bat2" parent="." instance=ExtResource("3_dvtrw")]
-position = Vector2(1476.5, 124.5)
-
-[node name="Bat3" parent="." instance=ExtResource("3_dvtrw")]
-position = Vector2(2580, 80)
+position = Vector2(1496, 125)
 
 [node name="Slime" parent="." instance=ExtResource("4_2r4gv")]
 position = Vector2(157, 296)
 
-[node name="Slime3" parent="." instance=ExtResource("4_2r4gv")]
-position = Vector2(2032.5, 267)
-
-[node name="Slime4" parent="." instance=ExtResource("4_2r4gv")]
-position = Vector2(2401.5, 266)
-
-[node name="Slime5" parent="." instance=ExtResource("4_2r4gv")]
-position = Vector2(2206.5, 268)
-
 [node name="Slime2" parent="." instance=ExtResource("4_2r4gv")]
 position = Vector2(281.5, 295.5)
+
+[node name="Slime3" parent="." instance=ExtResource("4_2r4gv")]
+position = Vector2(2066, 268)
+
+[node name="Slime4" parent="." instance=ExtResource("4_2r4gv")]
+position = Vector2(2208, 267)
+
+[node name="Slime5" parent="." instance=ExtResource("4_2r4gv")]
+position = Vector2(2344, 267.5)
 
 [node name="CanvasLayerGUI" type="CanvasLayer" parent="."]
 scale = Vector2(0.8, 0.8)
@@ -52,3 +49,15 @@ position = Vector2(17.5, 11.25)
 
 [node name="LightSeed" parent="." instance=ExtResource("6_e0j8n")]
 position = Vector2(537.5, 237)
+
+[node name="LightSeed2" parent="." instance=ExtResource("6_e0j8n")]
+position = Vector2(1084.5, 194.5)
+
+[node name="LightSeed3" parent="." instance=ExtResource("6_e0j8n")]
+position = Vector2(1797, 164)
+
+[node name="LightSeed4" parent="." instance=ExtResource("6_e0j8n")]
+position = Vector2(2755.5, 46)
+
+[node name="LightSeed5" parent="." instance=ExtResource("6_e0j8n")]
+position = Vector2(2207.5, 223.5)

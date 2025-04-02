@@ -1,5 +1,6 @@
-[gd_scene load_steps=10 format=3 uid="uid://bkgn2c1joulvm"]
+[gd_scene load_steps=11 format=3 uid="uid://bkgn2c1joulvm"]
 
+[ext_resource type="Script" path="res://scenes/scripts/LightSeed.gd" id="1_3sxik"]
 [ext_resource type="Texture2D" uid="uid://ci3gqwucei417" path="res://assets/particles/Shine.png" id="1_ckcd8"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lex2q"]
@@ -56,6 +57,7 @@ animations = [{
 size = Vector2(28, 26)
 
 [node name="LightSeed" type="Area2D"]
+script = ExtResource("1_3sxik")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(1.2, 1.2)
@@ -67,3 +69,5 @@ frame_progress = 0.266406
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 1)
 shape = SubResource("RectangleShape2D_8g5nv")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

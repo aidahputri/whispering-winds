@@ -13,11 +13,21 @@ var wind_timer := 0
 var max_hp := 100
 var current_hp := 100
 
+# Light Seed
+var total_light_seeds: int = 0
+var max_light_seeds: int = 5
+
 signal collected_count_updated(current: int, max: int)
 signal wind_countdown_updated(time_left: int)
 signal wind_orb_status_updated
 signal water_orb_status_updated
 signal hp_updated(current_hp: int, max_hp: int)
+signal light_seeds_updated(current: int, max: int)
+
+func add_light_seed():
+	if total_light_seeds < max_light_seeds:
+		total_light_seeds += 1
+		light_seeds_updated.emit(total_light_seeds, max_light_seeds)
 
 func set_current_hp(value: int):
 	current_hp = value

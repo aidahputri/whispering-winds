@@ -1,9 +1,12 @@
-[gd_scene load_steps=2 format=3 uid="uid://dpf71nw832fsi"]
+[gd_scene load_steps=3 format=3 uid="uid://dpf71nw832fsi"]
+
+[ext_resource type="Script" path="res://scenes/scripts/Obstacle.gd" id="1_x2mod"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yp4tk"]
 size = Vector2(37, 23)
 
 [node name="Obstacle" type="Area2D"]
+script = ExtResource("1_x2mod")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(8.5, 1.5)
