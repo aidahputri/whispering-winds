@@ -1,9 +1,10 @@
-[gd_scene load_steps=27 format=3 uid="uid://c4rln28d47k1c"]
+[gd_scene load_steps=28 format=3 uid="uid://c4rln28d47k1c"]
 
 [ext_resource type="Texture2D" uid="uid://b87cm0nl1ixn" path="res://assets/particles/Particle FX 1.2 Free/Spritesheets/Gravity-Sheet.png" id="1_bum4p"]
 [ext_resource type="Texture2D" uid="uid://bgkpoboepfaig" path="res://assets/bubble2.png" id="1_j22wf"]
 [ext_resource type="Script" path="res://scenes/scripts/Spiritus.gd" id="1_oavjm"]
 [ext_resource type="FontFile" uid="uid://bwwjbytyasj6u" path="res://assets/font/ModernDOS8x8.ttf" id="2_re1cw"]
+[ext_resource type="AudioStream" uid="uid://bo7njnjjio1qy" path="res://assets/audios/013_Confirm_03.wav" id="5_ouwsw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lv4gm"]
 size = Vector2(289, 303)
@@ -192,6 +193,10 @@ animation = &"idle"
 autoplay = "idle"
 frame = 15
 frame_progress = 0.482012
+
+[node name="SFXCollected" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_ouwsw")
+pitch_scale = 2.0
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]

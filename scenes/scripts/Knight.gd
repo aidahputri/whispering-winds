@@ -7,6 +7,13 @@ extends CharacterBody2D
 @export var can_double_jump = false
 @export var max_hp = 100
 
+@onready var sfx_move = $SFXWalk
+@onready var sfx_jump = $SFXJump
+@onready var sfx_interact = $SFXInteract
+@onready var sfx_die = $SFXDie
+@onready var sfx_attack = $SFXAttack
+@onready var sfx_hit = $SFXHit
+
 @onready var _animation_player = $AnimatedSprite2D
 @onready var health_bar = $HealthBar
 @onready var attack_area_right = $AttackAreaRight
@@ -20,7 +27,6 @@ var max_jumps = 3
 var jump_count = 0
 var fire_hold_time = 0.0
 var input_queue = []
-
 
 func _ready():
 	hp = max_hp
@@ -56,11 +62,16 @@ func _physics_process(delta):
 		velocity.y = jump_speed
 		jump_count += 1
 		_animation_player.play("jump")
+		if not sfx_jump.playing:
+			sfx_jump.play()
 		was_in_air = true
 
 	elif not is_on_floor():
 		if velocity.y < 0:
 			_animation_player.play("jump")
+			if not sfx_jump.playing:
+				sfx_jump.play()
+				
 		elif velocity.y > 0:
 			_animation_player.play("fall")
 
@@ -68,6 +79,8 @@ func _physics_process(delta):
 			velocity.y = jump_speed
 			can_double_jump = false
 			_animation_player.play("jump")
+			if not sfx_jump.playing:
+				sfx_jump.play()
 
 	# Attack (Normal, Skill & Special)
 	if Input.is_action_just_pressed("fire") and not is_attacking:
@@ -84,6 +97,9 @@ func _handle_movement():
 			_animation_player.flip_h = true
 			attack_area_left.visible = true
 			attack_area_right.visible = false
+			if not sfx_move.playing and not is_landing and is_on_floor():
+				sfx_move.play()
+				
 			_play_walk_or_run()
 
 		elif Input.is_action_pressed("right"):
@@ -91,6 +107,9 @@ func _handle_movement():
 			_animation_player.flip_h = false
 			attack_area_left.visible = false
 			attack_area_right.visible = true
+			if not sfx_move.playing and not is_landing and is_on_floor():
+				sfx_move.play()
+				
 			_play_walk_or_run()
 
 		else:
@@ -104,6 +123,7 @@ func _play_walk_or_run():
 			_animation_player.play("run")
 		else:
 			_animation_player.play("walk")
+			
 
 func _play_attack(anim_name: String):
 	if hp > 0:
@@ -111,6 +131,7 @@ func _play_attack(anim_name: String):
 		velocity.x = 0
 		attack_area_left.monitoring = true
 		attack_area_right.monitoring = true
+		sfx_attack.play()
 		_animation_player.play(anim_name)
 		
 		 # Attack canceling: Bisa di-cancel setelah 0.2 detik
@@ -125,6 +146,8 @@ func _play_attack(anim_name: String):
 	
 func take_damage(amount: int):
 	if hp > 0:
+		sfx_hit.play()
+		_animation_player.play("hurt")
 		hp -= amount
 		health_bar.update_health(hp)
 		Global.set_current_hp(max(0, Global.current_hp - amount))
@@ -132,6 +155,7 @@ func take_damage(amount: int):
 			die()
 
 func die():
+	sfx_die.play()
 	_animation_player.play("death")
 	await _animation_player.animation_finished
 	queue_free()
@@ -142,11 +166,12 @@ func reload_scene():
 	get_tree().reload_current_scene()	
 
 func _on_attack_area_body_entered(body):
-	print(body)
 	if is_attacking and (body.is_in_group("bat") or body.is_in_group("slime")):
+		sfx_hit.play()
 		body.take_damage(5)
 
 func _on_fall_area_body_entered(body: Node2D) -> void:
 	if body.name == "Knight":
+		sfx_die.play()
 		Global.reset_variables()
 		call_deferred("reload_scene")

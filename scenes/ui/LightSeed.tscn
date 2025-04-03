@@ -1,7 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://bkgn2c1joulvm"]
+[gd_scene load_steps=12 format=3 uid="uid://bkgn2c1joulvm"]
 
 [ext_resource type="Script" path="res://scenes/scripts/LightSeed.gd" id="1_3sxik"]
 [ext_resource type="Texture2D" uid="uid://ci3gqwucei417" path="res://assets/particles/Shine.png" id="1_ckcd8"]
+[ext_resource type="AudioStream" uid="uid://bo7njnjjio1qy" path="res://assets/audios/013_Confirm_03.wav" id="3_pwjf8"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lex2q"]
 atlas = ExtResource("1_ckcd8")
@@ -69,5 +70,9 @@ frame_progress = 0.266406
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 1)
 shape = SubResource("RectangleShape2D_8g5nv")
+
+[node name="SFXCollected" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_pwjf8")
+pitch_scale = 2.0
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
