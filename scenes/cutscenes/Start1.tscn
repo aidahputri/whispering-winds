@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://cqlvtcq3dmowi"]
+[gd_scene load_steps=13 format=3 uid="uid://cqlvtcq3dmowi"]
 
 [ext_resource type="Script" path="res://scenes/scripts/Start1.gd" id="1_mmvwj"]
 [ext_resource type="Texture2D" uid="uid://sg80hikued5m" path="res://assets/background/start1.png" id="2_550gb"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://ipnwnngm1f0h" path="res://assets/ui/Fantasy Minimal Pixel Art GUI by eta-commercial-free/UI/BlackBigCircleBoxWithBorder_27x27.png" id="5_buw44"]
 [ext_resource type="Texture2D" uid="uid://dgkriodcsswqj" path="res://assets/ui/Edinnu_UI_asset_pack/Edinnu_UI_asset_pack/Dialogue_plates/Plate (13).png" id="6_60oa0"]
 [ext_resource type="FontFile" uid="uid://2snsq37rh6lp" path="res://assets/font/ModernDOS8x16.ttf" id="7_nyuxb"]
+[ext_resource type="AudioStream" uid="uid://loh4ylwxohbe" path="res://assets/audios/Pixel 7.wav" id="8_bind6"]
 
 [sub_resource type="Animation" id="Animation_mxtn4"]
 length = 0.001
@@ -151,5 +152,9 @@ theme_override_font_sizes/font_size = 21
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_bind6")
+autoplay = true
 
 [connection signal="pressed" from="DialogBox/NextButton" to="." method="_on_next_button_pressed"]

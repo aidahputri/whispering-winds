@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://7oem5fx7ycsv"]
+[gd_scene load_steps=8 format=3 uid="uid://7oem5fx7ycsv"]
 
 [ext_resource type="Script" path="res://scenes/scripts/Epilogue.gd" id="1_ry2fq"]
 [ext_resource type="FontFile" uid="uid://2snsq37rh6lp" path="res://assets/font/ModernDOS8x16.ttf" id="2_ujeyi"]
+[ext_resource type="AudioStream" uid="uid://loh4ylwxohbe" path="res://assets/audios/Pixel 7.wav" id="3_e2u3c"]
 
 [sub_resource type="Animation" id="Animation_ukjbn"]
 length = 0.001
@@ -85,5 +86,8 @@ metadata/_edit_use_anchors_ = true
 [node name="FadeTimer" type="Timer" parent="CanvasLayer"]
 process_callback = 0
 one_shot = true
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_e2u3c")
 
 [connection signal="timeout" from="CanvasLayer/FadeTimer" to="." method="_on_fade_timer_timeout"]

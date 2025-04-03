@@ -69,7 +69,7 @@ func _get_input():
 	else:
 		velocity.y = move_toward(velocity.y, 0, SPEED)
 		
-	if Input.is_action_just_pressed("interact") or Input.is_action_just_pressed("fire"):
+	if Input.is_action_just_pressed("interact"):
 		sfx_interact.play()
 
 	animplayer.play(animation)

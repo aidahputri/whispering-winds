@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://cy6qsmh0kp8ds"]
+[gd_scene load_steps=23 format=3 uid="uid://cy6qsmh0kp8ds"]
 
 [ext_resource type="PackedScene" uid="uid://c2fdv70g2ipfl" path="res://scenes/levels/Level2Map.tscn" id="1_543la"]
 [ext_resource type="PackedScene" uid="uid://bpo3fgnn3e3a1" path="res://scenes/characters/Knight.tscn" id="2_cj7qc"]
@@ -14,6 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://ipnwnngm1f0h" path="res://assets/ui/Fantasy Minimal Pixel Art GUI by eta-commercial-free/UI/BlackBigCircleBoxWithBorder_27x27.png" id="12_7eog2"]
 [ext_resource type="Texture2D" uid="uid://dgkriodcsswqj" path="res://assets/ui/Edinnu_UI_asset_pack/Edinnu_UI_asset_pack/Dialogue_plates/Plate (13).png" id="13_dwr1q"]
 [ext_resource type="FontFile" uid="uid://2snsq37rh6lp" path="res://assets/font/ModernDOS8x16.ttf" id="14_u7cn5"]
+[ext_resource type="AudioStream" uid="uid://csxo6o4dy07cq" path="res://assets/audios/Pixel 4.wav" id="15_0cr6a"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_041nj"]
 size = Vector2(1744.5, 20)
@@ -296,6 +297,11 @@ position = Vector2(10.5, 155.5)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AreaTrigger9"]
 position = Vector2(24.25, 0)
 shape = SubResource("RectangleShape2D_r3bp3")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("15_0cr6a")
+autoplay = true
+max_distance = 1e+12
 
 [connection signal="body_entered" from="FallArea" to="Knight" method="_on_fall_area_body_entered"]
 [connection signal="body_entered" from="Obstacle" to="Obstacle" method="_on_body_entered"]
