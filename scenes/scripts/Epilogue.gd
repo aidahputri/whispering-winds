@@ -9,7 +9,7 @@ extends Node2D
 signal text_change
 
 var fading_in = true
-var fade_speed = 1.5
+var fade_speed = 3.0
 
 var epilog_text = [
 	"As the final Seed of Light merges into the Spiritus, a brilliant radiance engulfs the ruins, washing away the lingering darkness.",
@@ -19,19 +19,19 @@ var epilog_text = [
 ]
 
 var current_text_index = 0
-var text_change_timer = 3.5
+var text_change_timer = 3.0
 
 func _ready():
 	background.modulate.a = 0
 	title_label.modulate.a = 0
 
-	fade_timer.wait_time = 2.0
+	fade_timer.wait_time = 1.0
 	fade_timer.one_shot = true
 
 	fading_in = true
 	fade_timer.start()
 
-	await get_tree().create_timer(2.0).timeout
+	await get_tree().create_timer(1.0).timeout
 	start_epilogue_text()
 
 func _process(delta):

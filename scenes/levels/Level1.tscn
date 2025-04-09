@@ -64,6 +64,7 @@ position = Vector2(103, 0)
 polygon = PackedVector2Array(6, -162, 33, -189, 46, 1879, -241, 1881, -241, 1861, 15, 1859)
 
 [node name="GroundArea" type="Area2D" parent="."]
+visible = false
 position = Vector2(259, 2181)
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="GroundArea"]
