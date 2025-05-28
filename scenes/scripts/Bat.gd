@@ -11,6 +11,9 @@ var target_body = null
 @onready var attack_area = $AttackArea
 @onready var timer = $Timer
 
+@onready var hurt_particles = $HurtParticles
+@onready var die_particles = $DieParticles
+
 func _ready():
 	hp = max_hp
 	health_bar.update_health(hp)
@@ -29,6 +32,10 @@ func _physics_process(delta: float) -> void:
 func take_damage(amount: int):
 	if hp <= 0:
 		return
+	
+	hurt_particles.restart()
+	hurt_particles.emitting = true
+	
 	_animation_player.play("hurt")
 	hp -= amount
 	health_bar.update_health(hp)
@@ -37,6 +44,7 @@ func take_damage(amount: int):
 		die()
 
 func die():
+	die_particles.emitting = true
 	_animation_player.play("die")
 	await _animation_player.animation_finished
 	queue_free()

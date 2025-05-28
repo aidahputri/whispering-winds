@@ -238,6 +238,7 @@ max_health = 20
 one_shot = true
 
 [node name="HurtParticles" type="CPUParticles2D" parent="."]
+position = Vector2(-4, -1)
 emitting = false
 amount = 30
 lifetime = 0.4

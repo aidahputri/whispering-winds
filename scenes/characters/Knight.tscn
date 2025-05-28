@@ -509,7 +509,6 @@ stereo = true
 [node name="Knight" type="CharacterBody2D"]
 position = Vector2(290, -13)
 script = ExtResource("1_pxsda")
-max_hp = 20
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(-491, 247.5)
