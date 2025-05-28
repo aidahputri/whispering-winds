@@ -18,6 +18,7 @@ extends CharacterBody2D
 @onready var health_bar = $HealthBar
 @onready var attack_area_right = $AttackAreaRight
 @onready var attack_area_left = $AttackAreaLeft
+@onready var camera = $Camera2D
 
 var hp: int
 var was_in_air = false
@@ -27,8 +28,10 @@ var max_jumps = 3
 var jump_count = 0
 var fire_hold_time = 0.0
 var input_queue = []
+var overlay
 
 func _ready():
+	overlay = get_tree().current_scene.get_node("DeathScreenOverlay/ColorRect")
 	hp = max_hp
 	health_bar.update_health(hp)
 	attack_area_left.monitoring = false 
@@ -146,6 +149,7 @@ func _play_attack(anim_name: String):
 	
 func take_damage(amount: int):
 	if hp > 0:
+		camera.start_shake(5.0)
 		sfx_hit.play()
 		_animation_player.play("hurt")
 		hp -= amount
@@ -155,9 +159,14 @@ func take_damage(amount: int):
 			die()
 
 func die():
+	camera.start_shake(20.0)
 	sfx_die.play()
 	_animation_player.play("death")
+	
+	var tween = create_tween()
+	tween.tween_property(overlay, "color", Color(1, 0, 0, 0.2), 0.5)
 	await _animation_player.animation_finished
+	
 	queue_free()
 	Global.reset_variables()
 	call_deferred("reload_scene")
@@ -173,5 +182,10 @@ func _on_attack_area_body_entered(body):
 func _on_fall_area_body_entered(body: Node2D) -> void:
 	if body.name == "Knight":
 		sfx_die.play()
+		
+		var tween = create_tween()
+		tween.tween_property(overlay, "color", Color(1, 0, 0, 0.2), 0.1)
+		await tween.finished
+		
 		Global.reset_variables()
 		call_deferred("reload_scene")
