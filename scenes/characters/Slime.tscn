@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://b2x81s4stpug"]
+[gd_scene load_steps=30 format=3 uid="uid://b2x81s4stpug"]
 
 [ext_resource type="Script" path="res://scenes/scripts/Slime.gd" id="1_dv5v8"]
 [ext_resource type="Texture2D" uid="uid://c2oovqb76lsw2" path="res://assets/characters/slime-Sheet.png" id="1_muad5"]
@@ -188,13 +188,26 @@ size = Vector2(45, 24)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8jomm"]
 size = Vector2(42, 23)
 
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_rmc8j"]
+lifetime_randomness = 0.5
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(20, 1, 1)
+spread = 180.0
+initial_velocity_min = 50.0
+initial_velocity_max = 50.0
+gravity = Vector3(0, -500, 0)
+scale_min = 4.0
+scale_max = 4.0
+color = Color(0.678431, 0.996078, 0, 1)
+
 [node name="Slime" type="CharacterBody2D"]
 script = ExtResource("1_dv5v8")
 
 [node name="Slime" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, 1)
 sprite_frames = SubResource("SpriteFrames_yeojj")
-animation = &"atk"
+animation = &"die"
 autoplay = "idle"
 
 [node name="Body" type="CollisionShape2D" parent="." groups=["enemies"]]
@@ -222,6 +235,28 @@ scale = Vector2(0.3, 0.3)
 max_health = 20
 
 [node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="HurtParticles" type="CPUParticles2D" parent="."]
+position = Vector2(-4, -1)
+emitting = false
+amount = 30
+lifetime = 0.4
+one_shot = true
+explosiveness = 1.0
+randomness = 0.5
+gravity = Vector2(0, 300)
+initial_velocity_min = 80.0
+initial_velocity_max = 80.0
+scale_amount_min = 5.0
+scale_amount_max = 5.0
+color = Color(0.678431, 0.996078, 0, 1)
+
+[node name="DieParticles" type="GPUParticles2D" parent="."]
+position = Vector2(0, 13)
+emitting = false
+amount = 40
+process_material = SubResource("ParticleProcessMaterial_rmc8j")
 one_shot = true
 
 [connection signal="body_entered" from="AttackStart" to="." method="_on_attack_start_body_entered"]

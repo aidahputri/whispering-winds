@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://dwc5cku7kqu1t" path="res://assets/characters/knight/without_outline/RUN.png" id="6_bv5pq"]
 [ext_resource type="Texture2D" uid="uid://dvqhbd5jmgmcm" path="res://assets/characters/knight/without_outline/WALK.png" id="8_deo82"]
 [ext_resource type="PackedScene" uid="uid://pu5lxm1tc0yd" path="res://scenes/ui/HealthBar.tscn" id="11_tw1vi"]
+[ext_resource type="Script" path="res://scenes/scripts/CameraKnight.gd" id="12_cvyfy"]
 [ext_resource type="AudioStream" uid="uid://dhrdnn11y7to2" path="res://assets/audios/12_Step_wood_03.wav" id="12_f5rbp"]
 [ext_resource type="AudioStream" uid="uid://btfu6knaeoy6e" path="res://assets/audios/30_Jump_03.wav" id="13_dx7ew"]
 [ext_resource type="AudioStream" uid="uid://bo7njnjjio1qy" path="res://assets/audios/013_Confirm_03.wav" id="14_dlehp"]
@@ -69,10 +70,6 @@ region = Rect2(1056, 0, 96, 69)
 [sub_resource type="AtlasTexture" id="AtlasTexture_r82ht"]
 atlas = ExtResource("4_u3h6y")
 region = Rect2(384, 0, 96, 69)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_uok5d"]
-atlas = ExtResource("2_8jgjs")
-region = Rect2(0, 0, 96, 69)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vv4xp"]
 atlas = ExtResource("2_8jgjs")
@@ -315,13 +312,13 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_uok5d")
-}, {
-"duration": 1.0,
 "texture": SubResource("AtlasTexture_vv4xp")
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_wldpx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vv4xp")
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_guy7h")
@@ -516,10 +513,8 @@ script = ExtResource("1_pxsda")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(-491, 247.5)
 sprite_frames = SubResource("SpriteFrames_fn8hu")
-animation = &"hurt"
+animation = &"death"
 autoplay = "idle"
-frame = 3
-frame_progress = 1.0
 
 [node name="Body" type="CollisionShape2D" parent="."]
 position = Vector2(-490.5, 262)
@@ -549,6 +544,7 @@ scale = Vector2(0.3, 0.3)
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(-288, 241)
 limit_top = -200
+script = ExtResource("12_cvyfy")
 
 [node name="SFXWalk" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("12_f5rbp")

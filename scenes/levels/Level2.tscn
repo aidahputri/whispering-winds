@@ -212,6 +212,21 @@ position = Vector2(3072.5, 282)
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Barrier"]
 polygon = PackedVector2Array(-149.5, 474, -146, -59, 3239, -48, 3237.5, 472.5, 3196.5, 477, 3199.5, 359.5, 3202, -23.5, -119, -35, -125, 471.5)
 
+[node name="DeathScreenOverlay" type="CanvasLayer" parent="."]
+follow_viewport_enabled = true
+
+[node name="ColorRect" type="ColorRect" parent="DeathScreenOverlay"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -800.0
+offset_top = -424.0
+offset_right = 6540.0
+offset_bottom = 1438.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 0.160784, 0, 0)
+
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="DialogBox" type="NinePatchRect" parent="CanvasLayer"]
